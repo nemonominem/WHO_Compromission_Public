@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Global Health Security Network</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#e8e8e8;overflow:hidden;height:100vh;display:flex;flex-direction:column;color:#222}
+
+#top{background:#fff;padding:8px 16px;border-bottom:1px solid #ddd;display:flex;align-items:center;gap:16px;flex-shrink:0;z-index:5}
+#top h1{font-size:15px;font-weight:600;white-space:nowrap}
+.sub{font-size:11px;color:#888;white-space:nowrap}
+#legend{display:flex;gap:8px;flex-wrap:wrap;font-size:10.5px;margin-left:auto;align-items:center}
+.leg{display:flex;align-items:center;gap:3px;white-space:nowrap}
+.leg-s{display:inline-block;width:16px;height:3px;border-radius:2px}
+.leg-d{display:inline-block;width:16px;border-top:3px dashed;opacity:.9}
+
+#main{flex:1;display:flex;overflow:hidden}
+#canvas-wrap{flex:1;position:relative;overflow:hidden}
+canvas{display:block;background:#fff}
+
+#status{position:absolute;bottom:10px;left:10px;font-size:11px;color:#555;
+  background:rgba(255,255,255,0.92);padding:4px 10px;border-radius:5px;
+  pointer-events:none;border:1px solid #e0e0e0}
+
+#tooltip{position:fixed;pointer-events:none;
+  background:rgba(18,18,18,0.88);color:#f0f0f0;
+  font-size:12px;line-height:1.55;padding:7px 11px;border-radius:7px;
+  max-width:280px;display:none;z-index:200}
+#tooltip strong{font-size:13px;display:block;margin-bottom:2px}
+
+#panel{width:272px;min-width:272px;flex-shrink:0;background:#fff;
+  border-left:1px solid #ddd;display:flex;flex-direction:column;
+  overflow:hidden;transition:min-width .2s,width .2s}
+#panel.collapsed{width:34px;min-width:34px}
+#panel-header{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px;border-bottom:1px solid #eee;font-size:13px;font-weight:600;
+  flex-shrink:0;white-space:nowrap;min-height:42px}
+#panel-title{overflow:hidden;white-space:nowrap}
+#panel-toggle{background:none;border:1px solid #ccc;border-radius:4px;
+  padding:2px 7px;cursor:pointer;font-size:11px;color:#555;flex-shrink:0}
+#panel-toggle:hover{background:#f5f5f5}
+#panel-body{padding:0;display:flex;flex-direction:column;overflow-y:auto;min-width:250px}
+
+/* ── Accordion ── */
+.acc-section{border-bottom:1px solid #efefef}
+.acc-header{display:flex;justify-content:space-between;align-items:center;
+  padding:7px 12px;cursor:pointer;font-size:11px;font-weight:600;
+  color:#555;background:#f8f8f8;user-select:none}
+.acc-header:hover{background:#eee;color:#222}
+.acc-caret{font-size:9px;color:#aaa;flex-shrink:0}
+.acc-body{padding:8px 11px 10px;display:flex;flex-direction:column;gap:7px}
+.acc-body.hidden{display:none}
+.pinned{padding:8px 11px;display:flex;flex-direction:column;gap:6px}
+
+.ctrl-group{display:flex;flex-direction:column;gap:4px}
+.ctrl-row{display:flex;justify-content:space-between;align-items:center}
+.ctrl-row label{font-size:11.5px;color:#444}
+.ctrl-row .val{font-size:11px;color:#888;min-width:28px;text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:#2E75B6;cursor:pointer;height:4px}
+
+.check-row{display:flex;align-items:center;gap:7px;font-size:11.5px;color:#444;
+  cursor:pointer;user-select:none}
+.check-row input{cursor:pointer;accent-color:#2E75B6;width:13px;height:13px;flex-shrink:0}
+
+hr.div{border:none;border-top:1px solid #eee;margin:1px 0}
+
+.btn{width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:5px;
+  background:#f8f8f8;font-size:11.5px;cursor:pointer;color:#333;
+  transition:background .1s;text-align:center}
+.btn:hover{background:#ebebeb}
+.btn.primary{background:#2E75B6;color:#fff;border-color:#1a5fa0}
+.btn.primary:hover{background:#1a5fa0}
+.btn-row{display:flex;gap:6px}
+.btn-row .btn{width:auto;flex:1}
+
+/* ── Dual-handle range slider ── */
+.dual-range{position:relative;height:26px;margin:3px 0 1px}
+.dual-range input[type=range]{
+  position:absolute;width:100%;pointer-events:none;
+  -webkit-appearance:none;appearance:none;
+  background:transparent;top:11px;height:4px;margin:0;padding:0}
+.dual-range input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;pointer-events:auto;cursor:pointer;
+  width:14px;height:14px;border-radius:50%;
+  background:#2E75B6;border:2px solid #fff;
+  box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+.dual-range input[type=range]::-moz-range-thumb{
+  pointer-events:auto;cursor:pointer;
+  width:10px;height:10px;border-radius:50%;
+  background:#2E75B6;border:2px solid #fff}
+.dual-range-track{position:absolute;left:0;right:0;top:13px;
+  height:4px;background:#ddd;border-radius:2px}
+.dual-range-fill{position:absolute;top:13px;height:4px;
+  background:#2E75B6;border-radius:2px}
+
+/* ── Org-type checkboxes ── */
+.org-chks{display:flex;flex-direction:column;gap:3px}
+.org-swatch{display:inline-block;width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* ── Narrative alignment ── */
+.narr-dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── Info pane ── */
+#info-pane{border-top:1px solid #eee;padding-top:9px;min-height:60px}
+#info-hd{font-weight:600;font-size:12px;color:#222;margin-bottom:4px;
+  line-height:1.4;word-break:break-word}
+#info-hd.i-hint{font-weight:normal;color:#aaa;font-style:italic;font-size:11px}
+#info-bd{font-size:11px;color:#444;line-height:1.5}
+#info-bd p{margin:3px 0;word-break:break-word}
+.i-tag{display:inline-block;border-radius:3px;padding:1px 6px;
+  font-size:10px;margin-bottom:3px;color:#fff;font-weight:600}
+.i-when{color:#888;font-size:10px;display:block;margin:1px 0 3px}
+
+#footer{background:#fff;border-top:1px solid #ddd;padding:5px 16px;font-size:11px;
+  color:#999;flex-shrink:0;display:flex;justify-content:space-between;align-items:center}
+#footer-sel{color:#444;font-weight:500}
+</style>
+</head>
+<body>
+
+<div id="top">
+  <div>
+    <h1>Global Health Security Network</h1>
+    <div class="sub">78 nodes &middot; 140 edges</div>
+  </div>
+  <div id="legend">
+    <span class="leg"><span class="leg-s" style="background:#2E75B6"></span>Employment</span>
+    <span class="leg"><span class="leg-s" style="background:#1A3A5C"></span>Leadership</span>
+    <span class="leg"><span class="leg-d" style="border-color:#9BC2E6"></span>Consulting</span>
+    <span class="leg"><span class="leg-s" style="background:#70AD47"></span>Education</span>
+    <span class="leg"><span class="leg-d" style="border-color:#A9D18E"></span>Partnership</span>
+    <span class="leg"><span class="leg-s" style="background:#E6A020"></span>Coordination</span>
+    <span class="leg"><span class="leg-s" style="background:#C00000"></span>Funding</span>
+    <span class="leg"><span class="leg-s" style="background:#9B59B6"></span>Lobbying</span>
+    <span class="leg"><span class="leg-s" style="background:#FF0000"></span>Conflict</span>
+    <span class="leg"><span class="leg-s" style="background:#FFC000"></span>Oversight</span>
+    <span class="leg"><span class="leg-s" style="background:#BFBFBF"></span>Structure</span>
+    <span class="leg" style="color:#777">&nbsp;&#9711; Person</span>
+  </div>
+</div>
+
+<div id="main">
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div id="status">Settling layout&hellip;</div>
+  </div>
+
+  <div id="panel">
+    <div id="panel-header">
+      <span id="panel-title">Controls</span>
+      <button id="panel-toggle" title="Collapse panel">&#9664;</button>
+    </div>
+    <div id="panel-body">
+
+      <!-- ── Display ── -->
+      <div class="acc-section">
+        <div class="acc-header">Display <span class="acc-caret">▾</span></div>
+        <div class="acc-body">
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Node size</label><span class="val" id="r-val">10</span></div>
+            <input type="range" id="r-slider" min="5" max="30" value="10" step="1">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Node label</label><span class="val" id="ls-val">12</span>px</div>
+            <input type="range" id="ls-slider" min="8" max="20" value="12" step="1">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Edge width</label><span class="val" id="ew-val">1.5</span></div>
+            <input type="range" id="ew-slider" min="0.5" max="5" value="1.5" step="0.5">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Edge label</label><span class="val" id="els-val">9</span>px</div>
+            <input type="range" id="els-slider" min="7" max="16" value="9" step="1">
+          </div>
+          <label class="check-row"><input type="checkbox" id="chk-el"> Show edge labels</label>
+          <label class="check-row"><input type="checkbox" id="chk-arr" checked> Show arrowheads</label>
+          <label class="check-row"><input type="checkbox" id="chk-persons" checked> Show people</label>
+          <label class="check-row"><input type="checkbox" id="chk-orgs" checked> Show organisations</label>
+        </div>
+      </div>
+
+      <!-- ── Org Types ── -->
+      <div class="acc-section">
+        <div class="acc-header">Org Types <span class="acc-caret">▸</span></div>
+        <div class="acc-body hidden">
+          <div class="org-chks">
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="intelligence" checked><span class="org-swatch" style="background:#C62828"></span>Intelligence</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="usgov"        checked><span class="org-swatch" style="background:#1565C0"></span>US Gov&rsquo;t</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="globalhealth" checked><span class="org-swatch" style="background:#00838F"></span>Global Health</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="research"     checked><span class="org-swatch" style="background:#6A1B9A"></span>Research</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="track2"       checked><span class="org-swatch" style="background:#2E7D32"></span>Track II</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="forum"        checked><span class="org-swatch" style="background:#E65100"></span>Forum</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="coalition"    checked><span class="org-swatch" style="background:#5D4037"></span>Coalition</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype="foreign"      checked><span class="org-swatch" style="background:#880E4F"></span>Foreign Gov&rsquo;t</label>
+            <label class="check-row"><input type="checkbox" class="org-type-chk" data-subtype=""             checked><span class="org-swatch" style="background:#ED7D31"></span>Other</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Time & Era ── -->
+      <div class="acc-section">
+        <div class="acc-header">Time &amp; Era <span class="acc-caret">▾</span></div>
+        <div class="acc-body">
+          <label class="check-row"><input type="checkbox" id="era-pre"    checked> Pre-Jan 2020</label>
+          <label class="check-row"><input type="checkbox" id="era-post"   checked> From Jan 2020</label>
+          <label class="check-row"><input type="checkbox" id="era-nodate" checked> No date</label>
+          <div class="ctrl-group" style="margin-top:2px">
+            <div class="ctrl-row">
+              <label>Year range</label>
+              <span class="val" id="yr-range-val">1984&ndash;2026</span>
+            </div>
+            <div class="dual-range">
+              <div class="dual-range-track"></div>
+              <div class="dual-range-fill" id="yr-fill"></div>
+              <input type="range" id="yr-from" min="1984" max="2026" value="1984" step="1">
+              <input type="range" id="yr-to"   min="1984" max="2026" value="2026" step="1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Narrative ── -->
+      <div class="acc-section">
+        <div class="acc-header">Public Narrative Alignment <span class="acc-caret">▾</span></div>
+        <div class="acc-body">
+          <label class="check-row"><input type="checkbox" class="narr-chk" data-narr="enforcer" checked><span class="narr-dot" style="background:#C62828;margin-left:2px"></span>Enforcer</label>
+          <label class="check-row"><input type="checkbox" class="narr-chk" data-narr="aligned"  checked><span class="narr-dot" style="background:#E65100;margin-left:2px"></span>Aligned</label>
+          <label class="check-row"><input type="checkbox" class="narr-chk" data-narr="neutral"  checked><span class="narr-dot" style="background:#757575;margin-left:2px"></span>Neutral / N-A</label>
+          <label class="check-row"><input type="checkbox" class="narr-chk" data-narr="opposed"  checked><span class="narr-dot" style="background:#1565C0;margin-left:2px"></span>Opposed</label>
+        </div>
+      </div>
+
+      <!-- ── Playback (starts collapsed) ── -->
+      <div class="acc-section">
+        <div class="acc-header">Playback <span class="acc-caret">▸</span></div>
+        <div class="acc-body hidden">
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Speed</label><span class="val" id="play-spd-val">2</span></div>
+            <input type="range" id="play-spd" min="1" max="5" value="2" step="1">
+          </div>
+          <div class="btn-row">
+            <button class="btn primary" id="btn-play">&#9654;&ensp;Play</button>
+            <button class="btn"         id="btn-reset-yr">&#8635;&ensp;Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Layout (starts collapsed) ── -->
+      <div class="acc-section">
+        <div class="acc-header">Layout <span class="acc-caret">▾</span></div>
+        <div class="acc-body">
+          <div class="ctrl-group">
+            <div class="ctrl-row"><label>Frames</label></div>
+            <input type="number" id="frames-input" min="100" max="50000" value="24000"
+              style="width:100%;padding:4px 7px;border:1px solid #ddd;border-radius:4px;font-size:12px;color:#333">
+          </div>
+          <button class="btn primary" id="btn-relayout">&#8635;&ensp;Re-run layout</button>
+        </div>
+      </div>
+
+      <!-- ── Pinned: view controls + info pane ── -->
+      <div class="pinned">
+        <div class="btn-row">
+          <button class="btn" id="btn-reset">&#8962;&ensp;Reset</button>
+          <button class="btn" id="btn-save" >&#128190;&ensp;Save</button>
+          <button class="btn" id="btn-load" >&#128194;&ensp;Load</button>
+        </div>
+        <div id="info-pane">
+          <div id="info-hd" class="i-hint">Click a node or edge for details</div>
+          <div id="info-bd"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="tooltip"><strong id="tip-label"></strong></div>
+
+<div id="footer">
+  <span>Drag node &middot; scroll to zoom &middot; click node/edge to inspect &middot; dbl-click canvas to reset</span>
+  <span id="footer-sel"></span>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+var nodes    = [{"id": "AK", "label": "Adrienne Keen", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "AH", "label": "Avril Haines", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JB", "label": "Jason Bannan", "full": "", "type": "person", "subtype": "", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "TD", "label": "Thomas DiNanno", "full": "", "type": "person", "subtype": "", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "NIC", "label": "NIC", "full": "National Intelligence Council", "type": "org", "subtype": "intelligence", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "ODNI", "label": "ODNI", "full": "Office of the Director of National Intelligence", "type": "org", "subtype": "intelligence", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "FBI", "label": "FBI", "full": "", "type": "org", "subtype": "intelligence", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CIA", "label": "CIA", "full": "", "type": "org", "subtype": "intelligence", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "BSEG", "label": "BSEG", "full": "Biological Science Experts Group (ODNI advisory)", "type": "org", "subtype": "intelligence", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "STATE", "label": "State Dept", "full": "U.S. State Dept / Bureau of Intelligence & Research", "type": "org", "subtype": "intelligence", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "SENATE", "label": "Senate HSGAC", "full": "Senate Homeland Security & Governmental Affairs Committee", "type": "org", "subtype": "usgov", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "TA", "label": "Tedros Adhanom", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MR", "label": "Mike Ryan", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MVK", "label": "Maria Van Kerkhove", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "PE", "label": "Peter Embarek", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "WHO", "label": "WHO", "full": "World Health Organization", "type": "org", "subtype": "globalhealth", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JF", "label": "Jeremy Farrar", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MMB", "label": "Manningham-Buller", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "WELLCOME", "label": "Wellcome Trust", "full": "", "type": "org", "subtype": "globalhealth", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CEPI", "label": "CEPI", "full": "Coalition for Epidemic Preparedness Innovations", "type": "org", "subtype": "globalhealth", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "WEF", "label": "WEF", "full": "World Economic Forum", "type": "org", "subtype": "forum", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "AF", "label": "Anthony Fauci", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "FC", "label": "Francis Collins", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DM", "label": "David Morens", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "NIAID", "label": "NIAID", "full": "National Institute of Allergy and Infectious Diseases", "type": "org", "subtype": "usgov", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "NIH", "label": "NIH", "full": "National Institutes of Health", "type": "org", "subtype": "usgov", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CDC", "label": "CDC", "full": "Centers for Disease Control", "type": "org", "subtype": "usgov", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "PD", "label": "Peter Daszak", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "SZ", "label": "Shi Zhengli", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "EHA", "label": "EcoHealth Alliance", "full": "", "type": "org", "subtype": "research", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "WIV", "label": "WIV", "full": "Wuhan Institute of Virology", "type": "org", "subtype": "research", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "KA", "label": "Kristian Andersen", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "EH", "label": "Edward Holmes", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "RG", "label": "Robert Garry", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "IL", "label": "Ian Lipkin", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "SN", "label": "Sam Nunn", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "BC", "label": "Beth Cameron", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "NTI", "label": "NTI", "full": "Nuclear Threat Initiative", "type": "org", "subtype": "track2", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JHU", "label": "Johns Hopkins CHS", "full": "Johns Hopkins Center for Health Security", "type": "org", "subtype": "track2", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "ELBI", "label": "ELBI", "full": "Emerging Leaders in Biosecurity Initiative", "type": "org", "subtype": "track2", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "TI", "label": "Tom Inglesby", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "GG", "label": "Gigi Gronvall", "full": "", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "RB", "label": "Ralph Baric", "full": "", "type": "person", "subtype": "", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DR", "label": "David Relman", "full": "", "type": "person", "subtype": "", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DF", "label": "David Franz", "full": "", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CISAC", "label": "CISAC", "full": "NAS Committee on International Security & Arms Control", "type": "org", "subtype": "track2", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "NSC", "label": "White House NSC", "full": "", "type": "org", "subtype": "usgov", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "LSHTM", "label": "LSHTM", "full": "London School of Hygiene & Tropical Medicine", "type": "org", "subtype": "research", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JK", "label": "Jerry Keusch", "full": "Gerald Keusch, Boston University; EHA board; Coalition of Support organiser", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "PH", "label": "Peter Hotez", "full": "Baylor College of Medicine virologist; Coalition of Support; 'Antiscience Kills'", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "RR", "label": "Rich Roberts", "full": "Nobel laureate (Physiology or Medicine 1993); New England Biolabs; Coalition of Support", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JS", "label": "Jeff Sturchio", "full": "EHA communications adviser for NIH/NIAID relations", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "AR", "label": "Angela Rasmussen", "full": "Virologist; Coalition of Support attack figure", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MK", "label": "Marion Koopmans", "full": "Erasmus MC virologist; WHO 2021 mission; Lancet letter co-signer", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JG", "label": "Jim Gimlett", "full": "DARPA program manager, PREEMPT", "type": "person", "subtype": "", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DARPA", "label": "DARPA", "full": "Defense Advanced Research Projects Agency", "type": "org", "subtype": "usgov", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "LANCET", "label": "The Lancet", "full": "Medical journal (Richard Horton, editor); published Calisher et al. Feb 2020", "type": "org", "subtype": "globalhealth", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "BCM", "label": "Baylor/BCM", "full": "Baylor College of Medicine", "type": "org", "subtype": "research", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "USAID", "label": "USAID", "full": "U.S. Agency for International Development; PREDICT funder", "type": "org", "subtype": "usgov", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DEFUSE", "label": "DEFUSE", "full": "EcoHealth/WIV DARPA proposal (Mar 2018): insert furin cleavage sites into chimeric SARS-CoVs at WIV; rejected by DARPA Jun 2018 citing biosafety", "type": "org", "subtype": "research", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "GILLIBRAND", "label": "Sen. Gillibrand", "full": "Sen. Kirsten Gillibrand (D-NY); SASC; sympathetic EHA lobby target", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "SCHUMER", "label": "Sen. Schumer", "full": "Sen. Chuck Schumer (D-NY); Senate Majority Leader; EHA lobby target", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MALONEY", "label": "Rep. Maloney", "full": "Rep. Carolyn Maloney (D-NY); House Oversight; EHA lobby target", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "ESHOO", "label": "Rep. Eshoo", "full": "Rep. Anna Eshoo (D-CA); House Energy & Commerce; EHA lobby target", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MI5", "label": "MI5", "full": "UK Security Service; Manningham-Buller DG 2002-2007; Andrew Parker DG 2013-2020", "type": "org", "subtype": "intelligence", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "AP", "label": "Andrew Parker", "full": "Director General of MI5 2013-2020; visited Manningham-Buller and Farrar at Wellcome mid-January 2020 to discuss pandemic origins", "type": "person", "subtype": "", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "COS", "label": "Coalition of Support", "full": "EHA lobbying-and-narrative coalition (2021-2023) convened by Daszak; members: Keusch, Hotez, Roberts, Sturchio, Rasmussen, Morens, Gronvall; considered name 'Americans for Pandemic Preparedness'", "type": "org", "subtype": "coalition", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "MSC", "label": "Munich Security Conf.", "full": "Munich Security Conference; hosted NTI pandemic tabletop exercises (2015, 2019) testing international mechanisms for investigating high-consequence biological events", "type": "org", "subtype": "forum", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CEIP", "label": "Carnegie Endowment", "full": "Carnegie Endowment for International Peace; Track II think tank; funds NTI; Avril Haines joining as President September 2026", "type": "org", "subtype": "track2", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "DRASTIC", "label": "DRASTIC", "full": "Decentralized Radical Autonomous Search Team Investigating COVID-19; independent open-source research collective including Gilles Demaneuf; first recipients of the leaked DARPA/DEFUSE memo (August 2021); produced key primary-source analyses of COVID-19 origins.", "type": "org", "subtype": "research", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "JPM", "label": "Maj. Murphy", "full": "Major Joseph Patrick Murphy, USMC; DARPA Biological Technologies Office; authored internal Aug 2021 memo revealing that DARPA had reviewed and rejected the DEFUSE proposal on biosafety grounds; memo leaked to DRASTIC in August 2021.", "type": "person", "subtype": "", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "BS", "label": "Schwartl\u00e4nder", "full": "Bernhard Schwartl\u00e4nder; WHO Representative to China 2013\u20132017; Tedros's Chief of Staff from 2017; consistent internal advocate for deference to Beijing; received Farrar's 12 Feb 2020 email alongside Ryan and Drosten; appeared in CGTN softball interviews with WHO Goodwill Ambassador James Chau projecting Beijing's pandemic narrative.", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CHN", "label": "China/CCP", "full": "Chinese Communist Party / Chinese government; used access denial as structural leverage throughout the COVID origins inquiry \u2014 restricted data, curated itineraries, supervised site visits, managed team composition \u2014 while conditioning cooperation on positive public praise. China's economic weight and WHO voting-bloc support (which helped secure Tedros's 2017 election) made confrontation structurally costly and deference the path of least resistance.", "type": "org", "subtype": "foreign", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "RF", "label": "Fouchier", "full": "Ron Fouchier; Erasmus MC Rotterdam; gain-of-function H5N1 researcher (controversial 2012 ferret-transmission paper, whose safety assurances underpinned P4 lab approvals); on the Feb 1 2020 Farrar teleconference; publicly dismissed lab-leak hypothesis; article notes he 'may very well be responsible for torpedoing Proximal Origin at Nature' because an early draft still mentioned passaging as a possibility.", "type": "person", "subtype": "", "narrative": "enforcer", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "CDT", "label": "Drosten", "full": "Christian Drosten; Director, Institute of Virology, Charit\u00e9 Berlin; Germany's leading pandemic voice in 2020; included by Farrar in the 12 February 2020 email alongside Ryan and Schwartl\u00e4nder: 'I hope there is a paper/letter ready this week\u2026 which effectively puts to bed the issue of the origin of the virus.'", "type": "person", "subtype": "", "narrative": "aligned", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "GHB", "label": "Brundtland", "full": "Gro Harlem Brundtland; WHO Director-General 1998\u20132003; publicly rebuked China for its SARS-1 cover-up in 2003 \u2014 a direct confrontation with Beijing that stands in stark contrast to Tedros's narrative deference in 2020. Keynote speaker at the NTI tabletop pandemic exercise at the Munich Security Conference (13 February 2020), simulating an engineered-virus outbreak: her WHO-DG authority lent institutional legitimacy to an exercise that dramatised exactly the investigation scenario Farrar's publications were simultaneously closing off.", "type": "person", "subtype": "", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "BULL", "label": "Robert Bull", "full": "Robert Bull; Scientific Response and Analysis Unit, FBI Laboratory, Quantico; attended 3 February 2020 NASEM call on COVID-19 origins alongside Fauci, Daszak, Baric, Inglesby, Kadlec \u2014 same unit as Jason Bannan, who was excluded from the August 2021 White House origins briefing", "type": "person", "subtype": "", "narrative": "opposed", "x": 0, "y": 0, "vx": 0, "vy": 0}, {"id": "KBRI", "label": "Kathryn Brinsfield", "full": "Kathryn Brinsfield; Senior Advisor, National Counterproliferation Centre, Office of the Director of National Intelligence (ODNI); attended 3 February 2020 NASEM call on COVID-19 origins \u2014 placing ODNI's counterproliferation apparatus in the room at the origins debate's first significant scientific convocation", "type": "person", "subtype": "", "narrative": "neutral", "x": 0, "y": 0, "vx": 0, "vy": 0}];
+var edges    = [{"source": "AK", "target": "STATE", "rel": "worked at", "detail": "Health/science advisor at State Dept Bureau of Intelligence & Research (INR); provided analysis on biological threats including Ebola, Zika, and MERS.", "when": "~2014\u20132018", "sy": 2014, "ey": 2018}, {"source": "AK", "target": "WHO", "rel": "consulted for", "detail": "Independent consultant to WHO Global TB Programme and outbreak analysis; critics cited this as a conflict of interest in her subsequent role coordinating the origins assessment.", "when": "~2016\u20132019", "sy": 2016, "ey": 2019}, {"source": "AK", "target": "LSHTM", "rel": "studied at", "detail": "Completed PhD in infectious disease modelling at LSHTM; formed early connections to UK global health network.", "when": "~2010\u20132014", "sy": 2010, "ey": 2014}, {"source": "AK", "target": "ELBI", "rel": "participated in", "detail": "2017 ELBI Fellow at Johns Hopkins; gained direct access to Beth Cameron as speaker/mentor, creating an NTI-to-IC pipeline.", "when": "2017", "sy": 2017, "ey": 2017}, {"source": "AK", "target": "NIC", "rel": "worked at", "detail": "Director for Global Health Security at NIC; coordinated the 90-day Biden COVID-19 origins review and the first National Intelligence Estimate on COVID-19.", "when": "2019\u20132022", "sy": 2019, "ey": 2022}, {"source": "AK", "target": "ODNI", "rel": "worked for", "detail": "NIC is a component of ODNI; Keen worked under DNI Haines and was central to shaping the IC's contested origins assessment.", "when": "2019\u20132022", "sy": 2019, "ey": 2022}, {"source": "AK", "target": "CEPI", "rel": "worked at", "detail": "Moved to CEPI as Senior Emergency Response Lead after government service; continued in the WHO-adjacent epidemic preparedness ecosystem.", "when": "2022+", "sy": 2022, "ey": 2026}, {"source": "AK", "target": "CDC", "rel": "affiliated with", "detail": "Brief CDC affiliation in outbreak analytics after leaving ODNI.", "when": "2022\u20132023", "sy": 2022, "ey": 2023}, {"source": "AH", "target": "ODNI", "rel": "directed", "detail": "Director of National Intelligence under Biden; oversaw entire IC including NIC's COVID origins review that critics allege was steered toward natural origin.", "when": "2021\u20132025", "sy": 2021, "ey": 2025}, {"source": "AH", "target": "NIC", "rel": "oversaw", "detail": "As DNI, Haines directed Keen's NIC coordination of the 90-day origins review; the NIC synthesised IC assessments including FBI's dissenting lab-associated conclusion.", "when": "2021", "sy": 2021, "ey": 2021}, {"source": "AH", "target": "NTI", "rel": "advised", "detail": "Haines was a member of NTI's Biosecurity Advisory Group before being appointed DNI; this created a direct NTI-to-ODNI personnel pipeline within the Biden administration.", "when": "2018\u20132021", "sy": 2018, "ey": 2021}, {"source": "JB", "target": "FBI", "rel": "worked at", "detail": "Senior Scientist (microbiologist) leading FBI's COVID origins analysis; FBI assessed lab-associated incident with moderate confidence \u2014 the only IC element to do so.", "when": "2020\u20132022", "sy": 2020, "ey": 2022}, {"source": "JB", "target": "NIC", "rel": "excluded from", "detail": "Bannan was reportedly not invited to the August 2021 White House origins briefing despite FBI's lab-associated assessment; he stated: 'I find it surprising that the White House didn't ask.'", "when": "Aug 2021", "sy": 2021, "ey": 2021}, {"source": "NIC", "target": "ODNI", "rel": "part of", "detail": "NIC is the analytical hub of ODNI, responsible for producing National Intelligence Estimates; Keen's role here made her the primary coordinator of IC-wide COVID origins synthesis.", "when": "", "sy": null, "ey": null}, {"source": "NIC", "target": "FBI", "rel": "coordinated with", "detail": "NIC synthesised FBI's dissenting lab-associated conclusion alongside four other IC elements' natural-origin assessments for the 90-day Biden review.", "when": "2021", "sy": 2021, "ey": 2021}, {"source": "BSEG", "target": "ODNI", "rel": "advises", "detail": "BSEG serves as ODNI's expert advisory panel on biological threats; received Jan 2020 Baric briefing on three SARS-CoV-2 origin scenarios before the IC formal assessment began.", "when": "2015+", "sy": 2015, "ey": 2026}, {"source": "TD", "target": "STATE", "rel": "worked at", "detail": "Bureau of Arms Control, Verification and Compliance (AVC); testified that Keen 'was an advocate for zoonosis, very involved in discrediting information' that State was presenting on lab-origin.", "when": "2018\u20132021", "sy": 2018, "ey": 2021}, {"source": "TD", "target": "AK", "rel": "testified against", "detail": "DiNanno told Sky News (2023) that Keen actively pushed back against lab-leak evidence State was presenting to Secretary Pompeo, framing her role as advocacy not analysis.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "SENATE", "target": "ODNI", "rel": "oversees", "detail": "Senate Homeland Security Committee (Oct 2025 letter to DNI Gabbard) requested records on Keen and Murphy's role in NIC COVID origins assessments.", "when": "2025", "sy": 2025, "ey": 2025}, {"source": "TA", "target": "WHO", "rel": "directed", "detail": "Director-General of WHO; visited Beijing Jan 28 2020 and endorsed China's cooperation publicly before full data access was granted; called WHO behaviour 'understandable' given China's political leverage.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "TA", "target": "JF", "rel": "appointed", "detail": "Tedros appointed Farrar as WHO Chief Scientist in 2023, bringing a central figure from early February 2020 origins coordination into WHO's formal senior leadership.", "when": "2023", "sy": 2023, "ey": 2023}, {"source": "MR", "target": "WHO", "rel": "worked at", "detail": "Executive Director for Health Emergencies; served on Jan 28 2020 Beijing delegation alongside Tedros; later acknowledged 'considerable frustration' with China's data delays.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "MVK", "target": "WHO", "rel": "worked at", "detail": "COVID-19 Technical Lead; in 2023 called the 2021 joint mission's lack of data access 'inexcusable'; participated in Feb 2020 situation briefings as the outbreak spread.", "when": "2020+", "sy": 2020, "ey": 2026}, {"source": "PE", "target": "WHO", "rel": "worked at", "detail": "Food Safety and Zoonoses scientist; led WHO-China joint origins mission (Feb 2021) and secretly negotiated TOR language with Chinese counterparts in August 2020 without WHO membership approval.", "when": "2010\u20132021", "sy": 2010, "ey": 2021}, {"source": "PE", "target": "TA", "rel": "reported to", "detail": "Embarek reported to Tedros and Ryan on mission progress; his Aug 2020 TOR negotiations bypassed WHO membership, effectively pre-determining the inquiry's scope.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "JF", "target": "WHO", "rel": "works at", "detail": "Appointed WHO Chief Scientist by Tedros in 2023; later promoted to Assistant Director-General; completing Farrar's transition from Wellcome philanthropy into formal WHO leadership.", "when": "2023+", "sy": 2023, "ey": 2026}, {"source": "JF", "target": "WELLCOME", "rel": "directed", "detail": "Director of Wellcome Trust 2013\u20132023; used this position to convene the Feb 2020 teleconference on SARS-CoV-2 origins and to coordinate with Fauci, Collins, and the Proximal Origin authors.", "when": "2013\u20132023", "sy": 2013, "ey": 2023}, {"source": "JF", "target": "NTI", "rel": "board member", "detail": "Farrar served on NTI board while directing Wellcome Trust; present at the June 2018 NTI\u2013Wellcome\u2013WEF Biosecurity Innovation meeting alongside Nunn, where Cameron co-authored the initiative paper.", "when": "2018+", "sy": 2018, "ey": 2026}, {"source": "JF", "target": "KA", "rel": "coordinated", "detail": "Farrar convened Andersen's team after the Feb 1 Fauci-Farrar call; hosted Feb 4 teleconference on origins evidence; private emails show scientists acknowledged lab-origin could not be ruled out even as the paper moved toward natural-origin conclusion.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "JF", "target": "AF", "rel": "coordinated with", "detail": "Farrar briefed Fauci on scientists' private laboratory-origin concerns in early Feb 2020; both coordinated messaging so the public Proximal Origin paper aligned NIH and Wellcome positions.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "MMB", "target": "WELLCOME", "rel": "chaired", "detail": "Eliza Manningham-Buller (former MI5 Director-General 2002\u20132007) chaired Wellcome Trust board 2015\u20132021; MI5 DG Parker visited Wellcome to meet Manningham-Buller in early 2020 to discuss outbreak origins.", "when": "2015\u20132021", "sy": 2015, "ey": 2021}, {"source": "MMB", "target": "WHO", "rel": "connected to", "detail": "Manningham-Buller's Wellcome chairship created an intelligence-community channel into the WHO-adjacent philanthropy network during the critical early months of the pandemic.", "when": "2020", "sy": 2020, "ey": 2020}, {"source": "WELLCOME", "target": "WHO", "rel": "funded", "detail": "Wellcome Trust contributed substantially to WHO's outbreak response capacity; Farrar leveraged this philanthropic relationship throughout pandemic preparedness and during the origins narrative period.", "when": "2013\u20132023", "sy": 2013, "ey": 2023}, {"source": "WELLCOME", "target": "CEPI", "rel": "co-founded", "detail": "Wellcome co-founded CEPI (2017) alongside governments and the Gates Foundation, creating another hub connecting Wellcome's network to global health emergency response infrastructure.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "WELLCOME", "target": "NTI", "rel": "partnered with", "detail": "NTI\u2013Wellcome\u2013WEF Biosecurity Innovation and Risk Reduction meeting (Jun 2018): Farrar and Nunn present; Cameron co-authored the NTI policy communication; formalized the Wellcome\u2013NTI institutional axis.", "when": "2018", "sy": 2018, "ey": 2018}, {"source": "SN", "target": "NTI", "rel": "co-founded", "detail": "Sam Nunn co-founded NTI in 2001 extending Nunn-Lugar cooperative threat reduction logic from nuclear to biological threats; NTI became the primary US biosecurity Track II actor.", "when": "2001+", "sy": 2001, "ey": 2026}, {"source": "NTI", "target": "WEF", "rel": "partnered with", "detail": "NTI co-hosted the June 2018 Biosecurity Innovation meeting with WEF and Wellcome; ran tabletop pandemic exercises at Munich Security Conference (2019) involving WEF participants.", "when": "2018\u20132019", "sy": 2018, "ey": 2019}, {"source": "NTI", "target": "JHU", "rel": "collaborates with", "detail": "NTI and Johns Hopkins CHS co-developed the Global Health Security Index and co-facilitated ELBI; shared intellectual leadership over the biosecurity field and its personnel pipeline.", "when": "2010+", "sy": 2010, "ey": 2026}, {"source": "NTI", "target": "WHO", "rel": "exercised with", "detail": "NTI ran tabletop pandemic exercises at Munich Security Conference (2015, 2019) testing international mechanisms for investigating high-consequence biological events \u2014 precisely the question WHO later faced in 2021.", "when": "2015, 2019", "sy": 2015, "ey": 2019}, {"source": "BC", "target": "NTI", "rel": "worked at", "detail": "VP Global Biological Policy and Programs; co-authored the NTI\u2013Wellcome\u2013WEF Biosecurity Innovation initiative (June 2018); central architect of NTI's biosecurity doctrine linking Track II to US government.", "when": "2017\u20132021", "sy": 2017, "ey": 2021}, {"source": "BC", "target": "NSC", "rel": "worked at", "detail": "Moved from NTI VP to Biden NSC Senior Director for Global Health Security and Biodefense; oversaw COVID origins question from the White House and coordinated with Haines at ODNI.", "when": "Jan 2021+", "sy": 2021, "ey": 2026}, {"source": "BC", "target": "AK", "rel": "connected to", "detail": "Both were in overlapping biosecurity circles through the JHU ELBI network (Cameron as speaker/mentor, Keen as 2017 fellow); created an informal NTI\u2013NSC\u2013NIC coordination channel in the Biden administration.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "BC", "target": "ELBI", "rel": "mentored at", "detail": "Cameron served as ELBI speaker/mentor for multiple cohorts including the 2017 class (Keen's cohort); directly linked the NTI institutional world to ELBI's talent pipeline for government.", "when": "2015+", "sy": 2015, "ey": 2026}, {"source": "TI", "target": "JHU", "rel": "directed", "detail": "Director of Johns Hopkins Center for Health Security; BSEG member and Biden health security adviser; the sole Track II insider to publicly endorse a lab-accident investigation, having co-authored a 2014 GoF moratorium call.", "when": "2016+", "sy": 2016, "ey": 2026}, {"source": "GG", "target": "JHU", "rel": "worked at", "detail": "Senior Scholar at Johns Hopkins CHS; ELBI faculty; aligned publicly with the natural-origin consensus despite JHU's institutional role in balanced biosecurity assessment.", "when": "2010+", "sy": 2010, "ey": 2026}, {"source": "ELBI", "target": "JHU", "rel": "hosted by", "detail": "ELBI fellowship hosted by Johns Hopkins CHS since 2012; 330+ alumni spanning government, IC, and academia; functioned as a talent pipeline and socialisation mechanism for the biosecurity field.", "when": "2012+", "sy": 2012, "ey": 2026}, {"source": "TI", "target": "ELBI", "rel": "mentored at", "detail": "Inglesby served in ELBI programme leadership, shaping the values and professional networks of emerging biosecurity leaders including future IC and government officials.", "when": "2012+", "sy": 2012, "ey": 2026}, {"source": "DF", "target": "CISAC", "rel": "co-chaired", "detail": "David Franz co-chaired CISAC's biosecurity committee; organised US-China Track II workshops in Beijing (2015), Wuhan (2017), and Harbin (2019), creating a direct scientific channel to WIV outside normal government oversight.", "when": "2010\u20132019", "sy": 2010, "ey": 2019}, {"source": "RB", "target": "CISAC", "rel": "participated in", "detail": "Baric presented chimeric coronavirus research at the 2015 Beijing CISAC workshop alongside Shi Zhengli, establishing a direct UNC-WIV scientific relationship outside standard government oversight.", "when": "2015", "sy": 2015, "ey": 2015}, {"source": "SZ", "target": "CISAC", "rel": "participated in", "detail": "Shi Zhengli participated in the 2015 Beijing CISAC US-China biosecurity workshop alongside Baric; the meeting documented direct WIV-UNC collaboration on chimeric coronavirus work.", "when": "2015", "sy": 2015, "ey": 2015}, {"source": "RB", "target": "BSEG", "rel": "briefed", "detail": "Baric presented SARS-CoV-2 analysis to BSEG quarterly meeting (Jan 29 2020) covering three origin scenarios: natural spillover, lab escape, and deliberate engineering; FBI's Bannan was present.", "when": "Jan 2020", "sy": 2020, "ey": 2020}, {"source": "DR", "target": "BSEG", "rel": "advised", "detail": "David Relman served as BSEG member; co-authored a 2021 Science letter calling for investigation of both zoonotic and laboratory origins; publicly challenged the natural-origin consensus.", "when": "2015+", "sy": 2015, "ey": 2026}, {"source": "DF", "target": "BSEG", "rel": "advised", "detail": "Franz advised BSEG on biological threat reduction while maintaining close CISAC ties to China and informal connections to the EcoHealth network \u2014 a dual positioning critics noted.", "when": "2010+", "sy": 2010, "ey": 2026}, {"source": "RB", "target": "SZ", "rel": "collaborated with", "detail": "Baric and Shi Zhengli collaborated on chimeric SARS-CoV-2 precursor experiments funded partly through EcoHealth's NIAID grant; joint papers documented the creation of novel coronaviruses with enhanced human-cell infectivity.", "when": "2015\u20132019", "sy": 2015, "ey": 2019}, {"source": "SZ", "target": "WIV", "rel": "worked at", "detail": "Bat coronavirus expert at WIV; ran biosafety level 3 and 4 research on SARS-related coronaviruses; collaborated with Baric and managed WIV's EcoHealth-funded grant work.", "when": "2000+", "sy": 2000, "ey": 2026}, {"source": "AF", "target": "NIAID", "rel": "directed", "detail": "Director of NIAID 1984\u20132022; oversaw the US biodefense portfolio ($1.71B in FY2003, 18\u00d7 the FY2000 baseline); primary federal node for pandemic research funding and the designated DTRA outreach target in 2007.", "when": "1984\u20132022", "sy": 1984, "ey": 2022}, {"source": "FC", "target": "NIH", "rel": "directed", "detail": "Director of NIH 2009\u20132021; participated in early Feb 2020 calls on SARS-CoV-2 origins with Fauci and Farrar; aligned NIH publicly with the natural-origin narrative.", "when": "2009\u20132021", "sy": 2009, "ey": 2021}, {"source": "DM", "target": "NIAID", "rel": "advised", "detail": "Senior Advisor to Fauci for 20+ years; FOIA emails show he coordinated with Daszak outside formal NIH channels using personal Gmail to avoid FOIA; cited in a NARA compliance review.", "when": "2000\u20132023", "sy": 2000, "ey": 2023}, {"source": "DM", "target": "PD", "rel": "coordinated with", "detail": "Morens's July 2023 NARA email named Daszak among colleagues 'supporting Tony by default'; the two communicated via personal Gmail to avoid FOIA capture; relationship spanned 20+ years of grant coordination.", "when": "2010\u20132023", "sy": 2010, "ey": 2023}, {"source": "NIAID", "target": "EHA", "rel": "funded", "detail": "NIAID granted EcoHealth Alliance ~$3.7M for bat coronavirus surveillance and chimeric virus research at WIV under grant R01AI110964.", "when": "2014\u20132020", "sy": 2014, "ey": 2020}, {"source": "NIH", "target": "EHA", "rel": "funded", "detail": "NIH provided overarching institutional support to EcoHealth Alliance through the NIAID grant portfolio; Collins-era NIH endorsed the EcoHealth programme and resisted congressional defunding attempts through 2022.", "when": "2014\u20132023", "sy": 2014, "ey": 2023}, {"source": "NIH", "target": "NIAID", "rel": "contains", "detail": "NIAID is a component institute of NIH; Collins as NIH Director oversaw Fauci's NIAID and the broader funding decisions that reached EcoHealth Alliance and WIV.", "when": "", "sy": null, "ey": null}, {"source": "PD", "target": "EHA", "rel": "directed", "detail": "President of EcoHealth Alliance; secured NIAID and USAID PREDICT grants for bat coronavirus surveillance; managed the WIV subcontract and maintained the Daszak-Morens-Fauci relationship.", "when": "2009+", "sy": 2009, "ey": 2026}, {"source": "EHA", "target": "WIV", "rel": "subgranted", "detail": "EcoHealth subcontracted WIV through NIAID grant R01AI110964; WIV conducted bat coronavirus sampling and chimeric experiments under Shi Zhengli \u2014 the exact research programme under scrutiny in the origins debate.", "when": "2014\u20132020", "sy": 2014, "ey": 2020}, {"source": "EHA", "target": "RB", "rel": "subgranted", "detail": "EcoHealth channelled part of the NIAID grant to Baric's lab at UNC for chimeric coronavirus work, creating a Daszak\u2013Baric\u2013WIV triangle funded through a single NIAID grant.", "when": "2014\u20132016", "sy": 2014, "ey": 2016}, {"source": "KA", "target": "AF", "rel": "reported to", "detail": "Andersen emailed Fauci on Jan 31 2020 noting 'unusual features' of the virus suggesting possible engineering; by Feb 12 he had reversed position to natural origin in the Proximal Origin draft.", "when": "Jan\u2013Feb 2020", "sy": 2020, "ey": 2020}, {"source": "KA", "target": "JF", "rel": "coordinated with", "detail": "Andersen co-led Proximal Origin drafting with Farrar; Wellcome's institutional position and Farrar's role made him a central node in the Feb 2020 scientific messaging process.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "EH", "target": "KA", "rel": "co-authored", "detail": "Holmes and Andersen were lead co-authors of Proximal Origin; Holmes's evolutionary biology expertise provided the technical backbone for the natural-origin argument.", "when": "Feb\u2013Mar 2020", "sy": 2020, "ey": 2020}, {"source": "RG", "target": "KA", "rel": "co-authored", "detail": "Garry (Tulane) co-authored Proximal Origin; FOIA transcripts show Garry's private views on the furin cleavage site diverged from the paper's public conclusion.", "when": "Feb\u2013Mar 2020", "sy": 2020, "ey": 2020}, {"source": "IL", "target": "KA", "rel": "co-authored", "detail": "Lipkin (Columbia) co-authored Proximal Origin; participated in the Feb 4 Wellcome teleconference and subsequent coordination with Farrar and Fauci.", "when": "Feb\u2013Mar 2020", "sy": 2020, "ey": 2020}, {"source": "FC", "target": "AF", "rel": "coordinated with", "detail": "Collins and Fauci aligned on origins messaging in Feb 2020; Collins received Proximal Origin drafts and helped ensure NIH's public position tracked with the natural-origin narrative being developed.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "JK", "target": "EHA", "rel": "board member", "detail": "Keusch served on EHA board (Boston University School of Public Health professor); his academic standing lent institutional credibility to EHA grant applications and public statements opposing congressional defunding.", "when": "~2015\u20132023", "sy": 2015, "ey": 2023}, {"source": "PH", "target": "BCM", "rel": "worked at", "detail": "Hotez is Professor of Molecular Virology at Baylor College of Medicine and co-director of Texas Children's Hospital Center for Vaccine Development; hosted the Coalition of Support's April 27 2023 in-person meeting.", "when": "2010+", "sy": 2010, "ey": 2026}, {"source": "PD", "target": "JK", "rel": "coordinated with", "detail": "Keusch was the primary organiser of Daszak's Coalition of Support ('Science & Policy Group'), first assembled October 2021 as congressional pressure mounted over EHA's WIV grants; he chaired the Feb 1 2023 Coalition Zoom meeting.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "PH", "rel": "coordinated with", "detail": "Hotez joined the Coalition of Support; hosted its April 27 2023 in-person launch at BCM alongside Rasmussen, Gronvall, Keusch, and Morens; drafted a 'National Strategy for COVID-19 Science' and wrote 'Antiscience Kills' aligned with Coalition messaging.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "RR", "rel": "coordinated with", "detail": "Rich Roberts (Nobel Prize, Physiology or Medicine 1993; New England Biolabs) provided scientific credibility to the Coalition of Support; participated in Coalition Zoom meetings and signed joint statements opposing congressional restrictions on EHA and gain-of-function research.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "JS", "rel": "coordinated with", "detail": "Jeff Sturchio served as EHA's dedicated NIH/NIAID communications strategy agent; drafted messaging and congressional engagement scripts to counter defunding legislation and origins scrutiny on behalf of Daszak.", "when": "2020\u20132023", "sy": 2020, "ey": 2023}, {"source": "PD", "target": "AR", "rel": "coordinated with", "detail": "Rasmussen was recruited into the Coalition of Support and served as its public attack figure against lab-leak advocates; characterised critics as politically motivated; attended the April 27 2023 in-person Coalition meeting at BCM.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "MK", "rel": "coordinated with", "detail": "Daszak cultivated Koopmans as a European scientific credibility anchor; she co-signed the Lancet letter he drafted (Calisher et al.) and served alongside him on the WHO 2021 origins mission where he continued to control the scope of inquiry.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "MK", "target": "WHO", "rel": "served on", "detail": "Koopmans was a member of the WHO\u2013China Joint Study team (Jan\u2013Feb 2021) alongside Daszak and Embarek; she later called the mission's data access 'inexcusable', acknowledging the mission was compromised.", "when": "2021", "sy": 2021, "ey": 2021}, {"source": "MK", "target": "LANCET", "rel": "co-signed", "detail": "Koopmans co-signed the Calisher et al. letter in The Lancet (Feb 2020), which Daszak had drafted; the letter characterised laboratory-origin investigation as 'conspiracy theory' and was presented as an independent scientific consensus statement.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "JF", "target": "LANCET", "rel": "facilitated", "detail": "Farrar suggested The Lancet \u2014 rather than Change.org \u2014 as the publication venue for Daszak's letter; he connected Daszak to editor Richard Horton and facilitated publication of Calisher et al., then separately facilitated Proximal Origin in Nature Medicine.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "PD", "target": "LANCET", "rel": "arranged", "detail": "Daszak emailed editor Richard Horton directly to arrange publication of the Calisher et al. letter (Feb 19 2020); he presented it publicly as an independent scientific consensus while having drafted and coordinated it himself, without disclosing his role.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "JF", "target": "MK", "rel": "coordinated with", "detail": "Koopmans participated in the Feb 1 2020 Wellcome teleconference convened by Farrar to assess SARS-CoV-2 origins; she was part of the inner circle that privately acknowledged a laboratory origin could not be ruled out before the public narrative hardened.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "GG", "target": "PD", "rel": "coordinated with", "detail": "Gronvall (JHU CHS) attended the April 27 2023 in-person Coalition of Support meeting at BCM alongside Daszak, Rasmussen, Hotez, Keusch, and Morens; her JHU affiliation lent institutional credibility to the Coalition.", "when": "2023", "sy": 2023, "ey": 2023}, {"source": "DM", "target": "JK", "rel": "coordinated with", "detail": "Morens participated alongside Keusch in the Coalition of Support's Feb 1 2023 Zoom meeting and the April 27 2023 in-person meeting at BCM; his NIAID position gave the Coalition an insider NIH voice.", "when": "2023", "sy": 2023, "ey": 2023}, {"source": "PD", "target": "DEFUSE", "rel": "authored", "detail": "Daszak was principal investigator on DEFUSE; the proposal was drafted by EcoHealth and submitted to DARPA's PREEMPT program in March 2018, with WIV as the designated execution site for chimeric coronavirus work.", "when": "2017\u20132018", "sy": 2017, "ey": 2018}, {"source": "SZ", "target": "DEFUSE", "rel": "co-proposed", "detail": "Shi Zhengli was WIV co-PI on DEFUSE; she and Daszak jointly visited DARPA in June 2017 to present the research concept before the formal proposal was submitted.", "when": "Jun 2017\u2013Mar 2018", "sy": 2017, "ey": 2018}, {"source": "EHA", "target": "DEFUSE", "rel": "submitted", "detail": "EcoHealth Alliance formally submitted DEFUSE to DARPA's PREEMPT program in March 2018, seeking $14.2M for bat coronavirus surveillance and chimeric gain-of-function experiments at WIV.", "when": "Mar 2018", "sy": 2018, "ey": 2018}, {"source": "DEFUSE", "target": "DARPA", "rel": "rejected by", "detail": "DARPA rejected DEFUSE in June 2018; internal DARPA review noted the proposal lacked adequate biosafety provisions for the planned insertion of furin cleavage sites into chimeric SARS-related coronaviruses at WIV.", "when": "Jun 2018", "sy": 2018, "ey": 2018}, {"source": "DEFUSE", "target": "WIV", "rel": "planned at", "detail": "DEFUSE designated WIV as the primary laboratory site for chimeric coronavirus construction and bat-derived virus sampling; Shi Zhengli's BSL-3/4 facilities were central to the proposal's technical plan.", "when": "2018", "sy": 2018, "ey": 2018}, {"source": "JG", "target": "DARPA", "rel": "managed", "detail": "Jim Gimlett was DARPA's program manager for PREEMPT; he received and reviewed the DEFUSE proposal from EcoHealth; DARPA's internal memo cited biosafety concerns about WIV's containment for the planned work.", "when": "2017\u20132018", "sy": 2017, "ey": 2018}, {"source": "USAID", "target": "EHA", "rel": "funded", "detail": "USAID funded EcoHealth Alliance through the PREDICT program for global surveillance of zoonotic pathogens; peak funding ~$1.5M per year alongside NIAID grants, creating a dual federal dependency.", "when": "2009\u20132020", "sy": 2009, "ey": 2020}, {"source": "PD", "target": "GILLIBRAND", "rel": "lobbied", "detail": "Daszak and EHA board members (Shedlarz, Stebbins, Griffin) lobbied Sen. Gillibrand's office (SASC) to oppose NDAA provisions defunding EHA; Gillibrand was sympathetic and the lobbying was documented in Daszak's calendar records.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "SCHUMER", "rel": "lobbied", "detail": "EHA lobbied Senate Majority Leader Schumer against NDAA defunding; Tim Reiser was the key Senate contact in the Schumer lobbying operation documented in EHA calendar and correspondence records.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "PD", "target": "MALONEY", "rel": "lobbied", "detail": "Daszak lobbied Rep. Carolyn Maloney (House Oversight Committee) against scrutiny of EHA's WIV grants; Maloney's oversight jurisdiction over NIH contracting made her a priority target.", "when": "2021\u20132022", "sy": 2021, "ey": 2022}, {"source": "PD", "target": "ESHOO", "rel": "lobbied", "detail": "Daszak lobbied Rep. Anna Eshoo (House Energy & Commerce, health subcommittee) against congressional restrictions on EHA and NIH gain-of-function research funding.", "when": "2021\u20132022", "sy": 2021, "ey": 2022}, {"source": "PD", "target": "FBI", "rel": "manipulated", "detail": "Daszak used a contact within the FBI to play victim \u2014 presenting himself and EHA as targets of political harassment while simultaneously naming critics and 'opponents' to the agent; the relationship is documented in the 25,000-item Daszak calendar release.", "when": "2021\u20132023", "sy": 2021, "ey": 2023}, {"source": "MMB", "target": "MI5", "rel": "directed", "detail": "Manningham-Buller served as Director General of MI5 (2002-2007), bringing deep security-service experience to her Wellcome Trust chairship (2015-2021) and creating a direct MI5-to-philanthropy channel into the February 2020 origins coordination.", "when": "2002-2007", "sy": 2002, "ey": 2007}, {"source": "AP", "target": "MI5", "rel": "directed", "detail": "Andrew Parker served as Director General of MI5 from 2013 until retirement in 2020; his visit to Wellcome in January 2020 occurred weeks before he left the post.", "when": "2013-2020", "sy": 2013, "ey": 2020}, {"source": "AP", "target": "MMB", "rel": "visited", "detail": "Parker visited Manningham-Buller at Wellcome Trust mid-January 2020, weeks after the Wuhan cluster became public; Manningham-Buller later recalled advising him to 'raise our guard, security-wise \u2014 use different phones, avoid putting things in emails.'", "when": "mid-Jan 2020", "sy": 2020, "ey": 2020}, {"source": "AP", "target": "JF", "rel": "briefed", "detail": "Parker briefed Farrar at Wellcome during the mid-January 2020 visit; the DG of MI5 and the director of Wellcome Trust discussed pandemic origins weeks before the February 1 teleconference, establishing a UK intelligence channel into the origins narrative process.", "when": "mid-Jan 2020", "sy": 2020, "ey": 2020}, {"source": "JF", "target": "EH", "rel": "handled", "detail": "Holmes referred to Farrar as his 'handler' in late January 2020 communications; Farrar coordinated the scientific messaging on origins and Holmes was one of the scientists whose public position he managed through the Proximal Origin process.", "when": "late Jan 2020", "sy": 2020, "ey": 2020}, {"source": "PD", "target": "COS", "rel": "convened", "detail": "Daszak convened the Coalition of Support ('Science & Policy Group') from October 2021 in response to mounting congressional scrutiny of EHA's WIV grants; it held its first formal Zoom February 1 2023 and in-person meeting April 27 2023 at BCM.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "JK", "target": "COS", "rel": "member of", "detail": "Keusch was a founding member and chair of the Coalition's meetings; his Boston University academic standing gave the Coalition credibility beyond EHA's immediate orbit.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "PH", "target": "COS", "rel": "member of", "detail": "Hotez joined the Coalition of Support and hosted its April 27 2023 in-person meeting at BCM alongside Rasmussen, Gronvall, Keusch, and Morens.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "RR", "target": "COS", "rel": "member of", "detail": "Roberts (Nobel, NEB) provided scientific credibility for the Coalition; his Nobel Prize standing was intended to deflect accusations that opposition to defunding EHA was purely self-interested.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "JS", "target": "COS", "rel": "member of", "detail": "Sturchio served as the Coalition's communications strategy lead, drafting NIH engagement scripts and congressional messaging for EHA.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "AR", "target": "COS", "rel": "member of", "detail": "Rasmussen was the Coalition's public attack figure; she attended the April 2023 in-person meeting at BCM and characterised lab-leak advocates as politically motivated.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "DM", "target": "COS", "rel": "member of", "detail": "Morens participated in the February 1 2023 Zoom and April 2023 in-person Coalition meetings; his position as Fauci's senior NIH adviser gave the Coalition a direct NIH insider voice.", "when": "2023", "sy": 2023, "ey": 2023}, {"source": "GG", "target": "COS", "rel": "member of", "detail": "Gronvall (JHU CHS) attended the April 27 2023 in-person Coalition meeting at BCM; her JHU affiliation lent Track II biosecurity credibility to the Coalition's scientific framing.", "when": "2023", "sy": 2023, "ey": 2023}, {"source": "CIA", "target": "ODNI", "rel": "part of", "detail": "CIA is a principal IC member and contributed its natural-origin assessment (low confidence) to the ODNI-coordinated 90-day Biden review (2021); Director Burns re-opened the analysis in 2023, reportedly shifting toward lab-associated with low confidence.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "CIA", "target": "NIC", "rel": "coordinated with", "detail": "CIA's analytical directorate fed its low-confidence natural-origin position into the NIC COVID-19 origins synthesis; the CIA later re-assessed under Director Burns.", "when": "2021-2023", "sy": 2021, "ey": 2023}, {"source": "NTI", "target": "MSC", "rel": "exercised at", "detail": "NTI ran pandemic tabletop exercises at the Munich Security Conference in 2015 and 2019, testing international mechanisms for investigating high-consequence biological events \u2014 precisely the challenge WHO faced in 2021.", "when": "2015, 2019", "sy": 2015, "ey": 2019}, {"source": "WEF", "target": "MSC", "rel": "partnered with", "detail": "WEF participated in the NTI pandemic simulation exercises at the Munich Security Conference, extending the Wellcome-NTI-WEF biosecurity network into European security diplomacy.", "when": "2018-2019", "sy": 2018, "ey": 2019}, {"source": "DM", "target": "AF", "rel": "advised", "detail": "Morens was Fauci's Senior Scientific Advisor in the NIAID Office of the Director for 20+ years \u2014 the direct back-channel between Daszak and the NIAID Director; he coordinated EHA/WIV-related messaging with Daszak on Fauci's behalf, using personal Gmail to evade FOIA.", "when": "2000\u20132023", "sy": 2000, "ey": 2023}, {"source": "AF", "target": "DM", "rel": "directed", "detail": "In October 2021, Fauci told Morens that using Gmail on a government-issued phone made those messages FOIA-able, and instructed him to obtain a personal smartphone. Fauci also told Morens not to be in direct contact with Daszak or EHA for the time being; Keusch would act as the relay. Documented in Keusch's October 25 2021 email to Daszak (BU confidential treatment): 'This came from Tony in their conversation this morning.'", "when": "Oct 2021", "sy": 2021, "ey": 2021}, {"source": "JK", "target": "AF", "rel": "coordinated with", "detail": "Per Fauci's October 2021 instructions, while Morens stood down from direct contact with Daszak and EHA, Keusch served as the relay: 'He will stay connected to me and via me to you' (Keusch to Daszak, October 25 2021). Keusch's EHA board position made him the natural replacement back-channel.", "when": "Oct 2021", "sy": 2021, "ey": 2021}, {"source": "AH", "target": "CIA", "rel": "worked at", "detail": "Avril Haines served as Deputy Director of the CIA 2013\u20132015 before becoming Principal Deputy National Security Advisor and later DNI.", "when": "2013\u20132015", "sy": 2013, "ey": 2015}, {"source": "AH", "target": "CEIP", "rel": "affiliated with", "detail": "Haines joined the Carnegie Endowment for International Peace as incoming President in 2026 after leaving as DNI.", "when": "2026", "sy": 2026, "ey": 2026}, {"source": "CEIP", "target": "NTI", "rel": "funded", "detail": "Carnegie Endowment for International Peace provides funding to the Nuclear Threat Initiative; the two organisations share personnel, board overlap, and a Track II security establishment network.", "when": "2000+", "sy": 2000, "ey": 2026}, {"source": "JPM", "target": "DARPA", "rel": "worked at", "detail": "Maj. Murphy served at DARPA's Biological Technologies Office in 2021, giving him access to the DEFUSE proposal review files.", "when": "2021", "sy": 2021, "ey": 2021}, {"source": "JPM", "target": "DEFUSE", "rel": "disclosed", "detail": "Murphy authored an internal DARPA memo (August 2021) detailing the DEFUSE proposal contents and DARPA's rejection on biosafety grounds; the memo was leaked directly to DRASTIC in August 2021, making the DEFUSE-WIV connection publicly documented for the first time.", "when": "Aug 2021", "sy": 2021, "ey": 2021}, {"source": "JPM", "target": "DRASTIC", "rel": "leaked to", "detail": "Murphy's DARPA memo was leaked to DRASTIC in August 2021; DRASTIC's receipt and analysis of the memo was the primary disclosure event.", "when": "Aug 2021", "sy": 2021, "ey": 2021}, {"source": "BS", "target": "WHO", "rel": "worked at", "detail": "Schwartl\u00e4nder served as WHO Representative to China (2013\u20132017), giving him deep ties to Beijing, then moved to Geneva as Tedros's Chief of Staff \u2014 making him the key inside-WHO channel for pro-China narrative management.", "when": "2011+", "sy": 2011, "ey": 2026}, {"source": "BS", "target": "TA", "rel": "advised", "detail": "As Chief of Staff, Schwartl\u00e4nder was Tedros's principal internal adviser; described in the article as having 'played a key role in promoting deference to China as the right policy within the top WHO circles' \u2014 sincere belief formed under structural influence.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "JF", "target": "BS", "rel": "coordinated with", "detail": "Farrar included Schwartl\u00e4nder in his 12 February 2020 email (alongside Ryan and Drosten): 'I hope there is a paper/letter ready this week to go to Nature (and WHO) which effectively puts to bed the issue of the origin of the virus.' Schwartl\u00e4nder's presence on that chain placed Tedros's office inside the narrative-closure operation.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "CHN", "target": "WHO", "rel": "pressured", "detail": "China used access denial as structural leverage throughout the COVID origins inquiry: restricted data, curated itineraries, supervised site visits, managed team composition, and conditioned cooperation on positive WHO public statements. China's economic weight and WHO voting-bloc support made confrontation structurally costly.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "CHN", "target": "WIV", "rel": "oversees", "detail": "WIV operates under Chinese state and Chinese Academy of Sciences oversight; CCP controlled all access to WIV data, samples, and personnel, making independent verification of the institute's records impossible without Beijing's consent.", "when": "2000+", "sy": 2000, "ey": 2026}, {"source": "CHN", "target": "TA", "rel": "pressured", "detail": "China's economic leverage and WHO electoral support (China backed Tedros's 2017 election) gave Beijing structural influence over the DG's public posture; Tedros praised China's transparency while negotiating access and enlisted social media platforms against 'infodemic' content from February 2020.", "when": "2017+", "sy": 2017, "ey": 2026}, {"source": "GHB", "target": "WHO", "rel": "directed", "detail": "Brundtland served as WHO Director-General 1998\u20132003; in 2003 she publicly rebuked China for covering up SARS-1 \u2014 issuing a travel advisory against Beijing without prior authorisation, a direct confrontation with Beijing that stands in marked contrast to Tedros's 2020 deference.", "when": "1998\u20132003", "sy": 1998, "ey": 2003}, {"source": "GHB", "target": "NTI", "rel": "participated in", "detail": "Brundtland was keynote speaker at the NTI tabletop pandemic exercise at the Munich Security Conference (13 February 2020), simulating an engineered-virus outbreak from a country with 'biotech development ambitions'; her presence gave former-WHO-DG authority to an exercise that dramatised exactly the investigation scenario being closed off in parallel.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "GHB", "target": "CHN", "rel": "challenged", "detail": "In 2003 Brundtland publicly rebuked China for covering up SARS-1, issuing a Beijing travel advisory without Chinese consent \u2014 a direct institutional confrontation that the WHO under Tedros conspicuously failed to repeat during COVID-19.", "when": "2003", "sy": 2003, "ey": 2003}, {"source": "JF", "target": "RF", "rel": "coordinated with", "detail": "Fouchier was on Farrar's 1 February 2020 teleconference; he publicly assigned negligible probability to a lab-origin scenario. The article suggests he may have been responsible for torpedoing an early Proximal Origin draft at Nature because it still mentioned passaging as a possibility.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "RF", "target": "MK", "rel": "collaborates with", "detail": "Fouchier and Koopmans are paired colleagues at Erasmus MC Rotterdam; both were on the Feb 1 teleconference and both publicly dismissed lab-leak scenarios. The article notes: 'They both work in a Dutch P4 lab built in the middle of a key European transport and population hub.'", "when": "2000+", "sy": 2000, "ey": 2026}, {"source": "JF", "target": "CDT", "rel": "coordinated with", "detail": "Drosten was included in Farrar's 12 February 2020 email alongside Ryan and Schwartl\u00e4nder, signalling that Farrar's narrative-closure strategy extended to Germany's leading pandemic authority.", "when": "Feb 2020", "sy": 2020, "ey": 2020}, {"source": "BULL", "target": "FBI", "rel": "worked at", "detail": "Scientific Response and Analysis Unit, FBI Laboratory, Quantico \u2014 same unit as Jason Bannan, the FBI's lead COVID origins scientist.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "BULL", "target": "JB", "rel": "colleague of", "detail": "Both worked at the Scientific Response and Analysis Unit, FBI Laboratory, Quantico. Bull attended the 3 February 2020 NASEM call; Bannan was later excluded from the August 2021 White House origins briefing. The FBI's forensic unit was present at Day 1 of the scientific debate and locked out at its conclusion.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "KBRI", "target": "ODNI", "rel": "worked at", "detail": "Senior Advisor, National Counterproliferation Centre (NCPC), ODNI; attended the 3 February 2020 NASEM call on COVID-19 origins, placing ODNI's counterproliferation unit in the room from the outset.", "when": "2020\u20132021", "sy": 2020, "ey": 2021}, {"source": "BULL", "target": "KBRI", "rel": "co-attended", "detail": "3 February 2020 NASEM call on COVID-19 origins \u2014 the first significant scientific convocation on origins, attended alongside Fauci, Daszak, Baric, Inglesby, Kadlec, and Gronvall. Bull represented FBI Quantico; Brinsfield represented ODNI/NCPC.", "when": "3 Feb 2020", "sy": 2020, "ey": 2020}];
+var cats     = {"worked at": ["#2E75B6", "Employment"], "worked for": ["#2E75B6", "Employment"], "works at": ["#2E75B6", "Employment"], "directed": ["#1A3A5C", "Leadership"], "oversaw": ["#1A3A5C", "Leadership"], "co-chaired": ["#1A3A5C", "Leadership"], "appointed": ["#1A3A5C", "Leadership"], "board member": ["#3B6EA5", "Leadership"], "managed": ["#3B6EA5", "Leadership"], "served on": ["#3B6EA5", "Leadership"], "convened": ["#3B6EA5", "Leadership"], "consulted for": ["#9BC2E6", "Consulting"], "affiliated with": ["#9BC2E6", "Consulting"], "advised": ["#9BC2E6", "Consulting"], "briefed": ["#9BC2E6", "Consulting"], "visited": ["#9BC2E6", "Consulting"], "studied at": ["#70AD47", "Education"], "participated in": ["#70AD47", "Education"], "mentored at": ["#70AD47", "Education"], "hosted by": ["#A9D18E", "Partnership"], "collaborates with": ["#A9D18E", "Partnership"], "partnered with": ["#A9D18E", "Partnership"], "exercised with": ["#A9D18E", "Partnership"], "exercised at": ["#A9D18E", "Partnership"], "co-founded": ["#A9D18E", "Partnership"], "connected to": ["#A9D18E", "Partnership"], "collaborated with": ["#A9D18E", "Partnership"], "coordinated": ["#E6A020", "Coordination"], "coordinated with": ["#E6A020", "Coordination"], "co-authored": ["#E6A020", "Coordination"], "reported to": ["#E6A020", "Coordination"], "co-signed": ["#E6A020", "Coordination"], "facilitated": ["#E6A020", "Coordination"], "arranged": ["#E6A020", "Coordination"], "presented to": ["#E6A020", "Coordination"], "authored": ["#E6A020", "Coordination"], "co-proposed": ["#E6A020", "Coordination"], "handled": ["#E6A020", "Coordination"], "lobbied": ["#9B59B6", "Lobbying"], "proposed to": ["#9B59B6", "Lobbying"], "submitted": ["#9B59B6", "Lobbying"], "funded": ["#C00000", "Funding"], "subgranted": ["#C00000", "Funding"], "funded by": ["#C00000", "Funding"], "part of": ["#BFBFBF", "Structure"], "coordinates": ["#BFBFBF", "Structure"], "contains": ["#BFBFBF", "Structure"], "planned at": ["#BFBFBF", "Structure"], "member of": ["#BFBFBF", "Structure"], "oversees": ["#FFC000", "Oversight"], "pressured": ["#880E4F", "Coercion"], "coerced": ["#880E4F", "Coercion"], "excluded from": ["#FF0000", "Conflict"], "testified against": ["#FF0000", "Conflict"], "challenged": ["#FF0000", "Conflict"], "manipulated": ["#FF0000", "Conflict"], "rejected by": ["#FF0000", "Conflict"], "mentored": ["#C55A11", "Personal"], "analyzed": ["#C55A11", "Personal"]};
+var orgCols  = {"intelligence": ["#C62828", "#9B1B1B"], "track2": ["#2E7D32", "#1B5E20"], "globalhealth": ["#00838F", "#006064"], "usgov": ["#1565C0", "#0D47A1"], "research": ["#6A1B9A", "#4A148C"], "forum": ["#E65100", "#BF360C"], "coalition": ["#5D4037", "#3E2723"], "foreign": ["#880E4F", "#560027"]};
+var orgDef   = ["#ED7D31", "#C55A11"];
+var YR_MIN   = 1984;
+var YR_MAX   = 2026;
+
+// ── State ─────────────────────────────────────────────────────────────────────
+var canvas, ctx, W, H;
+var scale = 1, ox = 0, oy = 0;
+var dragging = null, panStart = null, mouseDownAt = null;
+var selected = null, selectedEdge = null;
+var physAF = null, playTO = null;
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+var R = 10, LABEL_SIZE = 12, EDGE_W = 1.5, EDGE_LABEL_SIZE = 9;
+var SHOW_EL = false, SHOW_ARR = true, SHOW_P = true, SHOW_O = true;
+var HIDDEN_SUBTYPES = {};
+var HIDDEN_ERAS = {};
+var HIDDEN_NARRATIVES = {};
+
+var NARR_COLS = {
+  'enforcer': '#C62828',
+  'aligned':  '#E65100',
+  'neutral':  '#757575',
+  'opposed':  '#1565C0',
+};
+var YR_FROM = YR_MIN, YR_TO = YR_MAX;
+var PLAY_SPEEDS = [0, 1500, 900, 500, 280, 140]; // ms/year indexed 1-5
+var playSpeedIdx = 2;
+
+var dims = {};
+
+// ── Utility ───────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function findNode(id) {
+  for (var i=0;i<nodes.length;i++) if (nodes[i].id===id) return nodes[i];
+  return null;
+}
+function isConnected(a,b) {
+  for (var k=0;k<edges.length;k++){
+    var e=edges[k];
+    if ((e.source===a&&e.target===b)||(e.source===b&&e.target===a)) return true;
+  }
+  return false;
+}
+function orgColor(n) {
+  if (n.type!=='org') return null;
+  return (n.subtype && orgCols[n.subtype]) ? orgCols[n.subtype] : orgDef;
+}
+
+// ── Time filtering ────────────────────────────────────────────────────────────
+function timeFiltering() { return YR_FROM>YR_MIN||YR_TO<YR_MAX; }
+function edgeEras(e) {
+  if (e.sy===null&&e.ey===null) return ['nodate'];
+  var eras=[], lo=e.sy!==null?e.sy:0, hi=e.ey!==null?e.ey:9999;
+  if (lo<2020) eras.push('pre');
+  if (hi>=2020) eras.push('post');
+  return eras.length?eras:['nodate'];
+}
+function edgeVisible(e) {
+  // Year-range slider
+  if (e.sy!==null||e.ey!==null) {
+    var lo=e.sy!==null?e.sy:0, hi=e.ey!==null?e.ey:9999;
+    if (lo>YR_TO||hi<YR_FROM) return false;
+  }
+  // Era checkboxes
+  var eras=edgeEras(e), anyVis=false;
+  for (var i=0;i<eras.length;i++) { if (!HIDDEN_ERAS[eras[i]]) { anyVis=true; break; } }
+  if (!anyVis) return false;
+  return true;
+}
+function nodeHasVisEdge(nid) {
+  for (var k=0;k<edges.length;k++){
+    var e=edges[k]; if(!edgeVisible(e)) continue;
+    if(e.source===nid||e.target===nid) return true;
+  }
+  return false;
+}
+function isVis(n) {
+  if (n.type==='person'&&!SHOW_P) return false;
+  if (n.type==='org'&&!SHOW_O) return false;
+  if (n.type==='org'&&HIDDEN_SUBTYPES[n.subtype||'']) return false;
+  if (n.narrative&&HIDDEN_NARRATIVES[n.narrative]) return false;
+  if ((timeFiltering()||Object.keys(HIDDEN_ERAS).length||Object.keys(HIDDEN_NARRATIVES).length)&&!nodeHasVisEdge(n.id)) return false;
+  return true;
+}
+function visNodes() { return nodes.filter(isVis); }
+
+// ── Highlighting ──────────────────────────────────────────────────────────────
+function isNodeHL(n) {
+  if (!selected&&!selectedEdge) return true;
+  if (selected)     return n.id===selected||isConnected(selected,n.id);
+  if (selectedEdge) return n.id===selectedEdge.source||n.id===selectedEdge.target;
+  return false;
+}
+function isEdgeHL(e) {
+  if (!selected&&!selectedEdge) return true;
+  if (selected)     return e.source===selected||e.target===selected;
+  if (selectedEdge) return e===selectedEdge;
+  return false;
+}
+
+// ── Dimensions ────────────────────────────────────────────────────────────────
+function buildDims() {
+  ctx.font=LABEL_SIZE+'px sans-serif';
+  nodes.forEach(function(n){
+    if (n.type==='person') {
+      dims[n.id]={hw:R,hh:R};
+    } else {
+      var tw=ctx.measureText(n.label).width;
+      dims[n.id]={hw:Math.max(tw/2+10,R*1.2),hh:LABEL_SIZE/2+7};
+    }
+  });
+}
+
+// ── Hit tests ─────────────────────────────────────────────────────────────────
+function hitNode(px,py) {
+  var vn=visNodes();
+  for (var i=vn.length-1;i>=0;i--){
+    var n=vn[i],d=dims[n.id]||{hw:R,hh:R};
+    var dx=px-n.x,dy=py-n.y;
+    if (n.type==='person'){if(dx*dx+dy*dy<=d.hw*d.hw) return n;}
+    else {if(Math.abs(dx)<=d.hw&&Math.abs(dy)<=d.hh) return n;}
+  }
+  return null;
+}
+function distToSeg(px,py,ax,ay,bx,by){
+  var dx=bx-ax,dy=by-ay,len2=dx*dx+dy*dy;
+  if(len2===0) return Math.hypot(px-ax,py-ay);
+  var t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/len2));
+  return Math.hypot(px-(ax+t*dx),py-(ay+t*dy));
+}
+function hitEdgeAt(px,py){
+  var thresh=7/scale;
+  for (var k=edges.length-1;k>=0;k--){
+    var e=edges[k]; if(!edgeVisible(e)) continue;
+    var a=findNode(e.source),b=findNode(e.target);
+    if(!a||!b||!isVis(a)||!isVis(b)) continue;
+    if(distToSeg(px,py,a.x,a.y,b.x,b.y)<thresh) return e;
+  }
+  return null;
+}
+function canvasPos(e){
+  var r=canvas.getBoundingClientRect();
+  return{x:(e.clientX-r.left-ox)/scale,y:(e.clientY-r.top-oy)/scale};
+}
+
+// ── Info pane ─────────────────────────────────────────────────────────────────
+function showNodeInfo(n){
+  var hd=document.getElementById('info-hd'),bd=document.getElementById('info-bd');
+  hd.className=''; hd.textContent=n.label;
+  var col=orgColor(n);
+  var tagCol=col?col[0]:'#5B9BD5';
+  var html='<span class="i-tag" style="background:'+tagCol+'">'+esc(n.subtype||n.type)+'</span>';
+  if(n.narrative&&NARR_COLS[n.narrative]){
+    html+=' <span class="i-tag" style="background:'+NARR_COLS[n.narrative]+'">'+esc(n.narrative)+'</span>';
+  }
+  if(n.full) html+='<p>'+esc(n.full)+'</p>';
+  bd.innerHTML=html;
+}
+function showEdgeInfo(e){
+  var a=findNode(e.source),b=findNode(e.target);
+  var hd=document.getElementById('info-hd'),bd=document.getElementById('info-bd');
+  hd.className='';
+  hd.textContent=(a?a.label:e.source)+' → '+(b?b.label:e.target);
+  var cat=cats[e.rel]||['#888','Other'];
+  var html='<span class="i-tag" style="background:'+cat[0]+'">'+esc(e.rel)+'</span>';
+  if(e.when) html+='<span class="i-when">'+esc(e.when)+'</span>';
+  if(e.detail) html+='<p>'+esc(e.detail)+'</p>';
+  bd.innerHTML=html;
+}
+function clearInfo(){
+  var hd=document.getElementById('info-hd');
+  hd.className='i-hint'; hd.textContent='Click a node or edge for details';
+  document.getElementById('info-bd').innerHTML='';
+}
+
+// ── Year slider ───────────────────────────────────────────────────────────────
+function updateYrFill(){
+  var span=YR_MAX-YR_MIN; if(span===0) return;
+  var fp=(YR_FROM-YR_MIN)/span*100, tp=(YR_TO-YR_MIN)/span*100;
+  var fill=document.getElementById('yr-fill');
+  fill.style.left=fp+'%'; fill.style.width=(tp-fp)+'%';
+  document.getElementById('yr-range-val').textContent=YR_FROM+'–'+YR_TO;
+}
+function setupYrSlider(){
+  var ef=document.getElementById('yr-from'),et=document.getElementById('yr-to');
+  function sync(){
+    var f=+ef.value,t=+et.value; if(f>t){var tmp=f;f=t;t=tmp;}
+    YR_FROM=f; YR_TO=t; updateYrFill(); draw();
+  }
+  ef.addEventListener('input',sync); et.addEventListener('input',sync);
+  updateYrFill();
+}
+
+// ── Play over time ────────────────────────────────────────────────────────────
+function playStep(){
+  if(YR_TO<YR_MAX){
+    YR_TO++;
+    document.getElementById('yr-to').value=YR_TO;
+    updateYrFill(); draw();
+    playTO=setTimeout(playStep, PLAY_SPEEDS[playSpeedIdx]||900);
+  } else {
+    playTO=null;
+    document.getElementById('btn-play').innerHTML='&#9654;&ensp;Play';
+  }
+}
+function stopPlay(){
+  if(playTO){clearTimeout(playTO);playTO=null;}
+  document.getElementById('btn-play').innerHTML='&#9654;&ensp;Play';
+}
+function togglePlay(){
+  if(playTO){stopPlay();return;}
+  if(YR_TO>=YR_MAX){
+    YR_TO=YR_FROM;
+    document.getElementById('yr-to').value=YR_TO;
+    updateYrFill(); draw();
+  }
+  document.getElementById('btn-play').innerHTML='&#9646;&#9646;&ensp;Pause';
+  playTO=setTimeout(playStep, PLAY_SPEEDS[playSpeedIdx]||900);
+}
+
+// ── Save / load ───────────────────────────────────────────────────────────────
+function saveLayout(){
+  var s={positions:nodes.map(function(n){return{id:n.id,x:n.x,y:n.y};}),
+         scale:scale,ox:ox,oy:oy,
+         R:R,LS:LABEL_SIZE,EW:EDGE_W,ELS:EDGE_LABEL_SIZE,
+         EL:SHOW_EL,ARR:SHOW_ARR,P:SHOW_P,O:SHOW_O,YF:YR_FROM,YT:YR_TO,PS:playSpeedIdx};
+  localStorage.setItem('netLayout_v1',JSON.stringify(s));
+  var btn=document.getElementById('btn-save'),orig=btn.innerHTML;
+  btn.innerHTML='&#10003;'; setTimeout(function(){btn.innerHTML=orig;},1300);
+}
+function loadLayout(){
+  var raw=localStorage.getItem('netLayout_v1');
+  if(!raw){alert('No saved layout found.');return;}
+  try{
+    var s=JSON.parse(raw);
+    s.positions.forEach(function(p){var n=findNode(p.id);if(n){n.x=p.x;n.y=p.y;n.vx=0;n.vy=0;}});
+    scale=s.scale;ox=s.ox;oy=s.oy;
+    R=s.R;LABEL_SIZE=s.LS;EDGE_W=s.EW;EDGE_LABEL_SIZE=s.ELS||9;
+    SHOW_EL=s.EL;SHOW_ARR=s.ARR;SHOW_P=s.P;SHOW_O=s.O;
+    YR_FROM=s.YF!==undefined?s.YF:YR_MIN;
+    YR_TO=s.YT!==undefined?s.YT:YR_MAX;
+    playSpeedIdx=s.PS||2;
+    var set=function(id,val){var el=document.getElementById(id);if(el)el.value=val;};
+    var txt=function(id,val){var el=document.getElementById(id);if(el)el.textContent=val;};
+    var chk=function(id,val){var el=document.getElementById(id);if(el)el.checked=val;};
+    set('r-slider',R);txt('r-val',R);
+    set('ls-slider',LABEL_SIZE);txt('ls-val',LABEL_SIZE);
+    set('ew-slider',EDGE_W);txt('ew-val',EDGE_W);
+    set('els-slider',EDGE_LABEL_SIZE);txt('els-val',EDGE_LABEL_SIZE);
+    chk('chk-el',SHOW_EL);chk('chk-arr',SHOW_ARR);
+    chk('chk-persons',SHOW_P);chk('chk-orgs',SHOW_O);
+    set('yr-from',YR_FROM);set('yr-to',YR_TO);
+    set('play-spd',playSpeedIdx);txt('play-spd-val',playSpeedIdx);
+    updateYrFill();
+    if(physAF){cancelAnimationFrame(physAF);physAF=null;}
+    selected=null;selectedEdge=null;clearInfo();
+    document.getElementById('footer-sel').textContent='';
+    draw();
+  }catch(err){alert('Failed to load: '+err.message);}
+}
+
+// ── Physics ───────────────────────────────────────────────────────────────────
+function scatter(){
+  var cx=W/2, cy=H/2, R0=Math.min(W,H)*0.30;
+  // Map each org subtype to a sector angle (degrees, 0=right, clockwise)
+  var SECTOR={
+    'intelligence': -55,   // upper-right
+    'usgov':          5,   // right
+    'globalhealth':  65,   // lower-right
+    'research':     125,   // lower
+    'track2':       185,   // left
+    'forum':        245,   // upper-left
+    'coalition':   -115,   // upper
+  };
+  var secIdx={};
+  // Pass 1: seed org nodes into their sector
+  nodes.forEach(function(n){
+    if(n.type==='org'){
+      var ang=((SECTOR[n.subtype]!==undefined?SECTOR[n.subtype]:Math.random()*360))*Math.PI/180;
+      var idx=secIdx[n.subtype]||0; secIdx[n.subtype]=idx+1;
+      var radial=R0+idx*55;
+      n.x=cx+radial*Math.cos(ang)+(Math.random()-0.5)*60;
+      n.y=cy+radial*Math.sin(ang)+(Math.random()-0.5)*60;
+    }
+    n.vx=0;n.vy=0;
+  });
+  // Pass 2: seed person nodes near their connected orgs
+  nodes.forEach(function(n){
+    if(n.type!=='person') return;
+    var sx=0,sy=0,cnt=0;
+    edges.forEach(function(e){
+      var o=null;
+      if(e.source===n.id) o=findNode(e.target);
+      else if(e.target===n.id) o=findNode(e.source);
+      if(o&&o.type==='org'){sx+=o.x;sy+=o.y;cnt++;}
+    });
+    if(cnt>0){n.x=sx/cnt+(Math.random()-0.5)*110;n.y=sy/cnt+(Math.random()-0.5)*110;}
+    else{n.x=(0.2+Math.random()*0.6)*W;n.y=(0.2+Math.random()*0.6)*H;}
+    n.vx=0;n.vy=0;
+  });
+}
+function physStep(damp){
+  var dt=0.5,vn=visNodes();
+  // Node-node repulsion
+  for(var i=0;i<vn.length;i++){
+    for(var j=i+1;j<vn.length;j++){
+      var a=vn[i],b=vn[j];
+      var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy+1,d=Math.sqrt(d2),f=10000/d2*dt;
+      a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;
+    }
+  }
+  // Edge spring attraction
+  var ideal=Math.min(W,H)*0.20;
+  edges.forEach(function(e){
+    if(!edgeVisible(e)) return;
+    var a=findNode(e.source),b=findNode(e.target);
+    if(!a||!b||!isVis(a)||!isVis(b)) return;
+    var dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)+0.1;
+    var f=0.011*(d-ideal)*dt;
+    a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;
+  });
+  // Community gravity — pull same-subtype org nodes toward their centroid
+  var sC={};
+  vn.forEach(function(n){
+    if(n.type==='org'&&n.subtype){
+      if(!sC[n.subtype]) sC[n.subtype]={x:0,y:0,k:0};
+      sC[n.subtype].x+=n.x;sC[n.subtype].y+=n.y;sC[n.subtype].k++;
+    }
+  });
+  Object.keys(sC).forEach(function(k){var c=sC[k];c.x/=c.k;c.y/=c.k;});
+  vn.forEach(function(n){
+    if(n.type==='org'&&n.subtype&&sC[n.subtype]){
+      var c=sC[n.subtype];
+      n.vx+=(c.x-n.x)*0.0020*dt;n.vy+=(c.y-n.y)*0.0020*dt;
+    }
+  });
+  // Weak centre gravity to prevent runaway drift
+  vn.forEach(function(n){
+    n.vx+=(W/2-n.x)*0.0014*dt; n.vy+=(H/2-n.y)*0.0014*dt;
+    n.vx*=damp;n.vy*=damp;n.x+=n.vx;n.y+=n.vy;
+  });
+}
+function startLayout(){
+  if(physAF){cancelAnimationFrame(physAF);physAF=null;}
+  stopPlay();
+  scale=1;ox=0;oy=0;selected=null;selectedEdge=null;clearInfo();
+  document.getElementById('footer-sel').textContent='';
+  scatter();
+  var fi=document.getElementById('frames-input');
+  var FRAMES=fi?Math.max(50,Math.min(3000,+fi.value||800)):800;
+  var status=document.getElementById('status');
+  var frame=0;
+  status.textContent='Settling layout…';
+  function step(){
+    physStep(0.58+0.34*(frame/FRAMES));frame++;draw();
+    if(frame<FRAMES) physAF=requestAnimationFrame(step);
+    else{physAF=null;status.textContent='Drag · zoom · click to inspect · dbl-click to reset';}
+  }
+  physAF=requestAnimationFrame(step);
+}
+
+// ── Draw ──────────────────────────────────────────────────────────────────────
+function draw(){
+  if(!ctx) return;
+  buildDims();
+  ctx.clearRect(0,0,W,H);
+  ctx.save();
+  ctx.translate(ox,oy);
+  ctx.scale(scale,scale);
+  var vn=visNodes();
+
+  // Edges
+  edges.forEach(function(e){
+    var a=findNode(e.source),b=findNode(e.target);
+    if(!a||!b||!isVis(a)||!isVis(b)||!edgeVisible(e)) return;
+    var cat=cats[e.rel]||['#999','Other'];
+    var col=cat[0],hi=isEdgeHL(e);
+    var isDash=(cat[1]==='Consulting'||cat[1]==='Partnership');
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=col+(hi?'cc':'28');
+    ctx.lineWidth=hi?EDGE_W:Math.max(0.4,EDGE_W*0.35);
+    ctx.setLineDash(isDash?[5,4]:[]);
+    ctx.stroke();ctx.setLineDash([]);
+    if(SHOW_ARR&&hi) drawArrow(a,b,col+'cc');
+    if(SHOW_EL&&hi){
+      var mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      ctx.font=EDGE_LABEL_SIZE+'px sans-serif';
+      var tw=ctx.measureText(e.rel).width;
+      ctx.fillStyle='rgba(255,255,255,0.9)';
+      ctx.fillRect(mx-tw/2-2,my-EDGE_LABEL_SIZE/2-2,tw+4,EDGE_LABEL_SIZE+4);
+      ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(e.rel,mx,my);
+    }
+  });
+
+  // Nodes
+  vn.forEach(function(n){
+    var d=dims[n.id]||{hw:R,hh:R};
+    var hi=isNodeHL(n);
+    var isSel=n.id===selected||
+      (selectedEdge&&(n.id===selectedEdge.source||n.id===selectedEdge.target));
+    var dim=!hi;
+    if(n.type==='person'){
+      // Narrative ring
+      if(!dim&&n.narrative&&NARR_COLS[n.narrative]){
+        ctx.beginPath();ctx.arc(n.x,n.y,d.hw+3,0,Math.PI*2);
+        ctx.strokeStyle=NARR_COLS[n.narrative];ctx.lineWidth=2.5;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(n.x,n.y,d.hw,0,Math.PI*2);
+      ctx.fillStyle=dim?'rgba(200,200,200,0.22)':'#5B9BD5';
+      ctx.fill();
+      ctx.strokeStyle=isSel?'#111':(dim?'rgba(170,170,170,0.22)':'#2E75B6');
+      ctx.lineWidth=isSel?2.5:1.2;ctx.stroke();
+      drawNodeLabel(n.label,n.x,n.y+d.hw+LABEL_SIZE*0.5+4,isSel,dim);
+    } else {
+      var oc=orgColor(n);
+      var fill=dim?'rgba(220,210,200,0.22)':(oc?oc[0]:orgDef[0]);
+      var stroke=isSel?'#111':(dim?'rgba(180,170,160,0.22)':(oc?oc[1]:orgDef[1]));
+      ctx.beginPath();ctx.roundRect(n.x-d.hw,n.y-d.hh,d.hw*2,d.hh*2,5);
+      ctx.fillStyle=fill;ctx.fill();
+      ctx.strokeStyle=stroke;ctx.lineWidth=isSel?2.5:1.2;ctx.stroke();
+      ctx.font=(isSel?'bold ':'')+LABEL_SIZE+'px sans-serif';
+      ctx.fillStyle=dim?'rgba(180,180,180,0.5)':'#fff';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(n.label,n.x,n.y);
+    }
+  });
+  ctx.restore();
+}
+
+function drawNodeLabel(text,x,y,isSel,dim){
+  ctx.font=(isSel?'bold ':'')+LABEL_SIZE+'px sans-serif';
+  var tw=ctx.measureText(text).width,pad=3;
+  ctx.fillStyle=dim?'rgba(235,235,235,0.8)':'rgba(255,255,255,0.92)';
+  ctx.beginPath();
+  ctx.roundRect(x-tw/2-pad,y-LABEL_SIZE/2-pad,tw+pad*2,LABEL_SIZE+pad*2,3);
+  ctx.fill();
+  ctx.fillStyle=dim?'#bbb':'#1a1a1a';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,x,y);
+}
+function drawArrow(a,b,color){
+  var dx=b.x-a.x,dy=b.y-a.y,dist=Math.sqrt(dx*dx+dy*dy);
+  if(dist<2) return;
+  var angle=Math.atan2(dy,dx),db=dims[b.id]||{hw:R,hh:R},rB;
+  if(b.type==='person'){rB=db.hw;}
+  else{
+    var absAng=Math.abs(angle); if(absAng>Math.PI/2) absAng=Math.PI-absAng;
+    var ar=Math.atan2(db.hh,db.hw);
+    rB=(absAng<=ar)?(Math.abs(Math.cos(angle))>0.001?db.hw/Math.abs(Math.cos(angle)):db.hw)
+                   :(Math.abs(Math.sin(angle))>0.001?db.hh/Math.abs(Math.sin(angle)):db.hh);
+  }
+  if(dist<rB+R+2) return;
+  var ex=b.x-Math.cos(angle)*rB,ey=b.y-Math.sin(angle)*rB;
+  var aLen=Math.min(10,R*1.2),aAng=0.38;
+  ctx.beginPath();
+  ctx.moveTo(ex,ey);
+  ctx.lineTo(ex-aLen*Math.cos(angle-aAng),ey-aLen*Math.sin(angle-aAng));
+  ctx.lineTo(ex-aLen*Math.cos(angle+aAng),ey-aLen*Math.sin(angle+aAng));
+  ctx.closePath();ctx.fillStyle=color;ctx.fill();
+}
+
+// ── Controls setup ────────────────────────────────────────────────────────────
+function setupControls(){
+  function slider(id,valId,assign){
+    document.getElementById(id).addEventListener('input',function(){
+      assign(+this.value);document.getElementById(valId).textContent=this.value;draw();
+    });
+  }
+  slider('r-slider','r-val',function(v){R=v;});
+  slider('ls-slider','ls-val',function(v){LABEL_SIZE=v;});
+  slider('ew-slider','ew-val',function(v){EDGE_W=v;});
+  slider('els-slider','els-val',function(v){EDGE_LABEL_SIZE=v;});
+  slider('play-spd','play-spd-val',function(v){playSpeedIdx=v;});
+
+  function chk(id,assign){
+    document.getElementById(id).addEventListener('change',function(){assign(this.checked);draw();});
+  }
+  chk('chk-el',function(v){SHOW_EL=v;});
+  chk('chk-arr',function(v){SHOW_ARR=v;});
+  chk('chk-persons',function(v){SHOW_P=v;});
+  chk('chk-orgs',function(v){SHOW_O=v;});
+
+  document.getElementById('btn-play').addEventListener('click',togglePlay);
+  document.getElementById('btn-reset-yr').addEventListener('click',function(){
+    stopPlay();
+    YR_FROM=YR_MIN;YR_TO=YR_MAX;
+    document.getElementById('yr-from').value=YR_MIN;
+    document.getElementById('yr-to').value=YR_MAX;
+    updateYrFill();draw();
+  });
+  document.getElementById('btn-relayout').addEventListener('click',startLayout);
+  document.getElementById('btn-reset').addEventListener('click',function(){
+    selected=null;selectedEdge=null;clearInfo();
+    document.getElementById('footer-sel').textContent='';
+    scale=1;ox=0;oy=0;draw();
+  });
+  document.getElementById('btn-save').addEventListener('click',saveLayout);
+  document.getElementById('btn-load').addEventListener('click',loadLayout);
+
+  document.querySelectorAll('.org-type-chk').forEach(function(chk){
+    chk.addEventListener('change',function(){
+      var st=this.dataset.subtype;
+      if(this.checked) delete HIDDEN_SUBTYPES[st]; else HIDDEN_SUBTYPES[st]=true;
+      draw();
+    });
+  });
+
+  function eraChk(id,key){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('change',function(){
+      if(this.checked) delete HIDDEN_ERAS[key]; else HIDDEN_ERAS[key]=true;
+      draw();
+    });
+  }
+  eraChk('era-pre','pre'); eraChk('era-post','post'); eraChk('era-nodate','nodate');
+
+  document.querySelectorAll('.narr-chk').forEach(function(chk){
+    chk.addEventListener('change',function(){
+      var n=this.dataset.narr;
+      if(this.checked) delete HIDDEN_NARRATIVES[n]; else HIDDEN_NARRATIVES[n]=true;
+      draw();
+    });
+  });
+
+  var panel=document.getElementById('panel');
+  var toggle=document.getElementById('panel-toggle');
+  var title=document.getElementById('panel-title');
+  toggle.addEventListener('click',function(){
+    var c=panel.classList.toggle('collapsed');
+    toggle.innerHTML=c?'&#9654;':'&#9664;';
+    title.style.visibility=c?'hidden':'';
+    setTimeout(function(){resizeCanvas();draw();},220);
+  });
+}
+
+// ── Events ────────────────────────────────────────────────────────────────────
+function setupEvents(){
+  var tip=document.getElementById('tooltip');
+  var tipLabel=document.getElementById('tip-label');
+  var mx=0,my=0;
+
+  canvas.addEventListener('mousedown',function(e){
+    e.preventDefault();
+    var p=canvasPos(e),n=hitNode(p.x,p.y);
+    mouseDownAt={x:e.clientX,y:e.clientY};mx=e.clientX;my=e.clientY;
+    if(n){dragging=n;panStart=null;}
+    else{panStart={x:e.clientX-ox,y:e.clientY-oy};dragging=null;}
+  });
+
+  window.addEventListener('mousemove',function(e){
+    if(dragging){dragging.x+=(e.clientX-mx)/scale;dragging.y+=(e.clientY-my)/scale;draw();}
+    else if(panStart){ox=e.clientX-panStart.x;oy=e.clientY-panStart.y;draw();}
+    else{
+      var p=canvasPos(e),n=hitNode(p.x,p.y);
+      if(n){
+        canvas.style.cursor='pointer';
+        tipLabel.textContent=n.label;
+        var tl=e.clientX+16,tt=Math.max(8,e.clientY-14);
+        if(tl+280>window.innerWidth) tl=e.clientX-286;
+        tip.style.left=tl+'px';tip.style.top=tt+'px';tip.style.display='block';
+        if(!selected&&!selectedEdge) showNodeInfo(n);
+      } else {
+        var edge=hitEdgeAt(p.x,p.y);
+        tip.style.display='none';
+        canvas.style.cursor=edge?'pointer':'default';
+        if(!selected&&!selectedEdge){if(edge) showEdgeInfo(edge);else clearInfo();}
+      }
+    }
+    mx=e.clientX;my=e.clientY;
+  });
+
+  window.addEventListener('mouseup',function(e){
+    if(!mouseDownAt) return;
+    var wasClick=Math.hypot(e.clientX-mouseDownAt.x,e.clientY-mouseDownAt.y)<5;
+    if(wasClick){
+      var p=canvasPos(e),n=hitNode(p.x,p.y);
+      if(n&&dragging===n){
+        selected=(selected===n.id)?null:n.id;selectedEdge=null;
+        var sel=selected?findNode(selected):null;
+        document.getElementById('footer-sel').textContent=sel?'Selected: '+sel.label:'';
+        if(selected) showNodeInfo(findNode(selected)); else clearInfo();
+        draw();
+      } else if(!n){
+        var edge=hitEdgeAt(p.x,p.y);
+        if(edge){
+          selectedEdge=(selectedEdge===edge)?null:edge;selected=null;
+          document.getElementById('footer-sel').textContent='';
+          if(selectedEdge) showEdgeInfo(selectedEdge); else clearInfo();
+          draw();
+        } else if(panStart){
+          selected=null;selectedEdge=null;clearInfo();
+          document.getElementById('footer-sel').textContent='';draw();
+        }
+      }
+    }
+    dragging=null;panStart=null;mouseDownAt=null;
+  });
+
+  canvas.addEventListener('dblclick',function(){
+    selected=null;selectedEdge=null;scale=1;ox=0;oy=0;clearInfo();
+    document.getElementById('footer-sel').textContent='';draw();
+  });
+
+  canvas.addEventListener('wheel',function(e){
+    e.preventDefault();
+    var d=e.deltaY>0?0.88:1.14;
+    scale=Math.max(0.12,Math.min(8,scale*d));
+    ox-=e.offsetX*(d-1);oy-=e.offsetY*(d-1);draw();
+  },{passive:false});
+}
+
+// ── Accordion ────────────────────────────────────────────────────────────────
+function setupAccordions(){
+  document.querySelectorAll('.acc-header').forEach(function(h){
+    h.addEventListener('click',function(){
+      var body=this.nextElementSibling;
+      var hidden=body.classList.toggle('hidden');
+      this.querySelector('.acc-caret').textContent=hidden?'▸':'▾';
+    });
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+function resizeCanvas(){
+  var wrap=document.getElementById('canvas-wrap');
+  W=wrap.clientWidth;H=wrap.clientHeight;canvas.width=W;canvas.height=H;
+}
+function init(){
+  canvas=document.getElementById('c');ctx=canvas.getContext('2d');
+  resizeCanvas();
+  window.addEventListener('resize',function(){resizeCanvas();draw();});
+  if(!CanvasRenderingContext2D.prototype.roundRect){
+    CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+      r=Math.min(r,w/2,h/2);
+      this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);
+      this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);
+      this.arcTo(x,y,x+w,y,r);this.lineTo(x+r,y);
+    };
+  }
+  setupAccordions();setupControls();setupEvents();setupYrSlider();startLayout();
+}
+window.addEventListener('load',init);
+})();
+</script>
+</body>
+</html>

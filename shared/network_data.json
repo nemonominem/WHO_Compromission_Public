@@ -1,0 +1,1463 @@
+{
+  "meta": {
+    "title": "COVID-19 Origins — Institutional & Narrative Network",
+    "source": "shared/network_data.json",
+    "generated": "2026-06-20",
+    "version": 2,
+    "edge_schema": "[from_id, to_id, relation_type, description, when]"
+  },
+  "nodes": {
+    "AK": {
+      "label": "Adrienne Keen",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "AH": {
+      "label": "Avril Haines",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "JB": {
+      "label": "Jason Bannan",
+      "type": "person",
+      "narrative": "opposed"
+    },
+    "TD": {
+      "label": "Thomas DiNanno",
+      "type": "person",
+      "narrative": "opposed"
+    },
+    "NIC": {
+      "label": "NIC",
+      "type": "org",
+      "full": "National Intelligence Council",
+      "subtype": "intelligence",
+      "narrative": "enforcer"
+    },
+    "ODNI": {
+      "label": "ODNI",
+      "type": "org",
+      "full": "Office of the Director of National Intelligence",
+      "subtype": "intelligence",
+      "narrative": "enforcer"
+    },
+    "FBI": {
+      "label": "FBI",
+      "type": "org",
+      "subtype": "intelligence",
+      "narrative": "opposed"
+    },
+    "CIA": {
+      "label": "CIA",
+      "type": "org",
+      "subtype": "intelligence",
+      "narrative": "neutral"
+    },
+    "BSEG": {
+      "label": "BSEG",
+      "type": "org",
+      "full": "Biological Science Experts Group (ODNI advisory)",
+      "subtype": "intelligence",
+      "narrative": "neutral"
+    },
+    "STATE": {
+      "label": "State Dept",
+      "type": "org",
+      "full": "U.S. State Dept / Bureau of Intelligence & Research",
+      "subtype": "intelligence",
+      "narrative": "neutral"
+    },
+    "SENATE": {
+      "label": "Senate HSGAC",
+      "type": "org",
+      "full": "Senate Homeland Security & Governmental Affairs Committee",
+      "subtype": "usgov",
+      "narrative": "opposed"
+    },
+    "TA": {
+      "label": "Tedros Adhanom",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "MR": {
+      "label": "Mike Ryan",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "MVK": {
+      "label": "Maria Van Kerkhove",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "PE": {
+      "label": "Peter Embarek",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "WHO": {
+      "label": "WHO",
+      "type": "org",
+      "full": "World Health Organization",
+      "subtype": "globalhealth",
+      "narrative": "aligned"
+    },
+    "JF": {
+      "label": "Jeremy Farrar",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "MMB": {
+      "label": "Manningham-Buller",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "WELLCOME": {
+      "label": "Wellcome Trust",
+      "type": "org",
+      "subtype": "globalhealth",
+      "narrative": "enforcer"
+    },
+    "CEPI": {
+      "label": "CEPI",
+      "type": "org",
+      "full": "Coalition for Epidemic Preparedness Innovations",
+      "subtype": "globalhealth",
+      "narrative": "aligned"
+    },
+    "WEF": {
+      "label": "WEF",
+      "type": "org",
+      "full": "World Economic Forum",
+      "subtype": "forum",
+      "narrative": "neutral"
+    },
+    "AF": {
+      "label": "Anthony Fauci",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "FC": {
+      "label": "Francis Collins",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "DM": {
+      "label": "David Morens",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "NIAID": {
+      "label": "NIAID",
+      "type": "org",
+      "full": "National Institute of Allergy and Infectious Diseases",
+      "subtype": "usgov",
+      "narrative": "enforcer"
+    },
+    "NIH": {
+      "label": "NIH",
+      "type": "org",
+      "full": "National Institutes of Health",
+      "subtype": "usgov",
+      "narrative": "enforcer"
+    },
+    "CDC": {
+      "label": "CDC",
+      "type": "org",
+      "full": "Centers for Disease Control",
+      "subtype": "usgov",
+      "narrative": "aligned"
+    },
+    "PD": {
+      "label": "Peter Daszak",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "SZ": {
+      "label": "Shi Zhengli",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "EHA": {
+      "label": "EcoHealth Alliance",
+      "type": "org",
+      "subtype": "research",
+      "narrative": "enforcer"
+    },
+    "WIV": {
+      "label": "WIV",
+      "type": "org",
+      "full": "Wuhan Institute of Virology",
+      "subtype": "research",
+      "narrative": "neutral"
+    },
+    "KA": {
+      "label": "Kristian Andersen",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "EH": {
+      "label": "Edward Holmes",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "RG": {
+      "label": "Robert Garry",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "IL": {
+      "label": "Ian Lipkin",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "SN": {
+      "label": "Sam Nunn",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "BC": {
+      "label": "Beth Cameron",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "NTI": {
+      "label": "NTI",
+      "type": "org",
+      "full": "Nuclear Threat Initiative",
+      "subtype": "track2",
+      "narrative": "aligned"
+    },
+    "JHU": {
+      "label": "Johns Hopkins CHS",
+      "type": "org",
+      "full": "Johns Hopkins Center for Health Security",
+      "subtype": "track2",
+      "narrative": "aligned"
+    },
+    "ELBI": {
+      "label": "ELBI",
+      "type": "org",
+      "full": "Emerging Leaders in Biosecurity Initiative",
+      "subtype": "track2",
+      "narrative": "aligned"
+    },
+    "TI": {
+      "label": "Tom Inglesby",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "GG": {
+      "label": "Gigi Gronvall",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "RB": {
+      "label": "Ralph Baric",
+      "type": "person",
+      "narrative": "neutral"
+    },
+    "DR": {
+      "label": "David Relman",
+      "type": "person",
+      "narrative": "opposed"
+    },
+    "DF": {
+      "label": "David Franz",
+      "type": "person",
+      "narrative": "enforcer"
+    },
+    "CISAC": {
+      "label": "CISAC",
+      "type": "org",
+      "full": "NAS Committee on International Security & Arms Control",
+      "subtype": "track2",
+      "narrative": "neutral"
+    },
+    "NSC": {
+      "label": "White House NSC",
+      "type": "org",
+      "subtype": "usgov",
+      "narrative": "aligned"
+    },
+    "LSHTM": {
+      "label": "LSHTM",
+      "type": "org",
+      "full": "London School of Hygiene & Tropical Medicine",
+      "subtype": "research",
+      "narrative": "aligned"
+    },
+    "JK": {
+      "label": "Jerry Keusch",
+      "type": "person",
+      "full": "Gerald Keusch, Boston University; EHA board; Coalition of Support organiser",
+      "narrative": "aligned"
+    },
+    "PH": {
+      "label": "Peter Hotez",
+      "type": "person",
+      "full": "Baylor College of Medicine virologist; Coalition of Support; 'Antiscience Kills'",
+      "narrative": "enforcer"
+    },
+    "RR": {
+      "label": "Rich Roberts",
+      "type": "person",
+      "full": "Nobel laureate (Physiology or Medicine 1993); New England Biolabs; Coalition of Support",
+      "narrative": "aligned"
+    },
+    "JS": {
+      "label": "Jeff Sturchio",
+      "type": "person",
+      "full": "EHA communications adviser for NIH/NIAID relations",
+      "narrative": "enforcer"
+    },
+    "AR": {
+      "label": "Angela Rasmussen",
+      "type": "person",
+      "full": "Virologist; Coalition of Support attack figure",
+      "narrative": "enforcer"
+    },
+    "MK": {
+      "label": "Marion Koopmans",
+      "type": "person",
+      "full": "Erasmus MC virologist; WHO 2021 mission; Lancet letter co-signer",
+      "narrative": "aligned"
+    },
+    "JG": {
+      "label": "Jim Gimlett",
+      "type": "person",
+      "full": "DARPA program manager, PREEMPT",
+      "narrative": "neutral"
+    },
+    "DARPA": {
+      "label": "DARPA",
+      "type": "org",
+      "full": "Defense Advanced Research Projects Agency",
+      "subtype": "usgov",
+      "narrative": "neutral"
+    },
+    "LANCET": {
+      "label": "The Lancet",
+      "type": "org",
+      "full": "Medical journal (Richard Horton, editor); published Calisher et al. Feb 2020",
+      "subtype": "globalhealth",
+      "narrative": "enforcer"
+    },
+    "BCM": {
+      "label": "Baylor/BCM",
+      "type": "org",
+      "full": "Baylor College of Medicine",
+      "subtype": "research",
+      "narrative": "aligned"
+    },
+    "USAID": {
+      "label": "USAID",
+      "type": "org",
+      "full": "U.S. Agency for International Development; PREDICT funder",
+      "subtype": "usgov",
+      "narrative": "aligned"
+    },
+    "DEFUSE": {
+      "label": "DEFUSE",
+      "type": "org",
+      "full": "EcoHealth/WIV DARPA proposal (Mar 2018): insert furin cleavage sites into chimeric SARS-CoVs at WIV; rejected by DARPA Jun 2018 citing biosafety",
+      "subtype": "research",
+      "narrative": "neutral"
+    },
+    "GILLIBRAND": {
+      "label": "Sen. Gillibrand",
+      "type": "person",
+      "full": "Sen. Kirsten Gillibrand (D-NY); SASC; sympathetic EHA lobby target",
+      "narrative": "aligned"
+    },
+    "SCHUMER": {
+      "label": "Sen. Schumer",
+      "type": "person",
+      "full": "Sen. Chuck Schumer (D-NY); Senate Majority Leader; EHA lobby target",
+      "narrative": "aligned"
+    },
+    "MALONEY": {
+      "label": "Rep. Maloney",
+      "type": "person",
+      "full": "Rep. Carolyn Maloney (D-NY); House Oversight; EHA lobby target",
+      "narrative": "aligned"
+    },
+    "ESHOO": {
+      "label": "Rep. Eshoo",
+      "type": "person",
+      "full": "Rep. Anna Eshoo (D-CA); House Energy & Commerce; EHA lobby target",
+      "narrative": "aligned"
+    },
+    "MI5": {
+      "label": "MI5",
+      "type": "org",
+      "subtype": "intelligence",
+      "full": "UK Security Service; Manningham-Buller DG 2002-2007; Andrew Parker DG 2013-2020",
+      "narrative": "neutral"
+    },
+    "AP": {
+      "label": "Andrew Parker",
+      "type": "person",
+      "full": "Director General of MI5 2013-2020; visited Manningham-Buller and Farrar at Wellcome mid-January 2020 to discuss pandemic origins",
+      "narrative": "neutral"
+    },
+    "COS": {
+      "label": "Coalition of Support",
+      "type": "org",
+      "subtype": "coalition",
+      "full": "EHA lobbying-and-narrative coalition (2021-2023) convened by Daszak; members: Keusch, Hotez, Roberts, Sturchio, Rasmussen, Morens, Gronvall; considered name 'Americans for Pandemic Preparedness'",
+      "narrative": "enforcer"
+    },
+    "MSC": {
+      "label": "Munich Security Conf.",
+      "type": "org",
+      "subtype": "forum",
+      "full": "Munich Security Conference; hosted NTI pandemic tabletop exercises (2015, 2019) testing international mechanisms for investigating high-consequence biological events",
+      "narrative": "neutral"
+    },
+    "CEIP": {
+      "label": "Carnegie Endowment",
+      "type": "org",
+      "full": "Carnegie Endowment for International Peace; Track II think tank; funds NTI; Avril Haines joining as President September 2026",
+      "subtype": "track2",
+      "narrative": "aligned"
+    },
+    "DRASTIC": {
+      "label": "DRASTIC",
+      "type": "org",
+      "full": "Decentralized Radical Autonomous Search Team Investigating COVID-19; independent open-source research collective including Gilles Demaneuf; first recipients of the leaked DARPA/DEFUSE memo (August 2021); produced key primary-source analyses of COVID-19 origins.",
+      "subtype": "research",
+      "narrative": "opposed"
+    },
+    "JPM": {
+      "label": "Maj. Murphy",
+      "type": "person",
+      "full": "Major Joseph Patrick Murphy, USMC; DARPA Biological Technologies Office; authored internal Aug 2021 memo revealing that DARPA had reviewed and rejected the DEFUSE proposal on biosafety grounds; memo leaked to DRASTIC in August 2021.",
+      "narrative": "opposed"
+    },
+    "BS": {
+      "label": "Schwartländer",
+      "type": "person",
+      "full": "Bernhard Schwartländer; WHO Representative to China 2013–2017; Tedros's Chief of Staff from 2017; consistent internal advocate for deference to Beijing; received Farrar's 12 Feb 2020 email alongside Ryan and Drosten; appeared in CGTN softball interviews with WHO Goodwill Ambassador James Chau projecting Beijing's pandemic narrative.",
+      "narrative": "enforcer"
+    },
+    "CHN": {
+      "label": "China/CCP",
+      "type": "org",
+      "full": "Chinese Communist Party / Chinese government; used access denial as structural leverage throughout the COVID origins inquiry — restricted data, curated itineraries, supervised site visits, managed team composition — while conditioning cooperation on positive public praise. China's economic weight and WHO voting-bloc support (which helped secure Tedros's 2017 election) made confrontation structurally costly and deference the path of least resistance.",
+      "subtype": "foreign",
+      "narrative": "enforcer"
+    },
+    "RF": {
+      "label": "Fouchier",
+      "type": "person",
+      "full": "Ron Fouchier; Erasmus MC Rotterdam; gain-of-function H5N1 researcher (controversial 2012 ferret-transmission paper, whose safety assurances underpinned P4 lab approvals); on the Feb 1 2020 Farrar teleconference; publicly dismissed lab-leak hypothesis; article notes he 'may very well be responsible for torpedoing Proximal Origin at Nature' because an early draft still mentioned passaging as a possibility.",
+      "narrative": "enforcer"
+    },
+    "CDT": {
+      "label": "Drosten",
+      "type": "person",
+      "full": "Christian Drosten; Director, Institute of Virology, Charité Berlin; Germany's leading pandemic voice in 2020; included by Farrar in the 12 February 2020 email alongside Ryan and Schwartländer: 'I hope there is a paper/letter ready this week… which effectively puts to bed the issue of the origin of the virus.'",
+      "narrative": "aligned"
+    },
+    "GHB": {
+      "label": "Brundtland",
+      "type": "person",
+      "full": "Gro Harlem Brundtland; WHO Director-General 1998–2003; publicly rebuked China for its SARS-1 cover-up in 2003 — a direct confrontation with Beijing that stands in stark contrast to Tedros's narrative deference in 2020. Keynote speaker at the NTI tabletop pandemic exercise at the Munich Security Conference (13 February 2020), simulating an engineered-virus outbreak: her WHO-DG authority lent institutional legitimacy to an exercise that dramatised exactly the investigation scenario Farrar's publications were simultaneously closing off.",
+      "narrative": "neutral"
+    },
+    "BULL": {
+      "label": "Robert Bull",
+      "type": "person",
+      "full": "Robert Bull; Scientific Response and Analysis Unit, FBI Laboratory, Quantico; attended 3 February 2020 NASEM call on COVID-19 origins alongside Fauci, Daszak, Baric, Inglesby, Kadlec — same unit as Jason Bannan, who was excluded from the August 2021 White House origins briefing",
+      "narrative": "opposed"
+    },
+    "KBRI": {
+      "label": "Kathryn Brinsfield",
+      "type": "person",
+      "full": "Kathryn Brinsfield; Senior Advisor, National Counterproliferation Centre, Office of the Director of National Intelligence (ODNI); attended 3 February 2020 NASEM call on COVID-19 origins — placing ODNI's counterproliferation apparatus in the room at the origins debate's first significant scientific convocation",
+      "narrative": "neutral"
+    }
+  },
+  "edges": [
+    [
+      "AK",
+      "STATE",
+      "worked at",
+      "Health/science advisor at State Dept Bureau of Intelligence & Research (INR); provided analysis on biological threats including Ebola, Zika, and MERS.",
+      "~2014–2018"
+    ],
+    [
+      "AK",
+      "WHO",
+      "consulted for",
+      "Independent consultant to WHO Global TB Programme and outbreak analysis; critics cited this as a conflict of interest in her subsequent role coordinating the origins assessment.",
+      "~2016–2019"
+    ],
+    [
+      "AK",
+      "LSHTM",
+      "studied at",
+      "Completed PhD in infectious disease modelling at LSHTM; formed early connections to UK global health network.",
+      "~2010–2014"
+    ],
+    [
+      "AK",
+      "ELBI",
+      "participated in",
+      "2017 ELBI Fellow at Johns Hopkins; gained direct access to Beth Cameron as speaker/mentor, creating an NTI-to-IC pipeline.",
+      "2017"
+    ],
+    [
+      "AK",
+      "NIC",
+      "worked at",
+      "Director for Global Health Security at NIC; coordinated the 90-day Biden COVID-19 origins review and the first National Intelligence Estimate on COVID-19.",
+      "2019–2022"
+    ],
+    [
+      "AK",
+      "ODNI",
+      "worked for",
+      "NIC is a component of ODNI; Keen worked under DNI Haines and was central to shaping the IC's contested origins assessment.",
+      "2019–2022"
+    ],
+    [
+      "AK",
+      "CEPI",
+      "worked at",
+      "Moved to CEPI as Senior Emergency Response Lead after government service; continued in the WHO-adjacent epidemic preparedness ecosystem.",
+      "2022+"
+    ],
+    [
+      "AK",
+      "CDC",
+      "affiliated with",
+      "Brief CDC affiliation in outbreak analytics after leaving ODNI.",
+      "2022–2023"
+    ],
+    [
+      "AH",
+      "ODNI",
+      "directed",
+      "Director of National Intelligence under Biden; oversaw entire IC including NIC's COVID origins review that critics allege was steered toward natural origin.",
+      "2021–2025"
+    ],
+    [
+      "AH",
+      "NIC",
+      "oversaw",
+      "As DNI, Haines directed Keen's NIC coordination of the 90-day origins review; the NIC synthesised IC assessments including FBI's dissenting lab-associated conclusion.",
+      "2021"
+    ],
+    [
+      "AH",
+      "NTI",
+      "advised",
+      "Haines was a member of NTI's Biosecurity Advisory Group before being appointed DNI; this created a direct NTI-to-ODNI personnel pipeline within the Biden administration.",
+      "2018–2021"
+    ],
+    [
+      "JB",
+      "FBI",
+      "worked at",
+      "Senior Scientist (microbiologist) leading FBI's COVID origins analysis; FBI assessed lab-associated incident with moderate confidence — the only IC element to do so.",
+      "2020–2022"
+    ],
+    [
+      "JB",
+      "NIC",
+      "excluded from",
+      "Bannan was reportedly not invited to the August 2021 White House origins briefing despite FBI's lab-associated assessment; he stated: 'I find it surprising that the White House didn't ask.'",
+      "Aug 2021"
+    ],
+    [
+      "NIC",
+      "ODNI",
+      "part of",
+      "NIC is the analytical hub of ODNI, responsible for producing National Intelligence Estimates; Keen's role here made her the primary coordinator of IC-wide COVID origins synthesis.",
+      ""
+    ],
+    [
+      "NIC",
+      "FBI",
+      "coordinated with",
+      "NIC synthesised FBI's dissenting lab-associated conclusion alongside four other IC elements' natural-origin assessments for the 90-day Biden review.",
+      "2021"
+    ],
+    [
+      "BSEG",
+      "ODNI",
+      "advises",
+      "BSEG serves as ODNI's expert advisory panel on biological threats; received Jan 2020 Baric briefing on three SARS-CoV-2 origin scenarios before the IC formal assessment began.",
+      "2015+"
+    ],
+    [
+      "TD",
+      "STATE",
+      "worked at",
+      "Bureau of Arms Control, Verification and Compliance (AVC); testified that Keen 'was an advocate for zoonosis, very involved in discrediting information' that State was presenting on lab-origin.",
+      "2018–2021"
+    ],
+    [
+      "TD",
+      "AK",
+      "testified against",
+      "DiNanno told Sky News (2023) that Keen actively pushed back against lab-leak evidence State was presenting to Secretary Pompeo, framing her role as advocacy not analysis.",
+      "2021–2023"
+    ],
+    [
+      "SENATE",
+      "ODNI",
+      "oversees",
+      "Senate Homeland Security Committee (Oct 2025 letter to DNI Gabbard) requested records on Keen and Murphy's role in NIC COVID origins assessments.",
+      "2025"
+    ],
+    [
+      "TA",
+      "WHO",
+      "directed",
+      "Director-General of WHO; visited Beijing Jan 28 2020 and endorsed China's cooperation publicly before full data access was granted; called WHO behaviour 'understandable' given China's political leverage.",
+      "2017+"
+    ],
+    [
+      "TA",
+      "JF",
+      "appointed",
+      "Tedros appointed Farrar as WHO Chief Scientist in 2023, bringing a central figure from early February 2020 origins coordination into WHO's formal senior leadership.",
+      "2023"
+    ],
+    [
+      "MR",
+      "WHO",
+      "worked at",
+      "Executive Director for Health Emergencies; served on Jan 28 2020 Beijing delegation alongside Tedros; later acknowledged 'considerable frustration' with China's data delays.",
+      "2017+"
+    ],
+    [
+      "MVK",
+      "WHO",
+      "worked at",
+      "COVID-19 Technical Lead; in 2023 called the 2021 joint mission's lack of data access 'inexcusable'; participated in Feb 2020 situation briefings as the outbreak spread.",
+      "2020+"
+    ],
+    [
+      "PE",
+      "WHO",
+      "worked at",
+      "Food Safety and Zoonoses scientist; led WHO-China joint origins mission (Feb 2021) and secretly negotiated TOR language with Chinese counterparts in August 2020 without WHO membership approval.",
+      "2010–2021"
+    ],
+    [
+      "PE",
+      "TA",
+      "reported to",
+      "Embarek reported to Tedros and Ryan on mission progress; his Aug 2020 TOR negotiations bypassed WHO membership, effectively pre-determining the inquiry's scope.",
+      "2020–2021"
+    ],
+    [
+      "JF",
+      "WHO",
+      "works at",
+      "Appointed WHO Chief Scientist by Tedros in 2023; later promoted to Assistant Director-General; completing Farrar's transition from Wellcome philanthropy into formal WHO leadership.",
+      "2023+"
+    ],
+    [
+      "JF",
+      "WELLCOME",
+      "directed",
+      "Director of Wellcome Trust 2013–2023; used this position to convene the Feb 2020 teleconference on SARS-CoV-2 origins and to coordinate with Fauci, Collins, and the Proximal Origin authors.",
+      "2013–2023"
+    ],
+    [
+      "JF",
+      "NTI",
+      "board member",
+      "Farrar served on NTI board while directing Wellcome Trust; present at the June 2018 NTI–Wellcome–WEF Biosecurity Innovation meeting alongside Nunn, where Cameron co-authored the initiative paper.",
+      "2018+"
+    ],
+    [
+      "JF",
+      "KA",
+      "coordinated",
+      "Farrar convened Andersen's team after the Feb 1 Fauci-Farrar call; hosted Feb 4 teleconference on origins evidence; private emails show scientists acknowledged lab-origin could not be ruled out even as the paper moved toward natural-origin conclusion.",
+      "Feb 2020"
+    ],
+    [
+      "JF",
+      "AF",
+      "coordinated with",
+      "Farrar briefed Fauci on scientists' private laboratory-origin concerns in early Feb 2020; both coordinated messaging so the public Proximal Origin paper aligned NIH and Wellcome positions.",
+      "Feb 2020"
+    ],
+    [
+      "MMB",
+      "WELLCOME",
+      "chaired",
+      "Eliza Manningham-Buller (former MI5 Director-General 2002–2007) chaired Wellcome Trust board 2015–2021; MI5 DG Parker visited Wellcome to meet Manningham-Buller in early 2020 to discuss outbreak origins.",
+      "2015–2021"
+    ],
+    [
+      "MMB",
+      "WHO",
+      "connected to",
+      "Manningham-Buller's Wellcome chairship created an intelligence-community channel into the WHO-adjacent philanthropy network during the critical early months of the pandemic.",
+      "2020"
+    ],
+    [
+      "WELLCOME",
+      "WHO",
+      "funded",
+      "Wellcome Trust contributed substantially to WHO's outbreak response capacity; Farrar leveraged this philanthropic relationship throughout pandemic preparedness and during the origins narrative period.",
+      "2013–2023"
+    ],
+    [
+      "WELLCOME",
+      "CEPI",
+      "co-founded",
+      "Wellcome co-founded CEPI (2017) alongside governments and the Gates Foundation, creating another hub connecting Wellcome's network to global health emergency response infrastructure.",
+      "2017+"
+    ],
+    [
+      "WELLCOME",
+      "NTI",
+      "partnered with",
+      "NTI–Wellcome–WEF Biosecurity Innovation and Risk Reduction meeting (Jun 2018): Farrar and Nunn present; Cameron co-authored the NTI policy communication; formalized the Wellcome–NTI institutional axis.",
+      "2018"
+    ],
+    [
+      "SN",
+      "NTI",
+      "co-founded",
+      "Sam Nunn co-founded NTI in 2001 extending Nunn-Lugar cooperative threat reduction logic from nuclear to biological threats; NTI became the primary US biosecurity Track II actor.",
+      "2001+"
+    ],
+    [
+      "NTI",
+      "WEF",
+      "partnered with",
+      "NTI co-hosted the June 2018 Biosecurity Innovation meeting with WEF and Wellcome; ran tabletop pandemic exercises at Munich Security Conference (2019) involving WEF participants.",
+      "2018–2019"
+    ],
+    [
+      "NTI",
+      "JHU",
+      "collaborates with",
+      "NTI and Johns Hopkins CHS co-developed the Global Health Security Index and co-facilitated ELBI; shared intellectual leadership over the biosecurity field and its personnel pipeline.",
+      "2010+"
+    ],
+    [
+      "NTI",
+      "WHO",
+      "exercised with",
+      "NTI ran tabletop pandemic exercises at Munich Security Conference (2015, 2019) testing international mechanisms for investigating high-consequence biological events — precisely the question WHO later faced in 2021.",
+      "2015, 2019"
+    ],
+    [
+      "BC",
+      "NTI",
+      "worked at",
+      "VP Global Biological Policy and Programs; co-authored the NTI–Wellcome–WEF Biosecurity Innovation initiative (June 2018); central architect of NTI's biosecurity doctrine linking Track II to US government.",
+      "2017–2021"
+    ],
+    [
+      "BC",
+      "NSC",
+      "worked at",
+      "Moved from NTI VP to Biden NSC Senior Director for Global Health Security and Biodefense; oversaw COVID origins question from the White House and coordinated with Haines at ODNI.",
+      "Jan 2021+"
+    ],
+    [
+      "BC",
+      "AK",
+      "connected to",
+      "Both were in overlapping biosecurity circles through the JHU ELBI network (Cameron as speaker/mentor, Keen as 2017 fellow); created an informal NTI–NSC–NIC coordination channel in the Biden administration.",
+      "2017+"
+    ],
+    [
+      "BC",
+      "ELBI",
+      "mentored at",
+      "Cameron served as ELBI speaker/mentor for multiple cohorts including the 2017 class (Keen's cohort); directly linked the NTI institutional world to ELBI's talent pipeline for government.",
+      "2015+"
+    ],
+    [
+      "TI",
+      "JHU",
+      "directed",
+      "Director of Johns Hopkins Center for Health Security; BSEG member and Biden health security adviser; the sole Track II insider to publicly endorse a lab-accident investigation, having co-authored a 2014 GoF moratorium call.",
+      "2016+"
+    ],
+    [
+      "GG",
+      "JHU",
+      "worked at",
+      "Senior Scholar at Johns Hopkins CHS; ELBI faculty; aligned publicly with the natural-origin consensus despite JHU's institutional role in balanced biosecurity assessment.",
+      "2010+"
+    ],
+    [
+      "ELBI",
+      "JHU",
+      "hosted by",
+      "ELBI fellowship hosted by Johns Hopkins CHS since 2012; 330+ alumni spanning government, IC, and academia; functioned as a talent pipeline and socialisation mechanism for the biosecurity field.",
+      "2012+"
+    ],
+    [
+      "TI",
+      "ELBI",
+      "mentored at",
+      "Inglesby served in ELBI programme leadership, shaping the values and professional networks of emerging biosecurity leaders including future IC and government officials.",
+      "2012+"
+    ],
+    [
+      "DF",
+      "CISAC",
+      "co-chaired",
+      "David Franz co-chaired CISAC's biosecurity committee; organised US-China Track II workshops in Beijing (2015), Wuhan (2017), and Harbin (2019), creating a direct scientific channel to WIV outside normal government oversight.",
+      "2010–2019"
+    ],
+    [
+      "RB",
+      "CISAC",
+      "participated in",
+      "Baric presented chimeric coronavirus research at the 2015 Beijing CISAC workshop alongside Shi Zhengli, establishing a direct UNC-WIV scientific relationship outside standard government oversight.",
+      "2015"
+    ],
+    [
+      "SZ",
+      "CISAC",
+      "participated in",
+      "Shi Zhengli participated in the 2015 Beijing CISAC US-China biosecurity workshop alongside Baric; the meeting documented direct WIV-UNC collaboration on chimeric coronavirus work.",
+      "2015"
+    ],
+    [
+      "RB",
+      "BSEG",
+      "briefed",
+      "Baric presented SARS-CoV-2 analysis to BSEG quarterly meeting (Jan 29 2020) covering three origin scenarios: natural spillover, lab escape, and deliberate engineering; FBI's Bannan was present.",
+      "Jan 2020"
+    ],
+    [
+      "DR",
+      "BSEG",
+      "advised",
+      "David Relman served as BSEG member; co-authored a 2021 Science letter calling for investigation of both zoonotic and laboratory origins; publicly challenged the natural-origin consensus.",
+      "2015+"
+    ],
+    [
+      "DF",
+      "BSEG",
+      "advised",
+      "Franz advised BSEG on biological threat reduction while maintaining close CISAC ties to China and informal connections to the EcoHealth network — a dual positioning critics noted.",
+      "2010+"
+    ],
+    [
+      "RB",
+      "SZ",
+      "collaborated with",
+      "Baric and Shi Zhengli collaborated on chimeric SARS-CoV-2 precursor experiments funded partly through EcoHealth's NIAID grant; joint papers documented the creation of novel coronaviruses with enhanced human-cell infectivity.",
+      "2015–2019"
+    ],
+    [
+      "SZ",
+      "WIV",
+      "worked at",
+      "Bat coronavirus expert at WIV; ran biosafety level 3 and 4 research on SARS-related coronaviruses; collaborated with Baric and managed WIV's EcoHealth-funded grant work.",
+      "2000+"
+    ],
+    [
+      "AF",
+      "NIAID",
+      "directed",
+      "Director of NIAID 1984–2022; oversaw the US biodefense portfolio ($1.71B in FY2003, 18× the FY2000 baseline); primary federal node for pandemic research funding and the designated DTRA outreach target in 2007.",
+      "1984–2022"
+    ],
+    [
+      "FC",
+      "NIH",
+      "directed",
+      "Director of NIH 2009–2021; participated in early Feb 2020 calls on SARS-CoV-2 origins with Fauci and Farrar; aligned NIH publicly with the natural-origin narrative.",
+      "2009–2021"
+    ],
+    [
+      "DM",
+      "NIAID",
+      "advised",
+      "Senior Advisor to Fauci for 20+ years; FOIA emails show he coordinated with Daszak outside formal NIH channels using personal Gmail to avoid FOIA; cited in a NARA compliance review.",
+      "2000–2023"
+    ],
+    [
+      "DM",
+      "PD",
+      "coordinated with",
+      "Morens's July 2023 NARA email named Daszak among colleagues 'supporting Tony by default'; the two communicated via personal Gmail to avoid FOIA capture; relationship spanned 20+ years of grant coordination.",
+      "2010–2023"
+    ],
+    [
+      "NIAID",
+      "EHA",
+      "funded",
+      "NIAID granted EcoHealth Alliance ~$3.7M for bat coronavirus surveillance and chimeric virus research at WIV under grant R01AI110964.",
+      "2014–2020"
+    ],
+    [
+      "NIH",
+      "EHA",
+      "funded",
+      "NIH provided overarching institutional support to EcoHealth Alliance through the NIAID grant portfolio; Collins-era NIH endorsed the EcoHealth programme and resisted congressional defunding attempts through 2022.",
+      "2014–2023"
+    ],
+    [
+      "NIH",
+      "NIAID",
+      "contains",
+      "NIAID is a component institute of NIH; Collins as NIH Director oversaw Fauci's NIAID and the broader funding decisions that reached EcoHealth Alliance and WIV.",
+      ""
+    ],
+    [
+      "PD",
+      "EHA",
+      "directed",
+      "President of EcoHealth Alliance; secured NIAID and USAID PREDICT grants for bat coronavirus surveillance; managed the WIV subcontract and maintained the Daszak-Morens-Fauci relationship.",
+      "2009+"
+    ],
+    [
+      "EHA",
+      "WIV",
+      "subgranted",
+      "EcoHealth subcontracted WIV through NIAID grant R01AI110964; WIV conducted bat coronavirus sampling and chimeric experiments under Shi Zhengli — the exact research programme under scrutiny in the origins debate.",
+      "2014–2020"
+    ],
+    [
+      "EHA",
+      "RB",
+      "subgranted",
+      "EcoHealth channelled part of the NIAID grant to Baric's lab at UNC for chimeric coronavirus work, creating a Daszak–Baric–WIV triangle funded through a single NIAID grant.",
+      "2014–2016"
+    ],
+    [
+      "KA",
+      "AF",
+      "reported to",
+      "Andersen emailed Fauci on Jan 31 2020 noting 'unusual features' of the virus suggesting possible engineering; by Feb 12 he had reversed position to natural origin in the Proximal Origin draft.",
+      "Jan–Feb 2020"
+    ],
+    [
+      "KA",
+      "JF",
+      "coordinated with",
+      "Andersen co-led Proximal Origin drafting with Farrar; Wellcome's institutional position and Farrar's role made him a central node in the Feb 2020 scientific messaging process.",
+      "Feb 2020"
+    ],
+    [
+      "EH",
+      "KA",
+      "co-authored",
+      "Holmes and Andersen were lead co-authors of Proximal Origin; Holmes's evolutionary biology expertise provided the technical backbone for the natural-origin argument.",
+      "Feb–Mar 2020"
+    ],
+    [
+      "RG",
+      "KA",
+      "co-authored",
+      "Garry (Tulane) co-authored Proximal Origin; FOIA transcripts show Garry's private views on the furin cleavage site diverged from the paper's public conclusion.",
+      "Feb–Mar 2020"
+    ],
+    [
+      "IL",
+      "KA",
+      "co-authored",
+      "Lipkin (Columbia) co-authored Proximal Origin; participated in the Feb 4 Wellcome teleconference and subsequent coordination with Farrar and Fauci.",
+      "Feb–Mar 2020"
+    ],
+    [
+      "FC",
+      "AF",
+      "coordinated with",
+      "Collins and Fauci aligned on origins messaging in Feb 2020; Collins received Proximal Origin drafts and helped ensure NIH's public position tracked with the natural-origin narrative being developed.",
+      "Feb 2020"
+    ],
+    [
+      "JK",
+      "EHA",
+      "board member",
+      "Keusch served on EHA board (Boston University School of Public Health professor); his academic standing lent institutional credibility to EHA grant applications and public statements opposing congressional defunding.",
+      "~2015–2023"
+    ],
+    [
+      "PH",
+      "BCM",
+      "worked at",
+      "Hotez is Professor of Molecular Virology at Baylor College of Medicine and co-director of Texas Children's Hospital Center for Vaccine Development; hosted the Coalition of Support's April 27 2023 in-person meeting.",
+      "2010+"
+    ],
+    [
+      "PD",
+      "JK",
+      "coordinated with",
+      "Keusch was the primary organiser of Daszak's Coalition of Support ('Science & Policy Group'), first assembled October 2021 as congressional pressure mounted over EHA's WIV grants; he chaired the Feb 1 2023 Coalition Zoom meeting.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "PH",
+      "coordinated with",
+      "Hotez joined the Coalition of Support; hosted its April 27 2023 in-person launch at BCM alongside Rasmussen, Gronvall, Keusch, and Morens; drafted a 'National Strategy for COVID-19 Science' and wrote 'Antiscience Kills' aligned with Coalition messaging.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "RR",
+      "coordinated with",
+      "Rich Roberts (Nobel Prize, Physiology or Medicine 1993; New England Biolabs) provided scientific credibility to the Coalition of Support; participated in Coalition Zoom meetings and signed joint statements opposing congressional restrictions on EHA and gain-of-function research.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "JS",
+      "coordinated with",
+      "Jeff Sturchio served as EHA's dedicated NIH/NIAID communications strategy agent; drafted messaging and congressional engagement scripts to counter defunding legislation and origins scrutiny on behalf of Daszak.",
+      "2020–2023"
+    ],
+    [
+      "PD",
+      "AR",
+      "coordinated with",
+      "Rasmussen was recruited into the Coalition of Support and served as its public attack figure against lab-leak advocates; characterised critics as politically motivated; attended the April 27 2023 in-person Coalition meeting at BCM.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "MK",
+      "coordinated with",
+      "Daszak cultivated Koopmans as a European scientific credibility anchor; she co-signed the Lancet letter he drafted (Calisher et al.) and served alongside him on the WHO 2021 origins mission where he continued to control the scope of inquiry.",
+      "2020–2021"
+    ],
+    [
+      "MK",
+      "WHO",
+      "served on",
+      "Koopmans was a member of the WHO–China Joint Study team (Jan–Feb 2021) alongside Daszak and Embarek; she later called the mission's data access 'inexcusable', acknowledging the mission was compromised.",
+      "2021"
+    ],
+    [
+      "MK",
+      "LANCET",
+      "co-signed",
+      "Koopmans co-signed the Calisher et al. letter in The Lancet (Feb 2020), which Daszak had drafted; the letter characterised laboratory-origin investigation as 'conspiracy theory' and was presented as an independent scientific consensus statement.",
+      "Feb 2020"
+    ],
+    [
+      "JF",
+      "LANCET",
+      "facilitated",
+      "Farrar suggested The Lancet — rather than Change.org — as the publication venue for Daszak's letter; he connected Daszak to editor Richard Horton and facilitated publication of Calisher et al., then separately facilitated Proximal Origin in Nature Medicine.",
+      "Feb 2020"
+    ],
+    [
+      "PD",
+      "LANCET",
+      "arranged",
+      "Daszak emailed editor Richard Horton directly to arrange publication of the Calisher et al. letter (Feb 19 2020); he presented it publicly as an independent scientific consensus while having drafted and coordinated it himself, without disclosing his role.",
+      "Feb 2020"
+    ],
+    [
+      "JF",
+      "MK",
+      "coordinated with",
+      "Koopmans participated in the Feb 1 2020 Wellcome teleconference convened by Farrar to assess SARS-CoV-2 origins; she was part of the inner circle that privately acknowledged a laboratory origin could not be ruled out before the public narrative hardened.",
+      "Feb 2020"
+    ],
+    [
+      "GG",
+      "PD",
+      "coordinated with",
+      "Gronvall (JHU CHS) attended the April 27 2023 in-person Coalition of Support meeting at BCM alongside Daszak, Rasmussen, Hotez, Keusch, and Morens; her JHU affiliation lent institutional credibility to the Coalition.",
+      "2023"
+    ],
+    [
+      "DM",
+      "JK",
+      "coordinated with",
+      "Morens participated alongside Keusch in the Coalition of Support's Feb 1 2023 Zoom meeting and the April 27 2023 in-person meeting at BCM; his NIAID position gave the Coalition an insider NIH voice.",
+      "2023"
+    ],
+    [
+      "PD",
+      "DEFUSE",
+      "authored",
+      "Daszak was principal investigator on DEFUSE; the proposal was drafted by EcoHealth and submitted to DARPA's PREEMPT program in March 2018, with WIV as the designated execution site for chimeric coronavirus work.",
+      "2017–2018"
+    ],
+    [
+      "SZ",
+      "DEFUSE",
+      "co-proposed",
+      "Shi Zhengli was WIV co-PI on DEFUSE; she and Daszak jointly visited DARPA in June 2017 to present the research concept before the formal proposal was submitted.",
+      "Jun 2017–Mar 2018"
+    ],
+    [
+      "EHA",
+      "DEFUSE",
+      "submitted",
+      "EcoHealth Alliance formally submitted DEFUSE to DARPA's PREEMPT program in March 2018, seeking $14.2M for bat coronavirus surveillance and chimeric gain-of-function experiments at WIV.",
+      "Mar 2018"
+    ],
+    [
+      "DEFUSE",
+      "DARPA",
+      "rejected by",
+      "DARPA rejected DEFUSE in June 2018; internal DARPA review noted the proposal lacked adequate biosafety provisions for the planned insertion of furin cleavage sites into chimeric SARS-related coronaviruses at WIV.",
+      "Jun 2018"
+    ],
+    [
+      "DEFUSE",
+      "WIV",
+      "planned at",
+      "DEFUSE designated WIV as the primary laboratory site for chimeric coronavirus construction and bat-derived virus sampling; Shi Zhengli's BSL-3/4 facilities were central to the proposal's technical plan.",
+      "2018"
+    ],
+    [
+      "JG",
+      "DARPA",
+      "managed",
+      "Jim Gimlett was DARPA's program manager for PREEMPT; he received and reviewed the DEFUSE proposal from EcoHealth; DARPA's internal memo cited biosafety concerns about WIV's containment for the planned work.",
+      "2017–2018"
+    ],
+    [
+      "USAID",
+      "EHA",
+      "funded",
+      "USAID funded EcoHealth Alliance through the PREDICT program for global surveillance of zoonotic pathogens; peak funding ~$1.5M per year alongside NIAID grants, creating a dual federal dependency.",
+      "2009–2020"
+    ],
+    [
+      "PD",
+      "GILLIBRAND",
+      "lobbied",
+      "Daszak and EHA board members (Shedlarz, Stebbins, Griffin) lobbied Sen. Gillibrand's office (SASC) to oppose NDAA provisions defunding EHA; Gillibrand was sympathetic and the lobbying was documented in Daszak's calendar records.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "SCHUMER",
+      "lobbied",
+      "EHA lobbied Senate Majority Leader Schumer against NDAA defunding; Tim Reiser was the key Senate contact in the Schumer lobbying operation documented in EHA calendar and correspondence records.",
+      "2021–2023"
+    ],
+    [
+      "PD",
+      "MALONEY",
+      "lobbied",
+      "Daszak lobbied Rep. Carolyn Maloney (House Oversight Committee) against scrutiny of EHA's WIV grants; Maloney's oversight jurisdiction over NIH contracting made her a priority target.",
+      "2021–2022"
+    ],
+    [
+      "PD",
+      "ESHOO",
+      "lobbied",
+      "Daszak lobbied Rep. Anna Eshoo (House Energy & Commerce, health subcommittee) against congressional restrictions on EHA and NIH gain-of-function research funding.",
+      "2021–2022"
+    ],
+    [
+      "PD",
+      "FBI",
+      "manipulated",
+      "Daszak used a contact within the FBI to play victim — presenting himself and EHA as targets of political harassment while simultaneously naming critics and 'opponents' to the agent; the relationship is documented in the 25,000-item Daszak calendar release.",
+      "2021–2023"
+    ],
+    [
+      "MMB",
+      "MI5",
+      "directed",
+      "Manningham-Buller served as Director General of MI5 (2002-2007), bringing deep security-service experience to her Wellcome Trust chairship (2015-2021) and creating a direct MI5-to-philanthropy channel into the February 2020 origins coordination.",
+      "2002-2007"
+    ],
+    [
+      "AP",
+      "MI5",
+      "directed",
+      "Andrew Parker served as Director General of MI5 from 2013 until retirement in 2020; his visit to Wellcome in January 2020 occurred weeks before he left the post.",
+      "2013-2020"
+    ],
+    [
+      "AP",
+      "MMB",
+      "visited",
+      "Parker visited Manningham-Buller at Wellcome Trust mid-January 2020, weeks after the Wuhan cluster became public; Manningham-Buller later recalled advising him to 'raise our guard, security-wise — use different phones, avoid putting things in emails.'",
+      "mid-Jan 2020"
+    ],
+    [
+      "AP",
+      "JF",
+      "briefed",
+      "Parker briefed Farrar at Wellcome during the mid-January 2020 visit; the DG of MI5 and the director of Wellcome Trust discussed pandemic origins weeks before the February 1 teleconference, establishing a UK intelligence channel into the origins narrative process.",
+      "mid-Jan 2020"
+    ],
+    [
+      "JF",
+      "EH",
+      "handled",
+      "Holmes referred to Farrar as his 'handler' in late January 2020 communications; Farrar coordinated the scientific messaging on origins and Holmes was one of the scientists whose public position he managed through the Proximal Origin process.",
+      "late Jan 2020"
+    ],
+    [
+      "PD",
+      "COS",
+      "convened",
+      "Daszak convened the Coalition of Support ('Science & Policy Group') from October 2021 in response to mounting congressional scrutiny of EHA's WIV grants; it held its first formal Zoom February 1 2023 and in-person meeting April 27 2023 at BCM.",
+      "2021-2023"
+    ],
+    [
+      "JK",
+      "COS",
+      "member of",
+      "Keusch was a founding member and chair of the Coalition's meetings; his Boston University academic standing gave the Coalition credibility beyond EHA's immediate orbit.",
+      "2021-2023"
+    ],
+    [
+      "PH",
+      "COS",
+      "member of",
+      "Hotez joined the Coalition of Support and hosted its April 27 2023 in-person meeting at BCM alongside Rasmussen, Gronvall, Keusch, and Morens.",
+      "2021-2023"
+    ],
+    [
+      "RR",
+      "COS",
+      "member of",
+      "Roberts (Nobel, NEB) provided scientific credibility for the Coalition; his Nobel Prize standing was intended to deflect accusations that opposition to defunding EHA was purely self-interested.",
+      "2021-2023"
+    ],
+    [
+      "JS",
+      "COS",
+      "member of",
+      "Sturchio served as the Coalition's communications strategy lead, drafting NIH engagement scripts and congressional messaging for EHA.",
+      "2021-2023"
+    ],
+    [
+      "AR",
+      "COS",
+      "member of",
+      "Rasmussen was the Coalition's public attack figure; she attended the April 2023 in-person meeting at BCM and characterised lab-leak advocates as politically motivated.",
+      "2021-2023"
+    ],
+    [
+      "DM",
+      "COS",
+      "member of",
+      "Morens participated in the February 1 2023 Zoom and April 2023 in-person Coalition meetings; his position as Fauci's senior NIH adviser gave the Coalition a direct NIH insider voice.",
+      "2023"
+    ],
+    [
+      "GG",
+      "COS",
+      "member of",
+      "Gronvall (JHU CHS) attended the April 27 2023 in-person Coalition meeting at BCM; her JHU affiliation lent Track II biosecurity credibility to the Coalition's scientific framing.",
+      "2023"
+    ],
+    [
+      "CIA",
+      "ODNI",
+      "part of",
+      "CIA is a principal IC member and contributed its natural-origin assessment (low confidence) to the ODNI-coordinated 90-day Biden review (2021); Director Burns re-opened the analysis in 2023, reportedly shifting toward lab-associated with low confidence.",
+      "2021-2023"
+    ],
+    [
+      "CIA",
+      "NIC",
+      "coordinated with",
+      "CIA's analytical directorate fed its low-confidence natural-origin position into the NIC COVID-19 origins synthesis; the CIA later re-assessed under Director Burns.",
+      "2021-2023"
+    ],
+    [
+      "NTI",
+      "MSC",
+      "exercised at",
+      "NTI ran pandemic tabletop exercises at the Munich Security Conference in 2015 and 2019, testing international mechanisms for investigating high-consequence biological events — precisely the challenge WHO faced in 2021.",
+      "2015, 2019"
+    ],
+    [
+      "WEF",
+      "MSC",
+      "partnered with",
+      "WEF participated in the NTI pandemic simulation exercises at the Munich Security Conference, extending the Wellcome-NTI-WEF biosecurity network into European security diplomacy.",
+      "2018-2019"
+    ],
+    [
+      "DM",
+      "AF",
+      "advised",
+      "Morens was Fauci's Senior Scientific Advisor in the NIAID Office of the Director for 20+ years — the direct back-channel between Daszak and the NIAID Director; he coordinated EHA/WIV-related messaging with Daszak on Fauci's behalf, using personal Gmail to evade FOIA.",
+      "2000–2023"
+    ],
+    [
+      "AF",
+      "DM",
+      "directed",
+      "In October 2021, Fauci told Morens that using Gmail on a government-issued phone made those messages FOIA-able, and instructed him to obtain a personal smartphone. Fauci also told Morens not to be in direct contact with Daszak or EHA for the time being; Keusch would act as the relay. Documented in Keusch's October 25 2021 email to Daszak (BU confidential treatment): 'This came from Tony in their conversation this morning.'",
+      "Oct 2021"
+    ],
+    [
+      "JK",
+      "AF",
+      "coordinated with",
+      "Per Fauci's October 2021 instructions, while Morens stood down from direct contact with Daszak and EHA, Keusch served as the relay: 'He will stay connected to me and via me to you' (Keusch to Daszak, October 25 2021). Keusch's EHA board position made him the natural replacement back-channel.",
+      "Oct 2021"
+    ],
+    [
+      "AH",
+      "CIA",
+      "worked at",
+      "Avril Haines served as Deputy Director of the CIA 2013–2015 before becoming Principal Deputy National Security Advisor and later DNI.",
+      "2013–2015"
+    ],
+    [
+      "AH",
+      "CEIP",
+      "affiliated with",
+      "Haines joined the Carnegie Endowment for International Peace as incoming President in 2026 after leaving as DNI.",
+      "2026"
+    ],
+    [
+      "CEIP",
+      "NTI",
+      "funded",
+      "Carnegie Endowment for International Peace provides funding to the Nuclear Threat Initiative; the two organisations share personnel, board overlap, and a Track II security establishment network.",
+      "2000+"
+    ],
+    [
+      "JPM",
+      "DARPA",
+      "worked at",
+      "Maj. Murphy served at DARPA's Biological Technologies Office in 2021, giving him access to the DEFUSE proposal review files.",
+      "2021"
+    ],
+    [
+      "JPM",
+      "DEFUSE",
+      "disclosed",
+      "Murphy authored an internal DARPA memo (August 2021) detailing the DEFUSE proposal contents and DARPA's rejection on biosafety grounds; the memo was leaked directly to DRASTIC in August 2021, making the DEFUSE-WIV connection publicly documented for the first time.",
+      "Aug 2021"
+    ],
+    [
+      "JPM",
+      "DRASTIC",
+      "leaked to",
+      "Murphy's DARPA memo was leaked to DRASTIC in August 2021; DRASTIC's receipt and analysis of the memo was the primary disclosure event.",
+      "Aug 2021"
+    ],
+    [
+      "BS",
+      "WHO",
+      "worked at",
+      "Schwartländer served as WHO Representative to China (2013–2017), giving him deep ties to Beijing, then moved to Geneva as Tedros's Chief of Staff — making him the key inside-WHO channel for pro-China narrative management.",
+      "2011+"
+    ],
+    [
+      "BS",
+      "TA",
+      "advised",
+      "As Chief of Staff, Schwartländer was Tedros's principal internal adviser; described in the article as having 'played a key role in promoting deference to China as the right policy within the top WHO circles' — sincere belief formed under structural influence.",
+      "2017+"
+    ],
+    [
+      "JF",
+      "BS",
+      "coordinated with",
+      "Farrar included Schwartländer in his 12 February 2020 email (alongside Ryan and Drosten): 'I hope there is a paper/letter ready this week to go to Nature (and WHO) which effectively puts to bed the issue of the origin of the virus.' Schwartländer's presence on that chain placed Tedros's office inside the narrative-closure operation.",
+      "Feb 2020"
+    ],
+    [
+      "CHN",
+      "WHO",
+      "pressured",
+      "China used access denial as structural leverage throughout the COVID origins inquiry: restricted data, curated itineraries, supervised site visits, managed team composition, and conditioned cooperation on positive WHO public statements. China's economic weight and WHO voting-bloc support made confrontation structurally costly.",
+      "2020–2021"
+    ],
+    [
+      "CHN",
+      "WIV",
+      "oversees",
+      "WIV operates under Chinese state and Chinese Academy of Sciences oversight; CCP controlled all access to WIV data, samples, and personnel, making independent verification of the institute's records impossible without Beijing's consent.",
+      "2000+"
+    ],
+    [
+      "CHN",
+      "TA",
+      "pressured",
+      "China's economic leverage and WHO electoral support (China backed Tedros's 2017 election) gave Beijing structural influence over the DG's public posture; Tedros praised China's transparency while negotiating access and enlisted social media platforms against 'infodemic' content from February 2020.",
+      "2017+"
+    ],
+    [
+      "GHB",
+      "WHO",
+      "directed",
+      "Brundtland served as WHO Director-General 1998–2003; in 2003 she publicly rebuked China for covering up SARS-1 — issuing a travel advisory against Beijing without prior authorisation, a direct confrontation with Beijing that stands in marked contrast to Tedros's 2020 deference.",
+      "1998–2003"
+    ],
+    [
+      "GHB",
+      "NTI",
+      "participated in",
+      "Brundtland was keynote speaker at the NTI tabletop pandemic exercise at the Munich Security Conference (13 February 2020), simulating an engineered-virus outbreak from a country with 'biotech development ambitions'; her presence gave former-WHO-DG authority to an exercise that dramatised exactly the investigation scenario being closed off in parallel.",
+      "Feb 2020"
+    ],
+    [
+      "GHB",
+      "CHN",
+      "challenged",
+      "In 2003 Brundtland publicly rebuked China for covering up SARS-1, issuing a Beijing travel advisory without Chinese consent — a direct institutional confrontation that the WHO under Tedros conspicuously failed to repeat during COVID-19.",
+      "2003"
+    ],
+    [
+      "JF",
+      "RF",
+      "coordinated with",
+      "Fouchier was on Farrar's 1 February 2020 teleconference; he publicly assigned negligible probability to a lab-origin scenario. The article suggests he may have been responsible for torpedoing an early Proximal Origin draft at Nature because it still mentioned passaging as a possibility.",
+      "Feb 2020"
+    ],
+    [
+      "RF",
+      "MK",
+      "collaborates with",
+      "Fouchier and Koopmans are paired colleagues at Erasmus MC Rotterdam; both were on the Feb 1 teleconference and both publicly dismissed lab-leak scenarios. The article notes: 'They both work in a Dutch P4 lab built in the middle of a key European transport and population hub.'",
+      "2000+"
+    ],
+    [
+      "JF",
+      "CDT",
+      "coordinated with",
+      "Drosten was included in Farrar's 12 February 2020 email alongside Ryan and Schwartländer, signalling that Farrar's narrative-closure strategy extended to Germany's leading pandemic authority.",
+      "Feb 2020"
+    ],
+    [
+      "BULL",
+      "FBI",
+      "worked at",
+      "Scientific Response and Analysis Unit, FBI Laboratory, Quantico — same unit as Jason Bannan, the FBI's lead COVID origins scientist.",
+      "2020–2021"
+    ],
+    [
+      "BULL",
+      "JB",
+      "colleague of",
+      "Both worked at the Scientific Response and Analysis Unit, FBI Laboratory, Quantico. Bull attended the 3 February 2020 NASEM call; Bannan was later excluded from the August 2021 White House origins briefing. The FBI's forensic unit was present at Day 1 of the scientific debate and locked out at its conclusion.",
+      "2020–2021"
+    ],
+    [
+      "KBRI",
+      "ODNI",
+      "worked at",
+      "Senior Advisor, National Counterproliferation Centre (NCPC), ODNI; attended the 3 February 2020 NASEM call on COVID-19 origins, placing ODNI's counterproliferation unit in the room from the outset.",
+      "2020–2021"
+    ],
+    [
+      "BULL",
+      "KBRI",
+      "co-attended",
+      "3 February 2020 NASEM call on COVID-19 origins — the first significant scientific convocation on origins, attended alongside Fauci, Daszak, Baric, Inglesby, Kadlec, and Gronvall. Bull represented FBI Quantico; Brinsfield represented ODNI/NCPC.",
+      "3 Feb 2020"
+    ]
+  ]
+}

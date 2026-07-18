@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How China, the WHO, and a network of conflicted actors foreclosed the COVID-19 origins investigation. An immersive dossier by Gilles Demaneuf / DRASTIC.">
+<title>Fate or Failure? — China, the WHO, and the Politics of Origins</title>
+<style>
+/* ── Inline citation links ───────────────────────────────── */
+a.cite-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(232,184,75,0.75);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+a.cite-link:hover { text-decoration-color: var(--red-bright); }
+
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal-image, .pull-quote, .timeline-item, .stat-callout, .doc-excerpt, .chapter-card {
+    transition: none !important; opacity: 1 !important;
+    transform: none !important; box-shadow: none !important;
+  }
+  .scroll-cue { animation: none; opacity: 1; }
+}
+
+/* ── Focus visibility ─────────────────────────────────────── */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--red-bright);
+  outline-offset: 2px;
+}
+
+/* ── Screen-reader-only text (always-present chat transcript) ── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+/* With JS disabled, the animated chat bubbles never populate — show the
+   plain-text transcript in place instead of leaving it screen-reader-only. */
+.no-js .chat-transcript-sr {
+  position: static;
+  width: auto; height: auto;
+  padding: 0; margin: 0 0 1rem;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+.no-js .chat-messages { display: none; }
+
+/* ── Tokens ───────────────────────────────────────────────── */
+:root {
+  --bg:            #0D1117;
+  --bg-elevated:   #161B22;
+  --bg-glass:      rgba(13,17,23,0.88);
+  --text-primary:  #E6EDF3;
+  --text-muted:    #8B949E;
+  --red:           #8B0000;
+  --red-bright:    #E55A4A;
+  --red-glow:      rgba(139,0,0,0.28);
+  --border:        rgba(230,237,243,0.08);
+  --border-red:    rgba(192,57,43,0.5);
+  --overlay:       linear-gradient(to bottom,rgba(13,17,23,0.45) 0%,rgba(13,17,23,0.82) 55%,#0D1117 100%);
+  --font-serif:    Georgia,"Times New Roman",Times,serif;
+  --font-sans:     -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-mono:     "SF Mono","Cascadia Code",Consolas,monospace;
+  --col:           72ch;
+  --pad:           clamp(1rem,5vw,4rem);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem,2vw,1.22rem);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── Skip link ────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  z-index: 300;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border-red);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* ── Sticky nav ───────────────────────────────────────────── */
+.sticky-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(13,17,23,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.progress-bar {
+  height: 3px;
+  background: var(--red-bright);
+  width: 0%;
+  transition: width 0.1s linear;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  height: 52px;
+  gap: 1rem;
+}
+.nav-logo {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-logo:hover { color: var(--text-primary); }
+.chapter-nav { position: relative; }
+.chapter-list {
+  display: flex;
+  list-style: none;
+  gap: 0.15rem;
+}
+.chapter-list a {
+  display: block;
+  padding: 0.35rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+.chapter-list a:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+.chapter-list a.active { color: var(--red-bright); border-bottom-color: var(--red-bright); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+}
+.nav-toggle:hover { color: var(--text-primary); }
+
+@media (max-width: 820px) {
+  .nav-toggle { display: flex; align-items: center; }
+  .chapter-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: min(340px, 100vw);
+    flex-direction: column;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    padding: 0.5rem 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .chapter-list a {
+    padding: 0.9rem 1.25rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+  }
+  .chapter-list a.active { border-bottom-color: var(--border); background: rgba(139,0,0,0.1); }
+  .sticky-nav.nav-open .chapter-list { display: flex; }
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url('../../shared/images/tedros-xi-20200128.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: scroll;
+}
+@media (hover: hover) and (pointer: fine) {
+  #hero { background-attachment: fixed; }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: var(--overlay);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 1;
+  padding: 0 var(--pad) clamp(2.5rem,6vw,5rem);
+  max-width: 1100px;
+}
+.hero-badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  border: 1px solid var(--border-red);
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 1.5rem;
+  text-shadow: none;
+}
+.hero-title {
+  font-size: clamp(3.2rem,8vw,6.5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);
+}
+.hero-title em { font-style: normal; color: var(--text-muted); font-size: 0.6em; }
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.1rem,2.2vw,1.4rem);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  max-width: 55ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+}
+.hero-byline {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.04em;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+}
+.hero-abstract {
+  background: rgba(10,13,18,0.92);
+  border-left: 3px solid var(--red);
+  padding: 1.4rem 1.6rem;
+  max-width: 62ch;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+.hero-abstract strong { color: #fff; }
+.scroll-cue {
+  position: absolute;
+  bottom: 1.5rem;
+  right: var(--pad);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  animation: bounce 2s ease-in-out infinite;
+  z-index: 1;
+  transition: opacity 0.5s;
+}
+.scroll-cue .arrow { font-size: 1.1rem; }
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ── Context bar ──────────────────────────────────────────── */
+.context-bar {
+  background: var(--red);
+  padding: 0.85rem var(--pad);
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem,1.5vw,0.9rem);
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+/* ── Chapter hero ─────────────────────────────────────────── */
+.chapter-hero {
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+.chapter-hero.is-visible { opacity: 1; }
+.chapter-hero::before {
+  content: '';
+  position: absolute;
+  inset: -5%;
+  background-image: var(--hero-img);
+  background-size: cover;
+  background-position: var(--hero-pos, center);
+  background-attachment: scroll;
+  transform: scale(0.955);
+  transition: transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+.chapter-hero.is-visible::before {
+  transform: scale(1);
+}
+@media (max-width: 768px) {
+  .chapter-hero { min-height: 50vh; }
+}
+.chapter-hero .hero-overlay {
+  background: linear-gradient(to bottom,rgba(13,17,23,0.1) 0%,rgba(13,17,23,0.6) 50%,#0D1117 100%);
+}
+.chapter-hero-content {
+  position: relative; z-index: 1;
+  padding: 0 var(--pad) 2.5rem;
+}
+.chapter-num {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.5rem;
+}
+.chapter-hero-title {
+  font-size: clamp(1.6rem,4vw,2.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+  max-width: 18ch;
+}
+.chapter-hero-date {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.chapter-hero-caption {
+  position: absolute;
+  top: 1.4rem;
+  right: var(--pad);
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: rgba(230,237,243,0.72);
+  background: rgba(13,17,23,0.62);
+  padding: 0.3rem 0.55rem;
+  border-radius: 2px;
+  max-width: 38ch;
+  line-height: 1.45;
+  text-align: right;
+}
+
+/* ── Chapter typographic hero (ch8) ──────────────────────── */
+.chapter-hero-text {
+  min-height: 55vh;
+  display: flex;
+  align-items: flex-end;
+  border-top: 3px solid var(--red);
+  padding: 0 var(--pad) 2.5rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.chapter-hero-text.is-visible { opacity: 1; }
+
+/* ── Article body wrapper ─────────────────────────────────── */
+.chapter-body-wrap {
+  max-width: calc(var(--col) + var(--pad)*2);
+  margin: 0 auto;
+  padding: 2.5rem var(--pad) 3.5rem;
+}
+
+/* ── Pull quote ───────────────────────────────────────────── */
+.pull-quote {
+  border-left: 4px solid var(--red);
+  padding: 1.5rem 2rem 0.5rem;
+  margin: 2.5rem 0;
+  background: var(--bg-elevated);
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.8s ease;
+}
+.pull-quote.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 40px var(--red-glow);
+}
+.pull-quote p {
+  font-size: clamp(1.2rem,2.5vw,1.75rem);
+  font-style: italic;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+.pull-quote footer {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0;
+  padding: 2.1rem 0;
+}
+.pull-quote cite { font-style: normal; }
+.pull-quote--sm p {
+  font-size: clamp(1.0rem,2.2vw,1.56rem);
+}
+
+/* ── Chapter body text ────────────────────────────────────── */
+.chapter-text {
+  font-size: clamp(1.05rem,2vw,1.18rem);
+  line-height: 1.78;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+.chapter-text.is-visible { opacity: 1; transform: translateY(0); }
+.chapter-text p + p { margin-top: 1rem; }
+
+/* ── Authorship table ─────────────────────────────────────── */
+.authorship-table {
+  margin: 2.5rem 0;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  background: var(--bg-elevated);
+  border-radius: 2px;
+}
+.authorship-table summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+  user-select: none;
+}
+.authorship-table summary::-webkit-details-marker { display: none; }
+.authorship-table summary::before {
+  content: '▸';
+  color: var(--red-bright);
+  font-size: 0.85em;
+  margin-right: 0.5rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.authorship-table[open] summary::before { transform: rotate(90deg); }
+.authorship-table summary .at-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+.authorship-table-body {
+  padding: 0.3rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.authorship-table-scroll {
+  overflow-x: auto;
+  margin-top: 1.1rem;
+}
+.authorship-table table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 620px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+}
+.authorship-table th, .authorship-table td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.45;
+}
+.authorship-table th {
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-red);
+}
+.authorship-table td:first-child, .authorship-table th:first-child {
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.authorship-table tr.at-total td {
+  font-style: italic;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-red);
+  border-bottom: none;
+}
+.authorship-table tr.at-total td:first-child { font-family: var(--font-sans); font-size: 0.78rem; }
+.authorship-table .at-yes { color: var(--text-primary); font-size: 1rem; }
+.authorship-table .at-lead { color: var(--red-bright); font-weight: 700; }
+.authorship-table .at-lead::after { content: ' (lead)'; font-size: 0.62rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; color: var(--red-bright); }
+.authorship-table .at-shaped { color: var(--text-muted); font-size: 0.72rem; font-style: italic; line-height: 1.4; }
+.authorship-table .at-quote { color: #E8B84B; font-weight: 700; font-style: normal; }
+.authorship-table .at-no { color: var(--text-muted); opacity: 0.35; }
+.authorship-table tr.at-po-row td { background: #16243F; }
+.authorship-table tr.at-shaper-row td { background: #2A151B; }
+.authorship-table-legend {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+.authorship-table-note {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 0.7rem;
+}
+
+/* ── Reveal utilities ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-image {
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal-image.is-visible { opacity: 1; transform: scale(1); }
+
+/* ── Doc excerpt ──────────────────────────────────────────── */
+.doc-excerpt {
+  background: rgba(139,0,0,0.07);
+  border-left: 4px solid var(--border-red);
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+.doc-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.6rem;
+}
+.doc-excerpt blockquote {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+.doc-excerpt cite {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+/* ── Stat callout ─────────────────────────────────────────── */
+.stat-callout {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.stat-figure {
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem,5vw,3.5rem);
+  font-weight: 700;
+  color: var(--red-bright);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+.stat-context {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
+/* ── Timeline ─────────────────────────────────────────────── */
+.timeline-block {
+  list-style: none;
+  border-left: 2px solid var(--border-red);
+  padding: 0.25rem 0;
+  margin: 2rem 0 2rem 0.5rem;
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.timeline-item.is-visible { opacity: 1; transform: translateX(0); }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -7px; top: 1.35rem;
+  width: 12px; height: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--red-bright);
+  padding-top: 0.2rem;
+  line-height: 1.4;
+}
+.timeline-content strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+.timeline-content p {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+@media (max-width: 520px) {
+  .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  .timeline-date { font-size: 0.7rem; }
+}
+
+/* ── Images ───────────────────────────────────────────────── */
+.img-feature {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+}
+.img-constrained {
+  display: block;
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  border: 1px solid var(--border);
+}
+.img-caption {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-top: 0.4rem;
+  margin-bottom: 1.6rem;
+  padding: 0 0.25rem;
+}
+.foia-frame .img-caption,
+.intel-frame .img-caption { margin-bottom: 0; }
+.context-section {
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--red);
+  padding: 1.4rem 1.6rem;
+  margin: 1.8rem 0;
+}
+.context-section-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.025rem,1.55vw,1.175rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+}
+.chapter-section-h3 {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem,1.6vw,1.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--red-bright);
+  margin: 3rem 0 1rem;
+}
+.dynamics-title-main {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--red-bright);
+  margin: 5rem 0 1rem;
+}
+.context-section p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin: 0;
+}
+.img-pair {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+@media (max-width: 600px) { .img-pair { grid-template-columns: 1fr; } }
+.foia-frame {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-red);
+  padding: 0.5rem;
+  position: relative;
+}
+.foia-frame::before {
+  content: var(--frame-label, 'FOIA DOCUMENT');
+  position: absolute;
+  top: 0.4rem; left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--red-bright);
+}
+.foia-frame img { width: 100%; height: auto; display: block; margin-top: 1rem; }
+
+/* ── DNI-released intelligence documents ─────────────────── */
+.intel-frame {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(100,140,180,0.4);
+  padding: 0.5rem;
+  position: relative;
+}
+.intel-frame::before {
+  content: 'DNI RELEASE';
+  position: absolute;
+  top: 0.4rem; left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: #6496b4;
+}
+.intel-frame img { width: 100%; height: auto; display: block; margin-top: 1rem; }
+
+/* ── Animated email chat window ──────────────────────────── */
+.chat-window {
+  background: #111820;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2rem 0;
+  font-family: var(--font-sans);
+}
+.chat-header {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0.65rem 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #D4783A;
+  text-align: center;
+}
+.chat-messages {
+  padding: 1.4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.chat-msg {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.chat-msg.chat-visible { opacity: 1; }
+.chat-msg-left  { align-items: flex-start; }
+.chat-msg-right { align-items: flex-end; }
+.chat-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-bottom: 0.22rem;
+  padding: 0 0.25rem;
+}
+.chat-meta-right { flex-direction: row-reverse; }
+.chat-name { font-size: 0.7rem; font-weight: 700; }
+.chat-collins { color: #e8a87c; }
+.chat-farrar  { color: #e07070; }
+.chat-tabak   { color: #7ca8e8; }
+.chat-garry   { color: #7ca8e8; }
+.chat-time { font-size: 0.62rem; color: var(--text-muted); font-family: var(--font-mono); }
+.chat-bubble {
+  padding: 0.65rem 0.95rem;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 84%;
+  min-height: 1.2rem;
+}
+.chat-bubble-incoming {
+  background: rgba(255,255,255,0.09);
+  color: var(--text-primary);
+  border-radius: 4px 14px 14px 14px;
+}
+.chat-bubble-outgoing {
+  background: rgba(150,25,25,0.5);
+  color: var(--text-primary);
+  border-radius: 14px 4px 14px 14px;
+}
+.chat-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 0.85em;
+  background: var(--text-muted);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: cur-blink 0.7s step-end infinite;
+}
+@keyframes cur-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .chat-msg { opacity: 1; transition: none; }
+}
+
+/* ── YouTube facade (click-to-play) ──────────────────────── */
+.yt-wrap { margin: 1.8rem 0 0.6rem; }
+.yt-wrap p + p { margin-top: 1rem; }
+.yt-source {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem,1.4vw,1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.55rem;
+}
+.yt-facade {
+  position: relative;
+  cursor: pointer;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.yt-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.82;
+  transition: opacity 0.2s;
+  display: block;
+}
+.yt-facade:hover img { opacity: 1; }
+.yt-facade:hover .yt-play-btn { transform: translate(-50%,-50%) scale(1.1); }
+.yt-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 68px; height: 68px;
+  background: rgba(210,0,0,0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+  pointer-events: none;
+}
+.yt-play-btn::after {
+  content: '';
+  border-left: 26px solid #fff;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  margin-left: 6px;
+}
+.yt-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.yt-caption { margin-top: 0.55rem; }
+.yt-caption a { color: var(--text-muted); text-decoration: underline; }
+
+/* ── Script vs Implementation compare block ──────────────── */
+.script-compare {
+  margin: 1.6rem 0 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.script-panel { padding: 1.1rem 1.4rem; }
+.script-panel-top  { background: var(--bg-elevated); }
+.script-panel-bottom { background: rgba(139,0,0,0.1); }
+.script-label {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem,1.8vw,1.3rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.65rem;
+}
+.script-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem,1.8vw,1.3rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0; padding: 0; border: none;
+}
+.script-impl {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem,1.8vw,1.3rem);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+.script-rule {
+  border: none;
+  border-top: 2px solid var(--red);
+  margin: 0;
+}
+
+/* ── Six-dynamics grid ────────────────────────────────────── */
+.dynamics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+.dynamic-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  padding: 1.5rem;
+}
+.dynamic-num {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(210, 108, 58, 0.88);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.dynamic-title {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.dynamic-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* ── Closing statement ────────────────────────────────────── */
+.closing-statement {
+  font-size: clamp(1.05rem,2vw,1.18rem);
+  font-style: normal;
+  line-height: 1.78;
+  text-align: left;
+  padding: 0 0 2.5rem;
+  margin: 1rem 0;
+  color: rgba(210, 108, 58, 0.88);
+  position: relative;
+  overflow: visible;
+}
+
+/* ── Flame tongues ────────────────────────────────────────── */
+.flame-row {
+  position: absolute;
+  bottom: -28px;
+  left: -2rem;
+  right: -2rem;
+  height: 84px;
+  pointer-events: none;
+}
+.flame-tongue {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  transform-origin: bottom center;
+  filter: blur(4px);
+  animation: flame-burn 1.4s ease-in-out infinite alternate;
+}
+.flame-tongue::after {
+  content: '';
+  position: absolute;
+  inset: 30% 20% 0;
+  border-radius: inherit;
+  background: rgba(255,220,60,0.55);
+  filter: blur(2px);
+}
+@keyframes flame-burn {
+  0%   { transform: scaleX(1)    scaleY(1)    rotate(0deg);   opacity: 0.9; }
+  25%  { transform: scaleX(0.88) scaleY(1.18) rotate(-2deg);  opacity: 1;   }
+  55%  { transform: scaleX(1.08) scaleY(0.88) rotate(1.5deg); opacity: 0.75;}
+  80%  { transform: scaleX(0.93) scaleY(1.12) rotate(-1deg);  opacity: 0.95;}
+  100% { transform: scaleX(1.04) scaleY(0.95) rotate(0.5deg); opacity: 0.85;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .flame-tongue, .flame-tongue::after { animation: none; }
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+footer {
+  background: var(--bg-elevated);
+  border-top: 3px solid var(--red);
+  padding: 3rem var(--pad);
+  margin-top: 2rem;
+}
+.footer-inner {
+  max-width: calc(var(--col) + var(--pad)*2);
+  margin: 0 auto;
+}
+.footer-network {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--red);
+  color: #fff;
+  padding: 0.7rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: background 0.2s;
+}
+.footer-network:hover { background: var(--red-bright); }
+.footer-disclosures {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+.footer-disclosures a { color: var(--text-muted); }
+.footer-meta {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+
+<body>
+<script>document.documentElement.classList.remove('no-js');</script>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ── Sticky nav ──────────────────────────────────────────── -->
+<header class="sticky-nav" role="banner" id="site-header">
+  <div class="progress-bar" role="progressbar" aria-label="Reading progress"
+       aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"></div>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Fate or Failure?</a>
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      <button class="nav-toggle" id="nav-toggle"
+              aria-expanded="false" aria-controls="chapter-list"
+              aria-label="Toggle chapter navigation">&#9776;</button>
+      <ol class="chapter-list" id="chapter-list" role="list">
+        <li><a href="#ch1" data-ch="1">Introduction</a></li>
+        <li><a href="#ch2" data-ch="2">Rock &amp; Hard Place</a></li>
+        <li><a href="#ch3" data-ch="3">Deep End</a></li>
+        <li><a href="#ch4" data-ch="4">Farrar</a></li>
+        <li><a href="#ch5" data-ch="5">GHS Nexus</a></li>
+        <li><a href="#ch6" data-ch="6">Missions</a></li>
+        <li><a href="#ch7" data-ch="7">Enforcement</a></li>
+        <li><a href="#ch8" data-ch="8">Infodemic</a></li>
+        <li><a href="#ch9" data-ch="9">Conclusion</a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section id="hero" aria-label="Article introduction">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-badge">DRASTIC &mdash; OSINT Research Product</div>
+    <h1 class="hero-title">Fate or<br>Failure?</h1>
+    <p class="hero-subtitle">China, the WHO, and the Politics of Origins</p>
+    <p class="hero-byline">Infographic synthesis of DRASTIC OSINT research report <em>Fate or Failure</em> &nbsp;&middot;&nbsp; Gilles Demaneuf &nbsp;&middot;&nbsp; July 2026</p>
+    <div class="hero-abstract">US and UK intelligence flagged a laboratory origin as a live hypothesis by the end of January 2020, based on consultations with key scientists. What then followed was deliberate narrative containment, with the WHO enrolled to play the key role. <strong>This is the story of why that happened and of how it was done.</strong></div>
+
+  </div>
+  <div class="scroll-cue" id="scroll-cue" aria-hidden="true">
+    <span class="arrow">&#8595;</span>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── Context bar ─────────────────────────────────────────── -->
+<div class="context-bar" role="note">
+  <strong>Disclaimer:</strong> This article does not adjudicate between a natural and a lab-accident origin for COVID-19. The article reconstructs instead the institutional failure: how the WHO was induced to behave weakly, why it accommodated pressure, and what sorts of actors benefited from that accommodation. The origin itself, still very much an open debate, is largely orthogonal to what is covered here.
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH1: Introduction                                        -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch1" data-chapter="1" aria-labelledby="ch1-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/wang-yi-tedros-munich-cgtn-feb2020.png')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <p class="chapter-hero-caption">Wang Yi, China's Foreign Minister, meets WHO Director-General Tedros Adhanom — Munich Security Conference, 15 February 2020. Source: CGTN</p>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 1</p>
+      <h2 class="chapter-hero-title" id="ch1-title">Introduction</h2>
+      <p class="chapter-hero-date">January 2020</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <blockquote class="pull-quote reveal" aria-label="Key quote">
+      <p>"The pressures did not need to be centrally orchestrated to be effective.
+         They only needed to point in the same direction. And they did."</p>
+      <footer>&mdash; <cite><em>Fate or Failure — China, the WHO, and the Politics of Origins, full report</em></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <p>In the last days of December 2019, a cluster of unusual pneumonia cases in Wuhan set off a chain of events that would eventually kill millions and reshape geopolitics for a generation. By late January 2020, <a class="cite-link" href="https://gillesdemaneuf.medium.com/the-odnis-b-group-meeting-ralph-baric-s-january-2020-briefing-and-its-relevance-to-covid-19-93c7cc007d63" target="_blank" rel="noopener noreferrer">US and UK intelligence had flagged concerns about a possible laboratory origin for the Wuhan outbreak</a>. The World Health Organization — the one international body with the mandate and in principle the standing to lead a genuine investigation into how the pandemic began — never did so.</p>
+
+      <p>That failure did not happen by accident &mdash; faced with the early intelligence alarm and China's determined strategy of access denial, an explicit choice was made: prioritize cooperation with Beijing over any confrontation on origins. It was a choice of convenience with consequences that outlasted the pandemic itself — an origins question left spinning in a charged geo-political landscape, and a UN health agency which has lost all credibility in its ability to conduct investigations of possibly non-natural outbreaks.</p>
+
+      <p>Six interlocking dynamics — Chinese access control, WHO institutional weakness, Farrar's narrative lock-in, the Global Health Security network posture, conflicted scientific networks, and a self-reinforcing echo chamber — operated in parallel to prevent any true investigation of the origin question, even before any WHO investigation team had landed in China. None of them required a central conspirator; each simply needed to point in the same direction. This article traces how they did.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <picture>
+        <source srcset="../../shared/images/0_Y4ULtkZ17ymMSRHW.webp" type="image/webp">
+        <img src="../../shared/images/0_Y4ULtkZ17ymMSRHW.jpg" loading="lazy"
+             alt="Bubble chart of top WHO Programme Budget contributors 2020–2021. China's contribution is notably small — Beijing's leverage rested on access control and cultivated relationships, not funding rank."
+             class="img-feature">
+      </picture>
+      <p class="img-caption">Top 15 contributors to the WHO Programme budget 2020–2021.
+         China's contribution is notably smaller than those of the US, Germany, or the Gates Foundation.
+         Beijing's leverage rested on access control and cultivated relationships — not funding rank.
+      </p>
+    </div>
+
+    <div class="stat-callout reveal">
+      <p class="stat-figure">&#8804;10th</p>
+      <p class="stat-label">China's rank among WHO funders, 2020–21</p>
+      <p class="stat-context">Beijing wielded disproportionate leverage through access control, cultivated relationships, and economic coercion — not through financial dominance of WHO's budget.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH2: Between a Rock and a Hard Place                    -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch2" data-chapter="2" aria-labelledby="ch2-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/tedros-xi-20200128.png')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 2</p>
+      <h2 class="chapter-hero-title" id="ch2-title">Between a Rock and a Hard Place</h2>
+      <p class="chapter-hero-date">January – February 2020</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <blockquote class="pull-quote reveal">
+      <p>The Committee emphasized that the declaration of a Public Health Emergency of International Concern should be seen in the spirit of support and appreciation for China, its people, and the actions China has taken on the front lines of this outbreak.</p>
+      <footer>&mdash; <cite><a class="cite-link" href="https://www.who.int/news/item/30-01-2020-statement-on-the-second-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-outbreak-of-novel-coronavirus-(2019-ncov)" target="_blank" rel="noopener noreferrer">WHO Emergency Committee, 30 January 2020</a></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+    <h3 class="context-section-title">Tedros in Beijing: Praises as the price for declaring a PHEIC</h3>
+    <p>On 28 January 2020, <a class="cite-link" href="https://www.who.int/news/item/28-01-2020-who-china-leaders-discuss-next-steps-in-battle-against-coronavirus-outbreak" target="_blank" rel="noopener noreferrer">Tedros Adhanom Ghebreyesus, WHO Director-General, flew to Beijing</a> to meet Xi Jinping and discuss the now inevitable declaration of a Public Health Emergency of International Concern, <a class="cite-link" href="https://www.who.int/news/item/23-01-2020-statement-on-the-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-outbreak-of-novel-coronavirus-(2019-ncov)" target="_blank" rel="noopener noreferrer">exactly one week after not calling one in Geneva</a>, under pressure from China. On 30 January, at the conference call during which the WHO declared the PHEIC, Tedros heaped praise on Beijing and Xi Jinping: <a class="cite-link" href="https://youtu.be/237TFjChJiI?si=2TNSgqkByjJjeNLC&t=93" target="_blank" rel="noopener noreferrer">“The speed with which China detected the outbreak, isolated the virus, sequenced the genome and shared it with the WHO and the world are very impressive, and beyond words. So is China's commitment to transparency [..]. In many ways, China is actually setting a new standard for outbreak response, and it's not an exaggeration.”</a></p>
+    <p>He followed with: <a class="cite-link" href="https://youtu.be/BpOGN8p6imY?si=xeLDrsgqkUMwu4C1" target="_blank" rel="noopener noreferrer">"The main reason for this declaration is not because of what is happening in China, but because of what is happening in other countries."</a> That later sentence may seem particularly surprising, but contains in itself the Chinese strategy for the years to come as to any possible origin investigation by the WHO.</p>
+
+    <div class="yt-wrap reveal">
+      <p class="yt-source">WHO &nbsp;&middot;&nbsp; PHEIC Declaration Press Conference &nbsp;&middot;&nbsp; 30 January 2020</p>
+      <div class="yt-facade" data-yt-id="237TFjChJiI" data-yt-start="93"
+           role="button" tabindex="0" aria-label="Play: Tedros praises China at the PHEIC declaration press conference, 30 January 2020">
+        <img src="https://img.youtube.com/vi/237TFjChJiI/hqdefault.jpg" loading="lazy"
+             alt="Tedros at the PHEIC declaration press conference, 30 January 2020">
+        <div class="yt-play-btn" aria-hidden="true"></div>
+      </div>
+      <p style="border-left:3px solid var(--red);padding-left:0.75rem;margin-top:0.9rem;
+                font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);line-height:1.5"> Source: <a href="https://youtu.be/237TFjChJiI?si=2TNSgqkByjJjeNLC&t=93" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted)">YouTube</a> &nbsp;&middot;&nbsp; WHO PHEIC declaration press conference, 30 January 2020</p>
+    </div>
+
+    <h3 class="context-section-title">Ground Truth</h3>
+    <p>The reality on the ground was rather different, and reminiscent of the cover-up that Brundtland, the WHO Director-General, had denounced with sharp words during the SARS epidemic in 2003. China's official case count was essentially frozen from 5 to 17 January — the only change was down, from 59 to 41, on 11 January, against the better advice of China's own CDC, while <a class="cite-link" href="https://bit.ly/IssuesEarlyWuhanCases" target="_blank" rel="noopener noreferrer">hospitals were facing an explosion of cases they were not allowed to officially report.</a></p>
+    
+    <p>In just one Wuhan hospital, one radiologist watched CT referrals climb from single digits in early January to over 100 a day by mid-month, until the machines themselves gave out under the load: "The machine was exhausted and often crashed... and the numbers finally stopped going up." Another radiologist called a Caixin reporter in the middle of the night on 22 January: <a class="cite-link" href="https://www.researchgate.net/publication/373301830_SAGO_Presentation_Limitations_of_the_official_2019_Wuhan_cases_based_on_Primary_Sources" target="_blank" rel="noopener noreferrer">"I did about 200 CT scans in 24 hours yesterday, and there are 143 (suspected) ones."</a> He could not help crying as he said it. At Wuhan Central Hospital, doctors outside the emergency, ICU and respiratory departments were meanwhile <a class="cite-link" href="https://bit.ly/IssuesEarlyWuhanCases" target="_blank" rel="noopener noreferrer">forbidden from wearing masks</a> — a policy that cost the lives of four doctors in the ophthalmology department alone; one department director warned colleagues plainly: "don't fight against the leader, don't use masks, don't talk nonsense, otherwise you will be dismissed like Li Wenliang."</p>
+    
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/Tedros_31Jan2020_2.PNG" loading="lazy"
+           alt="WHO reassuring statement on the day WHO declared a COVID-19 PHEIC, 30 January 2020"
+           class="img-feature">
+      <p class="img-caption">Image: Dr Tedros quoted in a WHO tweet, 31 January 2020, just after the PHEIC announcement. Source: <a class="cite-link" href="https://x.com/WHO/status/1222968207524450308?s=20" target="_blank" rel="noopener noreferrer">WHO on X</a>.</p>
+    </div>
+
+    <h3 class="context-section-title">What The WHO Already Knew</h3>
+    <p>But let's not believe that the WHO was not aware of some reluctance to share numbers and data. According to leaked recordings of internal WHO meetings, Dr Michael Ryan, WHO's chief of emergencies, urged colleagues in the second week of January to apply more pressure on China: <a class="cite-link" href="https://www.pbs.org/newshour/health/china-delayed-releasing-coronavirus-info-frustrating-who" target="_blank" rel="noopener noreferrer">"This would not happen in Congo and did not happen in Congo and other places."</a> — the senior emergency response team was growing increasingly frustrated, when not outright baffled, by the obstructions in the sharing of sequences, isolates and epidemiological data from China. </p><p>That is just one example. Chinese authorities in fact had a complete sequence far earlier than any of this: a private lab, Vision Medicals in Shenzhen, <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">identified the virus's high homology to SARS on 26 December 2019 and produced a full sequence the next day</a>, immediately alerting China's CDC and the Chinese Academy of Medical Sciences in Beijing. Two weeks later, with that sequence still withheld by China, a concerted effort between Farrar, Van Kerkhove (WHO's technical lead for COVID-19), Eddie Holmes, and Zhang Yongzhen forced its release: after Chinese authorities sat on Zhang's own independently sequenced genome for weeks, <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Holmes and Zhang delivered a 24-hour ultimatum on 9 January</a>, and when it passed unmet, the sequence went up unilaterally on virological.org on 11 January.</p>
+    
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/PHEIC_30Jan2020.png" loading="lazy"
+           alt="WHO press conference announcing the PHEIC, 30 January 2020 — Michael Ryan, Tedros Adhanom Ghebreyesus, Didier Houssin, and Maria Van Kerkhove"
+           class="img-feature">
+      <p class="img-caption">Image: Michael Ryan, Tedros, Didier Houssin, and Maria Van Kerkhove at the PHEIC press conference, 30 January 2020. Van Kerkhove, on the right, listens to Tedros praising China's transparency and "remarkable" response — having herself, days earlier, had to help force the publication of the genome and the disclosure of human-to-human transmission that China was sitting on. She would go on to head the WHO secretariat for SAGO (the Scientific Advisory Group for the Origins of Novel Pathogens), the body later tasked with investigating COVID-19's own origins. Source: <a class="cite-link" href="https://youtu.be/237TFjChJiI?si=2TNSgqkByjJjeNLC&t=93" target="_blank" rel="noopener noreferrer">WHO press conference video</a>.</p>
+    </div>
+
+    <p> Nine days later, on 20 January, the same Farrar to WHO channel forced a second disclosure from China. Dutch zoonotic-disease adviser Thijs Kuiken, reviewing a Lancet manuscript describing clear human-to-human transmission — still officially denied by China — brought the findings to Farrar on 18 January; Farrar and Kuiken relayed them to WHO's Van Kerkhove again the next day, and <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Beijing conceded human-to-human transmission on 20 January</a>.</p>
+    
+    <p>But Dr Tedros’ exercise in front of the cameras on 30 January was not an exception — it would become the main characteristic of the WHO engagement with China, including the insistence that any problem (be it origin or containment) lay not with China but with other countries. Indeed, each concession made by the WHO — and there were many — tried to preserve some modicum of cooperation from China, by effectively sacrificing the thorny investigative dimension of the WHO engagement. It was a case of death by a thousand cuts for any scientific investigation.</p>
+    </div>
+    
+    <!-- Brundtland contrast — lands immediately after the prose that sets it up -->
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>The world has changed dramatically since 2003. China has become much stronger. Anyone who publicly criticizes the country, as I did then, today runs this risk that China will withdraw.</p>
+      <footer>&mdash; <cite>Gro Harlem Brundtland, former WHO Director-General, <a class="cite-link" href="https://www.spiegel.de/international/world/europe-made-mistakes-too-interview-with-former-who-head-gro-harlem-brundtland-a-312827ff-3db0-4dbd-9d9e-fa32cbf19119" target="_blank" rel="noopener noreferrer"><em>Der Spiegel</em>, 8 June 2020</a></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+    <h3 class="context-section-title" style="margin-top:1.6rem">Here We Go Again</h3>
+    <p>The choices that Dr Tedros made for the WHO during that period strongly contrast with those made under Brundtland, the WHO Director-General, during the SARS epidemic in 2003. Something had changed, and not for the best.</p><p>But, contrary to what Tedros was telling the cameras on that 30 January, what had changed was not the capacity or will of China to cover up some outbreak - they had only learnt how to get better at it - but the pressure China was able to exert on the WHO. This time the resulting fractures would not appear in China, but in the West.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH3: WHO in the Deep End of the Pool                    -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch3" data-chapter="3" aria-labelledby="ch3-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/2Feb2020_Call_IntelAssess_AccessGame.PNG');--hero-pos:center top">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <p class="chapter-hero-caption">Intelligence assessment notes, 2–3 February 2020 — released by former DNI Tulsi Gabbard. Key passage: "probably operating under WHO to not cause problems with China and limit access"</p>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 3</p>
+      <h2 class="chapter-hero-title" id="ch3-title">WHO in the Deep End of the Pool</h2>
+      <p class="chapter-hero-date">February 2020</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+    <div class="chapter-text reveal">
+      <p>On 1 February 2020, <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Jeremy Farrar, Director of the Wellcome Trust, convened a confidential call</a> with top virologists — Holmes,
+         Andersen, Garry, Fouchier, Koopmans — who privately acknowledged a laboratory origin could not be ruled out; Andersen himself said the virus "looked potentially engineered." A decision to try to get the WHO to onboard the origin question (the 'Tedros Proposal') was the main actionable item of that call.</p><p> That same day — during the call itself and in the follow-up that evening from Anthony Fauci, Director of NIAID (the National Institute of Allergy and Infectious Diseases) — Fauci and his HHS (Department of Health and Human Services) contacts discussed that possibility, to clear it with the US administration. <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Grigsby (HHS Director of Global Affairs), Kerr (HHS Director of the Office of Pandemics and Emerging Threats), and Harrison (coordinated the HHS early response to COVID-19) were copied on Fauci's 5:58 pm EST email to Kadlec (Assistant Secretary for Preparedness and Response at HHS)</a>, while Simonson (in charge of the WHO-US Liaison Office) was looped in via Grigsby's earlier calls that same afternoon.</p> 
+        
+    </div>
+
+    <blockquote class="pull-quote reveal"> <p>On that call, two experts said that the sequences were natural, the rest (number not given) said they were unsure. It was determined that a panel of experts should be convened, probably operating under WHO to not cause problems with China and limit access, to investigate further.</p> <footer>&mdash; <cite>IC email following the NASEM call, 3 February 2020, released by former DNI Tulsi Gabbard. Among those present who considered a laboratory origin plausible but impossible to assert without further data: Baric, Andersen, Perlman, Inglesby. Their call for data was formalised in the NASEM response to OSTP (the White House Office of Science and Technology Policy), relayed by the National Academy of Sciences to the Chinese Academy — without result.</cite></footer>
+    </blockquote>
+
+    <div class="chat-window" id="ch3-chat" role="group" aria-label="Email exchange: Collins, Farrar, Tabak — 2 February 2020">
+      <div class="chat-header">FOIA &middot; Email Thread &middot; Sunday 2 February 2020</div>
+      <div class="chat-transcript-sr sr-only">
+        <p><strong>Francis Collins</strong>, 7:03 AM EST: &#8220;...waiting a month sounds like a really bad idea. If that's the response from WHO, then another plan will be needed. Would Wellcome be willing to be the host then [for an international origin scientific discussion]?&#8221;</p>
+        <p><strong>Jeremy Farrar</strong>, 7:13 AM EST: &#8220;...if Wellcome &ndash; I would need 110% support from you all.....it will not be easy!&#8221;</p>
+        <p><strong>Lawrence Tabak</strong>, 10:30 AM EST: &#8220;...given the concerns of so many people and the threat of further distortions on social media, it is essential that we move quickly. Hopefully we can get WHO to convene.&#8221;</p>
+      </div>
+      <div class="chat-messages" aria-hidden="true">
+
+        <div class="chat-msg chat-msg-left"
+             data-text="...waiting a month sounds like a really bad idea. If that's the response from WHO, then another plan will be needed. Would Wellcome be willing to be the host then [for an international origin scientific discussion]?">
+          <div class="chat-meta">
+            <span class="chat-name chat-collins">Francis Collins</span>
+            <span class="chat-time">7:03 AM EST</span>
+          </div>
+          <div class="chat-bubble chat-bubble-incoming"></div>
+        </div>
+
+        <div class="chat-msg chat-msg-right"
+             data-text="...if Wellcome – I would need 110% support from you all.....it will not be easy!">
+          <div class="chat-meta chat-meta-right">
+            <span class="chat-name chat-farrar">Jeremy Farrar</span>
+            <span class="chat-time">7:13 AM EST</span>
+          </div>
+          <div class="chat-bubble chat-bubble-outgoing"></div>
+        </div>
+
+        <div class="chat-msg chat-msg-left"
+             data-text="...given the concerns of so many people and the threat of further distortions on social media, it is essential that we move quickly. Hopefully we can get WHO to convene.">
+          <div class="chat-meta">
+            <span class="chat-name chat-tabak">Lawrence Tabak</span>
+            <span class="chat-time">10:30 AM EST</span>
+          </div>
+          <div class="chat-bubble chat-bubble-incoming"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>In its defence, the WHO did not volunteer to lead an origin investigation, for which it most likely had little appetite and very little bandwidth. Nevertheless the WHO was asked to pick up that sensitive issue by Farrar and Fauci, who were working with the backing of the US administration.</p><p>That decision to offload the investigation to the WHO was certainly not taken out of confidence in its capacity to solve the question, but — and maybe generously — because it seemed to be the best of bad options. An Intelligence Community (IC) email released by former DNI (Director of National Intelligence) Tulsi Gabbard is explicit: when the scientists consulted by the National Academy of Sciences (NASEM) could not agree on the likely origins — only two calling the sequences natural, the rest unsure — the conclusion was not to press for data, but to convene a panel "operating under WHO to not cause problems with China and limit access."
+      The formal NASEM response to OSTP, relayed subsequently to the Chinese Academy of Sciences, requested the data needed to resolve the question. It received no reply.</p><p>Unfortunately, China in 2020 was very different from the China of SARS-1 (2003): it had learned the lessons of SARS-1 in the sense that it had spent seventeen years building its diplomatic leverage with the WHO, and had generally become a much more powerful and assertive actor. Faced with this adversary, the WHO quickly found itself at the deep end of the pool.</p><p>
+
+      In retrospect, the result was foreseeable: procedurally dependent on China, and without the spine it had shown under Brundtland back in 2003, the WHO basically folded as soon as the pressure mounted within mere days of it unenthusiastically agreeing to take on the origin question at the request of Collins and Farrar. China's recalibrated position toward the WHO would allow it to concede just enough access to data and to the country to prevent a complete breakdown with the WHO, while ensuring no consequential investigation ever took place.</p>
+
+      <p>Laid end to end, the three weeks from Tedros's Beijing visit to the quiet settlement of the February mission's terms form a single, tightening sequence.</p>
+    </div>
+
+    <ol class="timeline-block" id="ch2-timeline" aria-label="Early pattern: WHO deference and parallel origin discussions, late January to mid-February 2020">
+      <li class="timeline-item">
+        <span class="timeline-date">28&ndash;30 Jan 2020</span>
+        <div class="timeline-content">
+          <strong>Tedros visits Beijing</strong>
+          <p>Meets Xi Jinping. Public readout praises China's "commitment from top leadership" and "transparency" — while data was still being withheld.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">29 Jan 2020</span>
+        <div class="timeline-content">
+          <strong>Classified BSEG briefing — lab origin flagged</strong>
+          <p>The National Counterproliferation Center (NCPC) within ODNI (the Office of the Director of National Intelligence) convenes its Quarterly Biological Sciences Expert Group. <a class="cite-link" href="https://gillesdemaneuf.medium.com/the-odnis-b-group-meeting-ralph-baric-s-january-2020-briefing-and-its-relevance-to-covid-19-93c7cc007d63" target="_blank" rel="noopener noreferrer">Ralph Baric states that a laboratory escape involving a modified virus is a valid hypothesis.</a></p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">30 Jan 2020</span>
+        <div class="timeline-content">
+          <strong>PHEIC declared</strong>
+          <p>WHO Emergency Committee issues a statement framing the PHEIC "in the spirit of support and appreciation for China." Tedros calls China <a class="cite-link" href="https://x.com/WHO/status/1222967082733559808?s=20" target="_blank" rel="noopener noreferrer">"setting a new standard"</a> (video, 3:43).</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">1 Feb 2020</span>
+        <div class="timeline-content">
+          <strong>Farrar's call — both origins plausible</strong>
+          <p>Jeremy Farrar, Director of the Wellcome Trust, convenes a <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">confidential call</a> that included the future authors of <em>Proximal Origin</em> (the influential paper later published as &#8220;The Proximal Origin of SARS-CoV-2,&#8221; <em>Nature Medicine</em>, 17 March 2020). Scientists privately acknowledge a laboratory origin cannot be ruled out; the consensus is that both natural and laboratory origin are plausible.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">3 Feb 2020</span>
+        <div class="timeline-content">
+          <strong>NASEM meeting — intelligence and scientists align</strong>
+          <p>National Academy of Sciences meeting attended by intelligence elements (FBI, ODNI), Ralph Baric, Peter Daszak, and Kristian Andersen. Consensus: both natural and laboratory origins remain plausible.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">13–15 Feb 2020</span>
+        <div class="timeline-content">
+          <strong>February mission ToRs — last-minute, not disclosed to US</strong>
+          <p>As the WHO advance team is already in China, <a class="cite-link" href="https://archive.ph/c6b21" target="_blank" rel="noopener noreferrer">Terms of Reference for the February mission are finalised</a> without disclosure to the US or other member states — and only after the <em>Proximal Origin</em> draft has been circulated to WHO contacts and public concessions to China made: Farrar and Tedros denounce "conspiracy theories" at the Munich Security Conference on 13 February, days before the team's access terms are quietly settled.</p>
+        </div>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH4: Farrar's Destructive Expedients                     -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch4" data-chapter="4" aria-labelledby="ch4-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/farrar-msc-20200215.jpeg')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 4</p>
+      <h2 class="chapter-hero-title" id="ch4-title">Farrar's Destructive Expedients</h2>
+      <p class="chapter-hero-date">February 2020</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+    <h3 class="chapter-section-h3 reveal">The Burden</h3>
+    <div class="chapter-text reveal">
+      <p>Unfortunately for Farrar, who was in charge of writing a non-public report with his core team of Andersen, Holmes, Rambaut and Garry, so as to anchor the offload of the origin question to the WHO, a few things quickly did not go as expected.</p>
+
+      <ul style="margin:1rem 0 0 1.3rem; padding:0;">
+        <li style="margin-bottom:0.8rem;"><em>First,</em> China — which Farrar had politely informed of the offload decision, by <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">calling his contact Chen Zhu (Chinese Minister of Health from 2007 to 2013) on 2 February</a> — started playing hardball, as regards access to data and to the country itself.</li>
+        <li style="margin-bottom:0.8rem;"><em>Second</em>, more rumours of a possible non-natural origin simultaneously made the news.</li>
+        <li><em>Last</em>, passaging — which had not initially featured much in his core team’s thinking — became a strong option, and could not be dismissed by the more conservative group of gain-of-function (GoF) virologists Farrar had consulted (Fouchier, Koopmans, Drosten).</li>
+      </ul>
+    </div>
+
+    <div class="chat-window" id="ch4-chat" role="group" aria-label="Slack exchange as passaging becomes a strong contender: Garry, Holmes, Andersen, Rambaut in the conversation — 4 February 2020">
+      <div class="chat-header">Pressure builds up &middot; Slack Exchange (Garry, Holmes, Andersen, Rambaut) &middot; Tuesday 4 February 2020, one day after the NASEM call</div>
+      <div class="chat-transcript-sr sr-only">
+        <p><strong>Garry</strong>, 6:31 PM UK: &#8220;If there is a natural explanation for CoV, it needs to be found. Some, perhaps more than a few, will not like it still since it allows that the nCoV may have arisen during cell culture passage in a lab (their labs).&#8221;</p>
+        <p><strong>Garry</strong>, 7:14 PM UK: &#8220;Another caveat is that I think there is plenty of room for additional discussion amongst the experts. Jeremy's idea (or was it Tony's) of a face-to-face under the auspices of WHO still makes sense to me.&#8221;</p>
+      </div>
+      <div class="chat-messages" aria-hidden="true">
+
+        <div class="chat-msg chat-msg-left"
+             data-text="If there is a natural explanation for CoV, it needs to be found.
+Some, perhaps more than a few, will not like it still since it allows that the nCoV may have arisen during cell culture passage in a lab (their labs).">
+          <div class="chat-meta">
+            <span class="chat-name chat-garry">Garry</span>
+            <span class="chat-time">6:31 PM UK</span>
+          </div>
+          <div class="chat-bubble chat-bubble-incoming"></div>
+        </div>
+
+        <div class="chat-msg chat-msg-left"
+             data-text="Another caveat is that I think there is plenty of room for additional discussion amongst the experts. Jeremy’s idea (or was it Tony’s) of a face-to-face under the auspices of WHO still makes sense to me.
+">
+          <div class="chat-meta">
+            <span class="chat-name chat-garry">Garry</span>
+            <span class="chat-time">7:14 PM UK</span>
+          </div>
+          <div class="chat-bubble chat-bubble-incoming"></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="chapter-text reveal">
+      <p>Put another way, Farrar had worked his network hard to arrange for an offload of the origin question to the WHO, on the back of a private report he had been leading with the benediction of UK intelligence services, just for that offload to turn dramatically impractical in a matter of days, as the situation deteriorated on all fronts.</p>
+
+      <p>By 8 February, Farrar had realized that the whole 'Tedros proposal' was by now a dead weight around the WHO's neck, with Tedros struggling to get a team on the ground in China. This necessitated a complete reset of priorities, and a U-turn was thus quickly effected. If the WHO, with its back to the wall, had zero hope now of being able to address the origin question, Farrar could still turn the impasse to his advantage, and use the timely neutralisation of the origin question as a concession to China to seek some minimal but critical access.</p>
+
+    </div>
+
+    <h3 class="chapter-section-h3 reveal">The Expedients</h3>
+    <div class="chapter-text reveal">
+      <p>And thus, in the second week of February, after aiming for a non-public exploratory report meant to anchor what Garry himself called <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">'a face-to-face under the auspices of WHO'</a>, Farrar instead laboured over a public communication instrument demoting any non-natural origins, with passaging surviving only in stealth mode — a minimum concession Andersen quietly worked to preserve.</p>
+    </div>
+
+    <blockquote class="pull-quote reveal">
+      <p>we owe China a huge amount for protecting the world</p>
+      <footer>&mdash; <cite>Jeremy Farrar, Director of Wellcome Trust, Munich Security Conference, 15 February 2020</cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <p>On 17 February, with the WHO team just arrived in China, and still without an agreed visit agenda, Farrar — after a last-minute check with the WHO — <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">ordered the release of <em>Proximal Origin</em> on virological.org</a>, while reaching out to Nature for a quick publication there. On the same day (17 February), Farrar asked Andersen to pull it down from virological.org so it could instead be released at a press conference — almost certainly for the WHO's benefit. Andersen refused.</p>
+
+      <p>Where <em>Proximal Origin</em> worked through scientific authority, the second instrument — the <em>Lancet</em> Letter — was calibrated for a different audience: not the scientific community but government leaders and the public at large. It was not a scientific piece: it presented no data, no analysis, no argument that could be tested or refuted. Its authority rested entirely on the weight of the names attached to it — an appeal to authority, and to basic fears and reflexes, rather than to evidence. It also carried an implicit threat to dissenting elements — intimidation, itself a <a class="cite-link" href="https://www.c-span.org/program/after-words/sharyl-attkisson/481923" target="_blank" rel="noopener noreferrer">favourite tool of smear consultants</a> in modern US politics.</p>
+
+      <p>Peter Daszak, president of EcoHealth Alliance, had been circulating it since early February, originally as a change.org petition. What elevated it to <em>Lancet</em> — instead of vegetating in a low-profile change.org petition — was a conversation with Farrar when they were on the same flight coming back from a WHO Blueprint meeting in Geneva on 12 February. Daszak subsequently asked Mike Ryan at the WHO to co-sign, and to check whether Tedros would sign as well.</p>
+
+      <p>Within days, Farrar had effectively organized two publications and had a heavy editorial hand in one, specifically to "put to bed the issue of the origin" and signal to China that any WHO visit would be safe. The <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">email of 12 February</a>, sent one hour after Farrar had landed in London, on the same flight as Daszak who was on his way back to New York via London, captures the goal verbatim. It drove the transformation of the <em>Proximal Origin</em> draft from a private report meant to address the origin question within the WHO arena, to a public paper that firmly asserted a natural origin, within a mere few days.</p>
+
+    </div>
+
+    <div class="foia-frame reveal">
+      <img src="../../shared/images/farrar-daszak-ryan-airport-feb12.png" loading="lazy"
+       alt="FOIA document: Farrar's 12 February 2020 email to Ryan, Schwartländer, and Drosten, seeking a paper to 'effectively put to bed the issue of the origin of the virus'">
+      <p class="img-caption" style="padding:0.5rem"> Farrar's 12 February 2020 email to Mike Ryan, Schwartländer, and Drosten — written as he flew from Geneva with Daszak. Goal: a paper to Nature to "effectively put to bed the issue of the origin of the virus." </p>
+    </div>
+
+    <h3 class="chapter-section-h3 reveal">The Denials</h3>
+    <div class="chapter-text reveal">
+      <p>A false narrative has since been promoted — particularly within the NIH–biodefense apparatus — that a decisive new scientific finding — rather than external political pressure — drove the switch from private report to public paper. None of it holds. The objections raised by Fouchier, Koopmans, and Drosten to a non-natural origin were being dismantled in real time in the private exchanges of the P.O. authors, who continued to regard passaging as biologically plausible as they were writing the opposite in their draft, for public consumption.</p>
+
+      <p>Moreover, the immediate trigger for Farrar's definitive decision to go public was not science but <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">a piece of news dropped in a specially convened press conference on 7 February 2020</a> that would quickly prove worthless: a reported 99% homology between SARS-CoV-2 and a pangolin coronavirus sequence. Andersen himself was sceptical and wanted to wait for the actual sequences to be released before committing. He was ignored; Farrar was not responding to science, he was grasping a pretext — any optically useful pretext — to come to the aid of an embattled WHO struggling to get its February mission into China, and it was Farrar who called the shots.</p><p>The bursting of the 99% claim happened on 18 February, the day after the release of P.O. on virological.org; <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Rambaut shared his quick analysis of the freshly released sequence with his P.O. co-authors showing instead a 90.3% full-genome homology</a> — in effect, nothing of note. Farrar himself showed not the least interest in that news, despite having used that 99% figure to justify pushing for publication.</p>
+
+      <p>Even long after <em>Proximal Origin</em> was published in <em>Nature Medicine</em>, <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p1-626c72cb05b1" target="_blank" rel="noopener noreferrer">Andersen continued to harbour serious private doubts about a passaged virus</a> — and separately about the possibility of a natural, collected virus having escaped from a laboratory, a scenario the paper had not even addressed. That the same network of researchers then spent five years producing papers that all failed to move the needle on the origin question is the clearest measure of how spurious the supposed zoonosis epiphany of February 2020 really was.</p>
+    </div>
+
+    <div class="reveal-image reveal" style="margin:2rem 0">
+      <img src="../../shared/images/farrar-msc2020-owe-china.png" loading="lazy"
+           alt="Jeremy Farrar speaking at the Munich Security Conference, 15 February 2020, where he stated WHO owed China 'a huge amount for protecting the world'"
+           class="img-feature" style="margin:0">
+      <p class="img-caption">Farrar at the Munich Security Conference, 15 February 2020.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH5: The Bio-Defense — Global Health Security — WHO Nexus -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch5" data-chapter="5" aria-labelledby="ch5-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/UpscaledNTINunnFarrar.png');--hero-pos:center top">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 5</p>
+      <h2 class="chapter-hero-title" id="ch5-title">The Bio-Defense — Global Health Security — WHO Nexus</h2>
+      <p class="chapter-hero-date">2018 – 2026</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <blockquote class="pull-quote reveal">
+      <p>"The scenario concludes with additional intelligence sources — including former laboratory workers — providing irrefutable evidence that the state-run laboratory in Aplea is in fact a bioweapons facility and that the spread of the deadly virus resulted from an accidental release. By the end of the exercise, the global case count is more than two billion, and more than 50 million lives have been lost."</p>
+      <footer>&mdash; <cite>NTI Bio tabletop exercise scenario, first run Washington DC, December 2019, with the active participation of Avril Haines; replayed at the Munich Security Conference, 14–15 February 2020 — while Farrar was shaping <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p2-39b90684bf01" target="_blank" rel="noopener noreferrer"><em>Proximal Origin</em></a>, and a few days after he had offered to get Daszak’s Statement of Support published in <em>Lancet</em></cite></footer>
+    </blockquote>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/nti-wellcome-wef-nunn-cameron-farrar.png" loading="lazy"
+           alt="NTI–Wellcome–World Economic Forum (WEF) Biosecurity Innovation meeting, June 2018 — Farrar and Nunn present; Cameron co-authored the initiative paper"
+           class="img-feature">
+      <p class="img-caption">NTI–Wellcome–WEF Biosecurity Innovation meeting, June 2018.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p><em>Proximal Origin</em> did not end its useful life as a single <em>Nature Medicine</em> paper in March 2020. The following year, the usual network of Biodefense & Global Health Initiatives actors pictured above — foremost Avril Haines and Beth Cameron — recycled it by using their positions inside the Biden administration to help Anthony Fauci present the paper to the Intelligence Community as settled scientific consensus. Understanding how that network operates, and its revolving doors, is essential to understanding what happened next.</p>
+
+
+      <h3 class="context-section-title" style="margin-top:1.6rem">NTI: The Institutional Backbone</h3>
+      <p>The Nuclear Threat Initiative (NTI), co-founded by Senator Sam Nunn, the architect of the 1991 Nunn–Lugar Cooperative Threat Reduction program that secured nuclear and biological materials from the disintegrating Soviet Union, had since extended its remit and become a key part of the institutional backbone of the US Track II (unofficial, non-governmental) engagement on biosecurity and pandemic preparedness.</p>
+      <p>The 2018 photo above shows Nunn (left) with Jeremy Farrar, Director of the Wellcome Trust, acting as the relay between intelligence networks, Track II organisations such as the NTI, and international health institutions. That 2018 press release was co-authored by Beth Cameron, then NTI's Vice President for Global Biological Policy. Cameron would go on to serve as NSC (National Security Council) Senior Director for Global Health Security under Biden, personally shaping the White House's engagement with the 90-day intelligence review that DNI (Director of National Intelligence) Avril Haines oversaw. Post pandemic, in October 2024, <a class="cite-link" href="https://www.nti.org/news/announcing-new-task-force-on-nuclear-proliferation-and-u-s-national-security/" target="_blank" rel="noopener noreferrer">the NTI and the Carnegie Endowment for International Peace formalised their partnership through a joint Task Force</a>. In June 2026, Haines — who as DNI had presided over the IC origins review — was <a class="cite-link" href="https://carnegieendowment.org/posts/2026/06/avril-haines-named-next-carnegie-endowment-president" target="_blank" rel="noopener noreferrer">named Carnegie's eleventh president</a>, taking office September 2026.</p>
+      
+      <p>What these quick mentions clearly demonstrate is that the same small cast that had previously created and rehearsed scenarios on non-natural pandemics, with particular concerns about biological research in China, worked hard to ignore any potential non-natural origin of SARS-CoV-2. They also show that these actors have happily kept rotating between government, foundations and think-tanks, as if nothing ever happened — a pattern that allows for continued pressure, whoever the president is and whoever controls the House.</p>
+    </div>
+
+    <div class="yt-wrap reveal">
+      <p class="yt-source">NTI | bio &nbsp;&middot;&nbsp; Munich Security Conference &nbsp;&middot;&nbsp; February 2020</p>
+      <div class="yt-facade" data-yt-id="n2D7Tj1Dph0" data-yt-start="149"
+           role="button" tabindex="0" aria-label="Play: NTI Bio Tabletop Exercise on High Consequence Biological Threats, Munich 2020, Segment 3">
+        <img src="https://img.youtube.com/vi/n2D7Tj1Dph0/hqdefault.jpg" loading="lazy"
+             alt="NTI Bio Tabletop Exercise, Munich Security Conference, February 2020 — Segment 3">
+        <div class="yt-play-btn" aria-hidden="true"></div>
+      </div>
+      <p style="border-left:3px solid var(--red);padding-left:0.75rem;margin-top:0.9rem;
+                font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);line-height:1.5"> Source: <a href="https://www.nti.org/news/nti-bio-munich-security-conference-convene-global-leaders-annual-tabletop-exercise-reducing-high-consequence-biological-threats/" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted)">NTI | bio official YouTube channel</a> &nbsp;&middot;&nbsp; NTI–Munich Security Conference Tabletop Exercise, 14–16 February 2020</p>
+      <div class="chapter-text" style="margin-top:1.2rem">
+        <p>The collision between what the Biodefense & Global Health Initiatives actors had been working on, and their actual track-record during COVID, cannot be better exemplified than by the late 2019 internal tabletop exercise (TTX) that was played publicly during the Munich Security Conference of February 2020. That exercise explicitly modelled international institutions confronting an accidental engineered-pathogen release from a state denying responsibility — the precise scenario that would edge toward reality within weeks. Farrar, who attended the Munich Security Conference, spent the same week locking in the opposite response: a natural-origin narrative designed to clear the path for WHO access to China.</p>
+      </div>
+    </div>
+
+    <div class="script-compare reveal">
+      <div class="script-panel script-panel-top">
+        <p class="script-label">The 2019&ndash;20 Scenario</p>
+        <p class="script-impl">The exercise scenario, first rehearsed in the corridors of Washington DC in December 2019, had imagined international institutions struggling to respond to an engineered-pathogen release with a state denying responsibility.</p>
+      </div>
+      <hr class="script-rule">
+      <div class="script-panel script-panel-bottom">
+        <p class="script-label">The Reality</p>
+        <p class="script-impl">The actual response, when that scenario edged toward reality, was to foreclose the question before any credible investigation could begin.</p>
+      </div>
+    </div>
+
+    <div class="reveal-image reveal" style="margin:2rem 0">
+      <img src="../../shared/images/BethCameron_NTI_2019-20.PNG" loading="lazy"
+           alt="Cover of NTI report 'Preventing Global Catastrophic Biological Risks: Lessons and Recommendations from a Tabletop Exercise Held at the 2020 Munich Security Conference', authored by Beth Cameron, Jaime Yassif, Jacob Jordan, and Jacob Eckles"
+           class="img-feature">
+    </div>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">From Tabletop Exercises to Bending the Biden 90-day Intel Report</h3>
+      <p>The lead author of that TTX report is Beth Cameron, then NTI's Vice President for Global Biological Policy. We shall allow ourselves a little jump ahead to conclude this section, and note that by January 2021 Cameron had moved to the White House as Special Assistant to the President for Global Health Security and Biodefense on the National Security Council.</p>
+
+      <p>Intelligence documents released by former DNI Tulsi Gabbard show that on 4 June 2021, as NSC Senior Director for Global Health Security & Biodefense, Beth Cameron personally "mediated/facilitated" a classified Fauci briefing recapping the 4 May 2021 PDB/WIRe on COVID-19 origins — one of the key White House-facing meetings of the Biden administration's 90-day intelligence review. This puts Cameron at the centre of the review's narrative management even though she never formally joined ODNI or the National Intelligence Council.</p>
+
+      <p>In that capacity, Cameron helped steer Fauci into the origins process as an ostensibly independent scientific expert who just happened to be convinced by the Proximal Origin argument — the same Fauci who had co-convened the 1 February 2020 confidential call and co-drafted Proximal Origin within days of it. Fauci was thus able to use Haines’ and Cameron’s endorsements to push Proximal Origin — and its July 2021 successor, the Holmes-led <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a> — directly to the Intelligence Community, presenting it as the authoritative scientific consensus on origins. The timing itself is suspicious: the manuscript had been posted to Zenodo — a platform with no moderation delay, unlike bioRxiv's typical two-day screening — just one day before Fauci's email, a release cadence that reads less like routine posting than a deadline met to order.</p>
+      
+      <p>The irony compounds from there. Having helped shape Proximal Origin with Farrar in February 2020, then pushed it onto the Intelligence Community with Haines’ and Cameron’s help, Fauci would then be considered as an 'external' reviewer of the Biden 90-day intel assessment which he had helped shape, based on a paper (P.O.) which he had also quietly helped shape. One can't make that up.</p>
+    </div>
+
+    <ol class="timeline-block" id="ch5-fauci-timeline" aria-label="Fauci's influence on the IC's 90-day COVID origins study, June to September 2021">
+      <li class="timeline-item">
+        <span class="timeline-date">4 Jun 2021</span>
+        <div class="timeline-content">
+          <strong>Fauci briefs the CIA on origins</strong>
+          <p>At a classified briefing with the CIA's Weapons and Counterproliferation Mission Center, Fauci recommends the IC examine a two-lineage market paper by <em>Proximal Origin</em> co-author Robert Garry of Tulane University. Within days, the same briefing yields "a few promising POCs for [outreach] — including Andersen at Scripps," with a meeting via the Defense Technical Information Center scheduled for the following week.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">7 Jul 2021</span>
+        <div class="timeline-content">
+          <strong>The "Critical Review" (Holmes et al.) lands as preprint</strong>
+          <p>Holmes et al.'s "Critical Review" is posted to <a class="cite-link" href="https://doi.org/10.5281/zenodo.5075888" target="_blank" rel="noopener noreferrer">Zenodo</a>. A preprint server is the usual choice when speed matters, but bioRxiv, the standard venue, runs submissions through a moderation screen that typically takes about two days before public release; Zenodo, with no such screen, is what a deadline that has to be met exactly, not approximately, calls for. The same move recurs eight months later: an overlapping cast from this network (Worobey, Andersen, Holmes, Wertheim among them) posts the two 'market' papers to <a class="cite-link" href="https://doi.org/10.5281/zenodo.6299600" target="_blank" rel="noopener noreferrer">Zenodo on 26 February 2022</a>, one day after China CDC's George Gao releases his own more cautious Huanan-market analysis on <a class="cite-link" href="https://www.science.org/content/article/do-three-new-studies-add-proof-covid-19-s-origin-wuhan-animal-market" target="_blank" rel="noopener noreferrer">Research Square</a>, reaching different conclusions about the market's role — landing the day after Gao reads less like coincidence than a deliberate move to catch, and blunt, his limelight.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">8 Jul 2021</span>
+        <div class="timeline-content">
+          <strong>Fauci forwards the "Critical Review" to the NSC the next day</strong>
+          <p>Fauci forwards the "Critical Review" to Cameron, calling it the work of "a group of highly qualified virologists" that "summarizes what I said yesterday," and asks that it be routed to the NSC group, OSTP, and Jake Sullivan; Cameron replies that the NSC is "in awe" of him.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">12 Jul 2021</span>
+        <div class="timeline-content">
+          <strong>Fauci recommends the Proximal Origin and "Critical Review" authors as independent experts</strong>
+          <p>Fauci personally highlights the "Critical Review" preprint to the IC. The authors whose views he considered "particularly important": Edward Holmes, Kristian Andersen, and Andrew Rambaut — three of the same four scientists who had authored <em>Proximal Origin</em> sixteen months earlier.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">13&ndash;14 Jul 2021</span>
+        <div class="timeline-content">
+          <strong>Andersen added to the SME list, over an internal objection</strong>
+          <p>With "43 days before our final paper is due to the President," Andersen is confirmed on the IC's list of subject-matter experts. When someone flags the obvious conflict of interest in Fauci recommending scientists such as Andersen — co-authors of the very paper whose conclusions the assessment was meant to test — ODNI's reply is blunt: Fauci "is not a policymaker... he's a SME with a wealth of knowledge about current and historical research who probably knows better than most who the real Coronavirus experts are." Haines signs off on the resulting assessment.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">19&ndash;20 Jul 2021</span>
+        <div class="timeline-content">
+          <strong>Fauci considered as one of the 90-day intel assessment's external reviewers</strong>
+          <p>As the IC draws up a shortlist of outside reviewers for the draft assessment, one colleague objects: "Not Fauci; in addition to being a customer, he'll be seen by many as having a conflict of interest." Another disagrees: "the name that came up probably the most when thinking of outside reviewer was Fauci, but we're not clear on how appropriate that would be, given he's a potential customer of the paper. If he's acceptable, we'd include him."</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">3 Sep 2021</span>
+        <div class="timeline-content">
+          <strong>The loop closes on itself</strong>
+          <p>An internal email confirms Andersen was "one of the people Fauci recommended the DNI reach out to" and was already "on the author line of multiple academic papers sourced in the origins study" — the very assessment his own recommended consultation was meant to inform.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="intel-frame reveal">
+      <img src="../../shared/images/fauci_reviewer_montage.png" loading="lazy"
+           alt="Two declassified ODNI documents, released by DNI Tulsi Gabbard: an email naming Edward Holmes, Kristian Andersen, and Andrew Rambaut as the 'Critical Review' authors Fauci highlighted as important, and the internal reviewer-shortlist discussion where Fauci's own name 'came up probably the most' despite being flagged as 'a potential customer' with a conflict of interest"
+           style="width:100%;height:auto;display:block;margin-top:1rem">
+      <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">
+        Declassified ODNI documents released by DNI Tulsi Gabbard, 18 June 2026 &#8212; the "Critical Review" author list (12 July 2021) and the reviewer-shortlist discussion naming Fauci (19&ndash;20 July 2021).
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH6: Controlled Failures                                 -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch6" data-chapter="6" aria-labelledby="ch6-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/wuhan-institute-of-virology-entrance.jpg')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 6</p>
+      <h2 class="chapter-hero-title" id="ch6-title">The WHO 'Assessments': Controlled Failures</h2>
+      <p class="chapter-hero-date">Feb 2020 – 2021</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <blockquote class="pull-quote reveal">
+      <p>Unfortunately, this has become a political investigation. Whatever they do is symbolic.</p>
+      <footer>&mdash; <cite>Wang Linfa, virologist, Duke-NUS Singapore, <a class="cite-link" href="https://www.nytimes.com/2020/11/02/world/who-china-coronavirus.html" target="_blank" rel="noopener noreferrer"><em>The New York Times</em>, November 2020</a></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <p>Wang Linfa's verdict above, 2 months before the WHO 2021 mission started, was not an exaggeration, even if, for some reason, the international press still seemed to have high hopes for that coming investigation. Linfa Wang and some wiser actors had none. Indeed, as this section shall show, the writing was on the wall.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">The WHA non-Resolution: Kill the Australian Chicken, Scare the European Monkeys</h3>
+      <p>In April 2020, Australia had become the first country to call publicly for an independent investigation. Beijing&#8217;s response was immediate and sequential: on 11 May &#8212; eight days before the WHA vote &#8212; China suspended beef imports from four Australian abattoirs; on 18 May, the day before the vote, 80.5% tariffs on barley were announced and reported internationally on the very day of the Assembly; wine duties of up to 218% followed in November. The Chinese idiom is &#26432;&#40481;&#20742;&#29492; &#8212; <em>kill the chicken to scare the monkeys</em>: punish one actor visibly to silence the rest.</p>
+
+      <p>While Beijing was pummelling Australian exports with tariffs, the Europeans <a class="cite-link" href="https://geneva.usmission.gov/2020/05/19/explanation-of-position-covid-19-response-resolution/" target="_blank" rel="noopener noreferrer">took the lead in drafting a compromise</a>, in the form of a short paragraph in the World Health Assembly Resolution 73.1. That compromise unfortunately was all about investigating the 'zoonotic origin' of the virus; the exact type of wording that can never be taken back once conceded to China. If the Europeans ever thought otherwise, they were delusional and very poorly versed in China. More likely, they knew perfectly well what they were doing.</p>
+
+      <div class="foia-frame reveal" style="--frame-label: 'WHA73.1'">
+        <img src="../../shared/images/wha73_zoonotic_para6.png" loading="lazy"
+             alt="Operative paragraph 6 of WHA73.1, adopted 19 May 2020, instructing WHO to identify the zoonotic source of the virus">
+        <p class="img-caption" style="padding:0.5rem">Operative paragraph (6) of WHA73.1, the resolution the European co-sponsors drafted. The word "zoonotic" appears three times &#8212; "zoonotic source," "zoonotic reservoirs," "zoonotic diseases" &#8212; the mandate never once contemplates a non-natural origin.</p>
+      </div>
+
+      <h3 class="context-section-title" style="margin-top:1.6rem">The Battle Around the Way the ToRs Should Be Negotiated</h3>
+      <p>The resolution's language was the opening concession, not the last one. Once WHA73.1 passed, the fight moved to the negotiating table where the actual Terms of Reference for the investigation mission would be hammered out — and to whether WHO's 34-government Executive Board would have any say in that process.</p>
+
+      <p>Lawrence Gostin, of the O&#8217;Neill Institute for National and Global Health Law at Georgetown and an adviser to the WHO on international health law, <a class="cite-link" href="https://archive.ph/15UCB" target="_blank" rel="noopener noreferrer">was direct</a>: &#8220;Consulting the board would have hugely strengthened the WHO&#8217;s hand politically.&#8221; A board consultation would have put China&#8217;s positions on the record before thirty-four governments, including the US which held a seat on the Board till 2021.</p>
+
+      <p>As <a class="cite-link" href="https://archive.ph/15UCB#selection-1975.0-1975.56" target="_blank" rel="noopener noreferrer">WHO spokesman Tarik Jasarevic later confirmed to the <em>Wall Street Journal</em></a>, the organisation &#8220;normally negotiates the terms of such missions with a host government directly, without other member states&#8221; &#8212; a practice that kept every WHO member state formally prevented from knowing what the WHO had conceded, as the ToRs themselves are typically not published. This is exactly what happened earlier for the February 2020 mission, to the dismay of the US, and was bound to happen again for the 2021 mission; hence the logical insistence on the US for involving the WHO Executive Board, which only made the European position not to back the US proposal more servile.</p> 
+
+      <p>China was thus free to negotiate directly with the WHO, without any oversight. One may argue that the Europeans were trying to preserve access and cooperation with Beijing on pandemic response, a prudent judgment call rather than fear of retaliation alone. But the facts undercut that reading. Preserving future access did not require both writing China's preferred resolution wording that left no room for a non-zoonotic origin, and then blocking the Executive Board oversight of the ToRs: the two together were not a European concession, but a surrender.</p>
+
+      <p>And indeed, the Europeans, particularly Germany, were worried about antagonizing China. Germany&#8217;s exposure was decisive: its car manufacturers and industrial-machinery exporters were deeply reliant on the Chinese market. At the same time France had its own skeletons to keep in the closet of its decision to build the Wuhan P4, against its own and US intel services warnings. Anyway, the Europeans had drawn the lesson from Australia&#8217;s experience, and were interested in their bottom-line; better let Australia and the US pick up the fight for them instead, if they wanted to.</p>
+
+      <h3 class="context-section-title" style="margin-top:1.6rem">The ToRs Negotiation</h3>
+      <p><a class="cite-link" href="https://medium.com/@gillesdemaneuf/we-must-talk-about-the-tors-ac42d757ecc1" target="_blank" rel="noopener noreferrer">Embarek spent four weeks horse-trading in Beijing</a>, two in quarantine. Most of his requests to video-call Chinese counterparts during that time were denied. He eventually found out that none of the studies that the WHO had been recommended after the February 2020 mission had been pursued, and he eventually returned with some final draft of the Terms of Reference (dated 2 August) that were rather alarming.</p>
+      
+      <p>The ToRs reproduced the Chinese government language verbatim in its preamble, mandated a &#8220;study&#8221; rather than an investigation, further framed the zoonotic origin as settled; not a hypothesis to be tested &#8212; while noting that some countries had already found undetected pre-surveillance cases and unpublished sewage-positive samples (Spain, fall 2019) which conveniently open the door to a non China-origin narrative.</p>
+
+      <blockquote class="pull-quote pull-quote--sm reveal">
+        <p>&#8220;The current COVID-19 pandemic shows the devastating impact emerging zoonotic diseases can have on societies. [&#8230;] WHO, the World Organization for Animal Health (OIE) and the Food and Agriculture Organization (FAO) agreed through the 73rd World Health Assembly resolution, to galvanize efforts to trace the animal origin of the virus, its route of transmission to humans and possible role of the intermediate host. [&#8230;] some countries have retrospectively identified cases of COVID-19 weeks before the first case was officially notified through surveillance, and unpublished reports of positive sewage samples could suggest that the virus may have circulated undetected for some time. [&#8230;] Findings from origin studies in China will advance origins tracing in other countries and may lead to similar work elsewhere.&#8221;</p>
+        <footer>&mdash; <cite>WHO-convened Global Study of the Origins of SARS-CoV-2: Terms of References for the China Part, finalised 2 August 2020</cite></footer>
+      </blockquote>
+
+      <p>The ToRs further confined the international team to work that would &#8220;build on existing information and augment, rather than duplicate, ongoing or existing efforts.&#8221; This may read like some unremarkable boilerplate against wasted duplication, but its operative effect was to make it perfectly clear that the WHO team would not have access to raw data, would not be able to derive its own studies based on such data, and would have to base itself on China-supplied studies and whatever partial or aggregated data would thus be released. Which is exactly what happened, as the programmed shift of the blame to foreign countries happened to. Anybody who somehow harboured any hope of the contrary simply does not understand how China operates, and how each concession becomes immediately functional when China has leverage.</p> 
+
+      <p>Embarek's own account of that trip surfaced in a leak to <em>The Guardian</em>. His confidential two-page travel report, dated 10 August 2020, one week after finalizing the ToRs and flying back to Europe, did not mince words about the lack of progress on the epidemiological investigation. He had hit a wall.</p>
+
+      <blockquote class="pull-quote pull-quote--sm reveal">
+        <p>&#8220;Following extensive discussions with and presentation from Chinese counterparts, it appears that little had been done in terms of epidemiological investigations around Wuhan since January 2020. The data presented orally gave a few more details than what was presented at the emergency committee meetings in January 2020. No PowerPoint presentations were made and no documents were shared.&#8221;</p>
+        <footer>&mdash; <cite>Peter Ben Embarek, confidential WHO travel report, 10 August 2020 &#8212; <a class="cite-link" href="https://www.theguardian.com/world/2021/feb/23/china-did-little-hunt-covid-origins-early-months-says-who-document" target="_blank" rel="noopener noreferrer">leaked to <em>The Guardian</em></a>, 23 February 2021</cite></footer>
+      </blockquote>
+
+      <h3 class="context-section-title" style="margin-top:1.6rem">The Forced Release of the ToRs</h3>
+      <p>Exactly as with the ToRs of the February 2020 mission, the WHO then sat on the 2021 mission ToRs. They were only published three months after being finalized, following a leak to the <em>The New York Times</em>. While their eventual publication was met by pointed criticism of their weaknesses by some, the release of the ToRs did not result in any modification. Again, what is conceded to China cannot be taken back; once the ToRs were finalized on 2 August 2020, with their debilitating wording for not only any proper origin but also any proper epidemiological investigation, there was no way back. A 'timely leak' may put a bit of pressure on the WHO, but it could not change the very weak hand the WHO had dealt to itself, as the US had feared and the Europeans had preferred to ignore.</p>
+    </div>
+
+    <ol class="timeline-block" id="ch6-kc-timeline" aria-label="From Australia's inquiry call to forced publication of the ToRs">
+      <li class="timeline-item">
+        <span class="timeline-date">Apr 2020</span>
+        <div class="timeline-content">
+          <strong>Australia calls for an independent investigation</strong>
+          <p>Australia becomes the first country to demand a formal independent inquiry into the pandemic&#8217;s origins &#8212; triggering Beijing&#8217;s retaliation strategy against the chicken it had selected.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">11 May 2020</span>
+        <div class="timeline-content">
+          <strong>First retaliation: beef suspended</strong>
+          <p>China suspends beef imports from four Australian abattoirs. The first concrete trade measure, eight days before the WHA vote. Wine, barley, coal, and lobster follow progressively through 2020.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">18&ndash;19 May 2020</span>
+        <div class="timeline-content">
+          <strong>European compromise at the 73rd WHA &mdash; barley tariffs land</strong>
+          <p>European governments draft and broker WHA73.1: a resolution calling for a &#8220;study to identify the zoonotic source,&#8221; not an investigation. On 18 May &#8212; the day before the vote &#8212; Beijing announces 80.5% tariffs on Australian barley; the news breaks internationally on the day of the Assembly itself.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">May&ndash;Jul 2020</span>
+        <div class="timeline-content">
+          <strong>European allies decline US push for executive board oversight of ToRs</strong>
+          <p>The US urges WHO to bring its 34-government governing executive board into the Terms of Reference consultations. European allies &#8212; particularly Germany &#8212; refuse to join. The bilateral WHO&#8211;China negotiating track proceeds without multilateral oversight.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Jul&ndash;Aug 2020</span>
+        <div class="timeline-content">
+          <strong>ToRs negotiated bilaterally in Beijing; finalised 2 August</strong>
+          <p>Peter Ben Embarek spends three weeks horse-trading with Chinese counterparts &#8212; two in quarantine, most video-call requests denied. The ToRs stamped &#8220;CHN and WHO agreed final version&#8221; on 2 August reproduce Chinese government language verbatim, mandate a &#8220;study&#8221; not an investigation, and restrict forensic review to &#8220;existing information and argument.&#8221;</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">2 Nov 2020</span>
+        <div class="timeline-content">
+          <strong>NYT publishes the secret ToRs</strong>
+          <p>The <em>New York Times</em> <a class="cite-link" href="https://archive.ph/c6b21" target="_blank" rel="noopener noreferrer">publishes the unpublished Terms of Reference</a> &#8212; leaked from within WHO by someone troubled by what had been agreed. WHO tells the Times it will &#8220;soon make the documents public.&#8221; Eight days later, the US publicly denounces the mission terms.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">17 Nov 2020</span>
+        <div class="timeline-content">
+          <strong>WHO forced to publish the ToRs officially</strong>
+          <p>Three months after finalisation &#8212; and fifteen days after the NYT article &#8212; WHO officially publishes the Terms of Reference. The mission mandate, team composition, and operating rules are already fixed. The publication is the forced formalization of an outcome decided in private.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title">The 2021 Mission: Failure Realised</h3>
+
+      <p>The outcome of the 2021 mission, played in front of international cameras on a stage in Beijing, followed accordingly: the WHO certified the laboratory hypothesis "extremely unlikely" and not worth considering further, while China's frozen-import theory was elevated to a valid alternative.</p>
+
+      <p>As Peter Embarek's own account makes clear, this was a forced compromise — negotiated after Chinese counterparts pushed to exclude the hypothesis altogether — that still delivered Beijing exactly the outcome it wanted, twice over: first, by dispatching the non-natural origin question outright, with Embarek telling the <a class="cite-link" href="https://www.who.int/publications/m/item/covid-19-virtual-press-conference-transcript---9-february-2021" target="_blank" rel="noopener noreferrer">9 February press conference in Wuhan that the lab-leak hypothesis "is not in the hypotheses that we will suggest for future studies"</a>; second, by swapping in the cold-chain hypothesis in its place. A complete win for China.</p>
+
+      <p>The cold-chain hypothesis had been carefully prepared before. It did not originate with the mission at all: it had been seeded in the <em>Global Times</em> by China CDC chief epidemiologist Wu Zunyou, who <a class="cite-link" href="https://www.globaltimes.cn/page/202011/1207027.shtml?id=11" target="_blank" rel="noopener noreferrer">told the paper on 16 November 2020 that "growing evidence showed frozen seafood or meat may have introduced the virus"</a> — a claim <a class="cite-link" href="https://www.globaltimes.cn/content/1209141.shtml" target="_blank" rel="noopener noreferrer">he and Wuhan University's Yang Zhanqiu expanded on three weeks later</a>, while the WHO joint team was still conducting Phase 1 desktop work. By the time the full team assembled in Wuhan, that key part of the Chinese narrative was in place, and just needed acceptance by the WHO.</p>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/Supertramp.png" loading="lazy"
+           alt="Supertramp 'Breakfast in America' album cover (1979), used to illustrate the contrast between the investigation WHO claimed to conduct and the reality"
+           class="img-feature">
+      <p class="img-caption"><em>Breakfast in America</em>, Supertramp (1979). Adapted for 2021.</p>
+    </div>
+
+      <p>Peter Embarek subsequently <a class="cite-link" href="https://nyheder.tv2.dk/udland/2021-08-12-ansat-paa-laboratorie-i-wuhan-kan-vaere-smittet-af-flagermus-som-den-foerste-siger-dansk-who-chef" target="_blank" rel="noopener noreferrer">told Danish broadcaster TV2 that "extremely unlikely" was his own negotiated compromise wording</a>, chosen to keep the laboratory hypothesis in the report at all after Chinese counterparts had initially wanted it excluded entirely — a detail that surfaced only after the label was already public.</p>
+    </div>
+
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>"If it had been categorized differently, it would probably have required another week, perhaps some more discussion and arguments for and against, and I didn't think it was worth it. [...] If it's included, then it's something we can talk about further. If it's not included, then it's over, so for me it was most important that it was included in the report. [...] Maybe someone is not at all interested in finding out what the truth is."</p>
+      <footer>&mdash; <cite>Peter Ben Embarek, on settling for "extremely unlikely," <a class="cite-link" href="https://nyheder.tv2.dk/udland/2021-08-12-ansat-paa-laboratorie-i-wuhan-kan-vaere-smittet-af-flagermus-som-den-foerste-siger-dansk-who-chef" target="_blank" rel="noopener noreferrer">TV2 Denmark</a>, August 2021, and in a <a class="cite-link" href="https://nyheder.tv2.dk/udland/2021-08-12-dansker-var-chef-for-whos-mission-til-wuhan-maaske-er-nogen-slet-ikke-interesseret-i-at-finde-sandheden" target="_blank" rel="noopener noreferrer">companion interview published the same day</a></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title">The 2021 Mission: One Failure Too Many</h3>
+      <p>Faced with an uproar, Tedros was pressed within three days into disowning the <del>conclusions</del> compromise reached by the WHO mission team, <a class="cite-link" href="https://www.who.int/publications/m/item/covid-19-virtual-press-conference-transcript---12-february-2021" target="_blank" rel="noopener noreferrer">telling a WHO press briefing on 12 February that "some questions have been raised as to whether some hypotheses have been discarded" and insisting "all hypotheses remain open"</a>. One may even wonder whether his whole game had been to let Embarek concede to China, then correct course once the pressure from Washington made the concession too costly to hold. What is certain is that WHO was in no way willing to stand behind its own mission — which left it whacked left and right within three days.</p>
+    </div> 
+
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>&#8220;The W.H.O. prioritizes access to the country, but if you do that to the bitter end, you lose soft power.&#8221;</p>
+      <footer>&mdash; <cite>Gian Luca Burci, WHO Legal Counsel 2005&ndash;2016, <a class="cite-link" href="https://archive.ph/c6b21#selection-821.53-821.68" target="_blank" rel="noopener noreferrer"><em>The New York Times</em>, 2 November 2020</a></cite></footer>
+    </blockquote>
+
+    <div class="stat-callout reveal">
+      <p class="stat-figure">&le;2 hrs</p>
+      <p class="stat-label">WIV access granted to the 2021 joint mission</p>
+      <p class="stat-context">A single supervised sit-down session in a meeting room — no raw data, no independent sampling, no unaccompanied questioning of personnel. But all whipped up as the real thing in an Annex to the WHO report, largely drafted by Daszak himself.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>In response to the WHO's complete procedural failures, the Paris Group — an informal network of scientists and biosafety experts, formed in late 2020 — published <a class="cite-link" href="https://www.researchgate.net/publication/351357912_Open_Letter_1_Reaction_to_the_China-WHO_joint_press_conference_on_the_9th_Feb_2021" target="_blank" rel="noopener noreferrer">five open letters to WHO and the World Health Assembly</a> between March 2021 and February 2022 demanding a genuine independent inquiry, plus separate letters <a class="cite-link" href="https://www.researchgate.net/publication/355020382_Call_for_the_Board_of_EcoHealth_Alliance_to_remove_Dr_Peter_Daszak_as_President_of_their_organization" target="_blank" rel="noopener noreferrer">calling for Daszak's removal as EcoHealth Alliance president</a> (September 2021) and <a class="cite-link" href="https://www.researchgate.net/publication/355585072_Proposed_changes_to_the_composition_of_the_SAGO_committee" target="_blank" rel="noopener noreferrer">for changes to SAGO's composition</a> (October 2021) — none of which received a substantive response.</p>
+
+      <p>SAGO — the <a class="cite-link" href="https://www.who.int/publications/i/item/9789240103061" target="_blank" rel="noopener noreferrer">Scientific Advisory Group for the Origins of Novel Pathogens, the advisory body eventually convened to carry the process forward, would soon stall on identical access terms: no new WIV samples, no raw sequence data, no independent review</a>. By March 2023 <a class="cite-link" href="https://www.science.org/content/article/inexcusable-van-kerkhove" target="_blank" rel="noopener noreferrer">Van Kerkhove described the continued data withholding as "inexcusable."</a> The investigation that did not happen in 2020, did not happen in 2021, and did not happen through SAGO either.</p>
+    </div>
+      
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/who-team-wuhan-exhibition-2021.webp" loading="lazy"
+           alt="WHO-China joint study team visiting a Wuhan exhibition, February 2021"
+           class="img-feature">
+      <p class="img-caption">WHO–China joint study team at a Wuhan exhibition, February 2021.
+         The visit included curated exhibitions and supervised site visits.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH7: Narrative Enforcement                               -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch7" data-chapter="7" aria-labelledby="ch7-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/china-covid-liberty-delacroix-propaganda.png')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 7</p>
+      <h2 class="chapter-hero-title" id="ch7-title">A Small And Vocal Minority Of Biased Scientists</h2>
+      <p class="chapter-hero-date">2021 – Present</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <div class="chapter-text reveal">
+      <p>The mission was over, but, the defence of its compromise outcome and of the original sin behind it - the Proximal Origin convenience piece - was about to start. Such move, despite Dr Tedros's U-turn on the origin question, was not irrational. It was well-understood career self-preservation for the authors of P.O. who had been corralled with various degrees of enthusiasm into writing a convenient health-diplomacy product by Farrar, never expecting the consequences. It was institutional self-preservation for the BioDefense apparatus which had created and funded EcoHealth Alliance, and was well anchored within the NIH where it commanded a huge budget.</p>
+      
+      <p>Some WHO insider put it down very nicely as 'a small and vocal minority of biased scientists' in a memorable quote:</p>
+    </div>
+
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>&#8220;If Sars-CoV-2 comes from an artificial consensus sequence composed of genomes with more than 95 per cent similarity to each other&hellip; I would predict that we will never find a really good match in nature and just a bunch of close matches across parts of the sequence, which so far is what we are seeing.<br><br>The problem is that those opposed to a lab leak scenario will always just say that we need to sample more, and absence of evidence isn&#8217;t evidence of absence. Scientists overall are afraid of discussing the issue of the origins due to the political situation. <span style="color:var(--red-bright)">This leaves a small and vocal minority of biased scientists free to spread misinformation.</span>&#8221;</p>
+      <footer>&mdash; <cite>Anonymous WHO insider, quoted by Sarah Knapton in the <a class="cite-link" href="https://drive.google.com/file/d/1lOmAlqAzPs9WuTyhON4Ha_lCHqKVA4GF/view?usp=sharing" target="_blank" rel="noopener noreferrer"><em>Daily Telegraph</em>, October 2021, after the release of DEFUSE</a> (the 2018 DARPA grant proposal from EcoHealth Alliance and the Wuhan Institute of Virology seeking funding for gain-of-function research on bat coronaviruses; DARPA rejected it, and DRASTIC later leaked and published it)</cite></footer>
+    </blockquote>
+
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">The 'Dispositive' Evidence</h3>
+      <p>After some set-backs in August-September 2021 (FBI and CIA coming down on the side of a research-accident, quickly followed by the DEFUSE proposal revelations and compromising FOIA'd EHA grant reports), the job to shore up the contested zoonotic certitudes narrative fell to the core P.O. authors and some associated scientists, who within a few months published a pair of 'market' papers on a preprint server in February 2022, then eventually got them published in <em>Science</em> in August 2022: <a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">Worobey et al.</a> and <a class="cite-link" href="https://medium.com/@gillesdemaneuf/backstage-story-the-oct-2023-correction-to-pekar-et-al-e167080e957d" target="_blank" rel="noopener noreferrer">Pekar et al.</a> According to their co-authors, the preprints offered 'dispositive evidence' of a zoonotic jump at the market, the evidence that ends all debate. And they were played up as such in the media.</p>
+
+      <p>As one peer-reviewer of Worobey et al. would later reveal, the media blitz that the papers co-authors indulged in when they were released as preprints (February 2022) was "not very scientific to be honest"; he explained that three out of four of Worobey et al. had issues with the draft, and that the paper was accepted for publication in Science, in August 2022, as one contribution subject to post-publication review, after some tuning down of the excessive claims of 'dispositve evidence' that had been pasted left and right in the media back in February.</p>
+      
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>Not very scientific to be honest!</p>
+      <footer>&mdash; <cite><a class="cite-link" href="https://x.com/gdemaneuf/status/1902324787491602662?s=20" target="_blank" rel="noopener noreferrer">Peer reviewer of Worobey et al. (2022), correspondence released 2025</a></cite></footer>
+    </blockquote>
+
+      <p>The December 2022 email is worth dwelling on, since the reviewer was making, in private and over a year ahead of time, the exact methodological point the <em>Journal of the Royal Statistical Society</em> would only put into print in 2024: that Worobey et al.'s data could not distinguish the market being the source of the outbreak from the market simply being a superspreader location once infected people were already circulating through it.</p>
+    </div>
+
+    <div class="foia-frame reveal">
+      <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem">
+        <div style="flex:1 1 260px;min-width:0">
+          <img src="../../shared/images/worobey-reviewer-email-2022-12-01.jpg" loading="lazy"
+               alt="Screenshot of peer reviewer communication on Worobey et al. (2022), 1 December 2022, detailing methodological concerns"
+               style="width:100%;height:auto;display:block">
+        </div>
+        <div style="flex:1 1 260px;min-width:0">
+          <img src="../../shared/images/worobey-reviewer-email-2023-03-05.jpg" loading="lazy"
+               alt="Screenshot of peer reviewer communication on Worobey et al. (2022), 5 March 2023, stating the methods were 'not very scientific to be honest!'"
+               style="width:100%;height:auto;display:block">
+        </div>
+      </div>
+      <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">
+        Peer reviewer correspondence on Worobey et al. (2022), identity redacted &#8212; 1 December 2022 (left) and 5 March 2023 (right).
+      </p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>This was enforcement from inside the guild: scientists policing scientists, litigated through journals, peer review, and professional reputation, run by a Track II network protecting the operating model it depended on. It ran in parallel with, and was reinforced by, a second enforcement track operating at an entirely different scale — state and platform power, activated within days of the pandemic's declaration and rehearsed months before the outbreak even began. That is where Part 8 turns next.</p>
+    </div>
+
+    <blockquote class="pull-quote reveal">
+      <p>The conscious and intelligent manipulation of the organized habits and opinions of the masses is an important element in democratic society.</p>
+      <footer>&mdash; <cite><a class="cite-link" href="https://www.historytoday.com/miscellanies/original-influencer" target="_blank" rel="noopener noreferrer">Edward L. Bernays</a> &#8212; later regarded as the father of public relations &#8212; <em>Propaganda</em>, 1928.</cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <p>But just as they had run away with claims of 'dispositive evidence' in February, the co-authors would repeat - in August - that their work closed the case once for all. From the victory laps of the co-authors in the media, one would never have guessed that this peer-reviewer considered a laboratory accident as plausible as a natural origin, or that the reviewers <a class="cite-link" href="Worobey_to_Eban.html" target="_blank" rel="noopener noreferrer">had asked for a watering-down of the 'dispositive' claims</a>. But so goes science by headlines: not much about science at work, more about locking a narrative.</p>
+
+      <p>Possibly the most pointed verdict about the value of the Science market papers came actually from inside the <a class="cite-link" href="https://drive.proton.me/urls/76RQCCFKM0#eXXjpWl26z1N" target="_blank" rel="noopener noreferrer">'Coalition of Support'</a>, a group of scientists working alongside Daszak, and with the help of <a class="cite-link" href="https://drive.proton.me/urls/CR7Q4VKNP4#Ck7VLXODAV8K" target="_blank" rel="noopener noreferrer">some PR firm</a>, to protect EcoHealth Alliance from defunding. In an internal email dated 3 August 2022 — copied to Daszak, Hotez, Chmura, and Sturchio — Gerald Keusch (all part of the Coalition) reported back on a call with W. Ian Lipkin and the latter's unvarnished judgment on the two Science papers: "crap epidemiology." The dismissal carries particular weight because Lipkin was himself a co-author of <em>Proximal Origin</em>, the convenience paper that had done more than any other to foreclose the laboratory hypothesis in public.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/Keusch_on_Lipkin.png" loading="lazy"
+           alt="Gerald Keusch internal email, 3 August 2022, reporting W. Ian Lipkin's assessment of the Worobey and Pekar Science papers as 'crap epidemiology'"
+           class="img-feature">
+        <p class="img-caption">Gerald Keusch to Peter Daszak, Peter Hotez, Aleksei Chmura, and Jeff Sturchio, 3 August 2022.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>Lipkin's private dismissal to Keusch was not a one-off: eight months later, in a sworn transcribed interview with the House Select Subcommittee on the Coronavirus Pandemic on 6 April 2023, Lipkin gave the same verdict on the record — this time specifically about Worobey et al. — and disclosed the professional cost of saying so.</p>
+    </div>
+
+    <blockquote class="pull-quote pull-quote--sm reveal">
+      <p>&#8220;I don&#8217;t think that I can conclude based on this paper that the origin is the seafood market. The only thing that I conclude from that paper is that it was a site for amplification. That doesn&#8217;t mean that it wasn&#8217;t the site. It just means that I don&#8217;t find it, you know, what we call dispositive evidence.&#8221;<br><br>&#8220;Our colleagues fuelled this with armchair epidemiology based on unverifiable data sets and terms like &#8216;dispositive evidence.&#8217;&#8221;<br><br>&#8220;Dr. Holmes became very unhappy with me after I refused to sign on and say that, you know, there was proof that this is where this began, in the wet market. And so we have no further &#8212; we&#8217;ve had no further contact.&#8221;</p>
+      <footer>&mdash; <cite>W. Ian Lipkin, transcribed interview, <a class="cite-link" href="https://drive.google.com/file/d/1Ecqlkw1ahfAfR2m--wajPW8-cjKHf1BL/view?usp=sharing" target="_blank" rel="noopener noreferrer">Select Subcommittee on the Coronavirus Pandemic, 6 April 2023</a></cite></footer>
+    </blockquote>
+
+    <div class="chapter-text reveal">
+      <p>Asked whether the falling-out explained his absence from the papers that followed, Lipkin — invited only to speculate — answered: "probably so." He remains, as the table below shows, the only one of the five <em>Proximal Origin</em> authors never to appear on Worobey et al., Pekar et al., or the "Critical Review."</p>
+      <h3 class="context-section-title" style="margin-top:1.6rem">Filling The Zone</h3>
+      <p>Even if the point of the Science papers, and the way they were enthroned, was to fill the zone with the desired narrative, and to make the cost of dissidence very clear, it could only work for a while. Eventually, post-publication review kicked in, with its corrections and critical peer-reviewed re-evaluations, exposing the serious weaknesses in their methodologies and conclusions.</p>
+    
+      <p>Stepping back a bit, none of this should be surprising. For instance, in what will - no doubt - in a few more years be recognised as the height of absurdity, Worobey et al. was based not on any granular data, but on badly extracted points from rather sketchy maps of the official early cases in Wuhan that were extracted from the WHO report. These were mere pixels on distorted low-resolution outlines of the city districts - crumbs of official data - compounded by basic geo-extraction errors. And these were only a part of the whole picture, with no proper unbiasing for initial reporting criteria (despite superficial assurances to the contrary by the authors) and clear <a class="cite-link" href="https://bit.ly/SAGOPres" target="_blank" rel="noopener noreferrer">'subtraction' of otherwise reported laboratory confirmed unique cases</a>.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/LATimes_OnlyWay.PNG" loading="lazy"
+           alt="Los Angeles Times headline amplifying the market-zoonosis hypothesis as settled, 2022"
+           class="img-feature">
+      <p class="img-caption"><em>Los Angeles Times</em> headline, 2022 — the media amplification moment that treated the papers as a definitive verdict.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>Even if taking its data at face value, a formal peer-reviewed critique in the <a class="cite-link" href="https://doi.org/10.1093/jrsssa/qnad139" target="_blank" rel="noopener noreferrer"><em>Journal of the Royal Statistical Society</em></a> demonstrated Worobey et al. had used tests inappropriate for the data structure. Separately, Pekar et al. required a significant <a class="cite-link" href="https://medium.com/@gillesdemaneuf/backstage-story-the-oct-2023-correction-to-pekar-et-al-e167080e957d" target="_blank" rel="noopener noreferrer"><em>Science</em> correction in October 2023</a>, after DRASTIC pointed out multiple issues. That was followed by some <a class="cite-link" href="https://arxiv.org/abs/2510.01484" target="_blank" rel="noopener noreferrer">2025 reanalysis by Weissman</a> and by Nod, which eventually showed the conclusions of Pekar et al. &ldquo;dissolve entirely&rdquo; and actually <em>reverse</em> when analytical errors are corrected.</p>
+    </div>
+
+    <ol class="timeline-block" id="ch7-timeline" aria-label="Narrative enforcement timeline">
+      <li class="timeline-item">
+        <span class="timeline-date">Mar 2021</span>
+        <div class="timeline-content">
+          <strong>WHO–China joint mission report published</strong>
+          <p>Laboratory hypothesis rated "extremely unlikely." The press conference is managed by Daszak, who speaks as de-facto Western lead despite being a named conflicted party.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Aug 2022</span>
+        <div class="timeline-content">
+          <strong>Worobey &amp; Pekar papers in <em>Science</em></strong>
+          <p>Published simultaneously as complementary market-zoonosis cases. Media coverage presents the conclusion as settled. Peer-review correspondence tells a different story.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Oct 2023</span>
+        <div class="timeline-content">
+          <strong>Pekar et al. corrected in <em>Science</em></strong>
+          <p>Headline conclusions revised following a formal statistical critique in the <em>Journal of the Royal Statistical Society</em>.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">Oct 2024</span>
+        <div class="timeline-content">
+          <strong>Peer reviewer correspondence published</strong>
+          <p>Peer reviewer correspondence (2022–2024) released: "Not very scientific to be honest!" The reviewer notes that both natural origin and research accident are &ldquo;equally plausible&rdquo;.</p>
+        </div>
+      </li>
+      <li class="timeline-item">
+        <span class="timeline-date">2025</span>
+        <div class="timeline-content">
+          <strong>Weissman reanalysis</strong>
+          <p>Full reanalysis shows Pekar et al. conclusions "dissolve entirely" when analytical errors are corrected.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="chapter-text reveal">
+      <p>The confidence projected in public bore little resemblance to what the private peer review exchanges showed. Worobey told <a class="cite-link" href="https://www.npr.org/sections/goatsandsoda/2023/02/28/1160162845/what-does-the-science-say-about-the-origin-of-the-sars-cov-2-pandemic" target="_blank" rel="noopener noreferrer">NPR</a> that the odds of the case-distribution pattern were "1 in 10 million" if the market was not the source — a statistical artefact of model assumptions applied to incomplete, politically curated data, repeated across outlets as though it were an empirical finding. In October 2024 — a year after the Pekar correction — Andersen was in Oslo promoting the same paper conclusions to the <a class="cite-link" href="https://norwegianimmunology.org/guest-lecture-with-prof-kristian-andersen-the-origin-of-a-pandemic-the-facts-and-the-fiction/" target="_blank" rel="noopener noreferrer">Norwegian Society for Immunology</a> without any qualification, and with derogatory terms for any critic.</p>
+      
+      <p>The Science papers' authors did not lack any chutzpah, but - if any defense can be found - some were essentially opportunistically surfing a narrative that was eager for such material, irrespective of quality, while others were trying to defend their disputed conclusions in Proximal Origin; four of the five <em>Proximal Origin</em> authors — Andersen, Rambaut, Holmes, and Garry — are also co-authors of both 2022 <em>Science</em> papers. Effectively, the same core group that had declared a laboratory origin implausible in March 2020 tried to summon up the "independent" epidemiological and molecular confirmation that closed the question two years later.</p>
+    </div>
+
+    <details class="authorship-table reveal" open>
+      <summary>
+        <span class="at-title">Four Papers, One Network — Authorship Cross-Reference</span>
+      </summary>
+      <div class="authorship-table-body">
+        <div class="authorship-table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Actor</th>
+                <th scope="col"><a class="cite-link" href="https://doi.org/10.1038/s41591-020-0820-9" target="_blank" rel="noopener noreferrer">Proximal Origin</a><br>(2020)</th>
+                <th scope="col"><a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a><br>(2021)</th>
+                <th scope="col"><a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">Worobey et al.</a><br>(2022)</th>
+                <th scope="col"><a class="cite-link" href="https://doi.org/10.1126/science.abp8337" target="_blank" rel="noopener noreferrer">Pekar et al.</a><br>(2022)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="at-po-row">
+                <td>Kristian G. Andersen</td>
+                <td><span class="at-yes at-lead">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Andrew Rambaut</td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Edward C. Holmes</td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes at-lead">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Robert F. Garry</td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr class="at-po-row">
+                <td>W. Ian Lipkin</td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td colspan="2"><span class="at-shaped"><span class="at-quote">&ldquo;crap epidemiology&rdquo;</span> &mdash; Lipkin's own verdict on both papers (Keusch email, 3 Aug 2022). Refused to sign Worobey et al.'s "dispositive evidence" framing; Holmes cut contact with him afterward (sworn testimony, 6 Apr 2023)</span></td>
+              </tr>
+              <tr>
+                <td>Michael Worobey</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes at-lead">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr>
+                <td>Joel O. Wertheim</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr>
+                <td>Alexander Crits-Christoph</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr>
+                <td>Marion Koopmans</td>
+                <td><span class="at-shaped">consulted on publication;<br>lobbied to strip passaging</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr>
+                <td>Jonathan E. Pekar</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes at-lead">&#9679;</span></td>
+              </tr>
+              <tr>
+                <td>Marc A. Suchard</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+              </tr>
+              <tr>
+                <td>Angela L. Rasmussen (CS)</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr>
+                <td>David L. Robertson</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr>
+                <td>Stephen A. Goldstein</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr class="at-shaper-row">
+                <td>Jeremy Farrar</td>
+                <td><span class="at-shaped">commissioned, organised,<br>edited (not a credited author)</span></td>
+                <td><span class="at-yes">&#9679;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr class="at-shaper-row">
+                <td>Anthony Fauci</td>
+                <td><span class="at-shaped">commissioned (named in Andersen's Nature cover letter); also documented recommending IC outreach to P.O. co-authors as SMEs for the Biden 90-day review &mdash; declassified ODNI email chain, 12&ndash;14 Jul 2021</span></td>
+                <td><span class="at-shaped">pushed the paper to the NSC/IC as an SME source &mdash; documented</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr class="at-shaper-row">
+                <td>Francis Collins</td>
+                <td><span class="at-shaped">commissioned (same cover letter);<br>approved release for WHO benefit</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+              </tr>
+              <tr class="at-total">
+                <td>Remaining co-authors not listed above</td>
+                <td>0</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="authorship-table-legend">&#9679; credited co-author (<span style="color:var(--red-bright)">red</span> = lead/first or corresponding author) &nbsp;&middot;&nbsp; <em>italic</em> = shaped, commissioned, or consulted the work but not a credited co-author &nbsp;&middot;&nbsp; &ndash; = no connection to this paper &nbsp;&middot;&nbsp; (CS) = member of EcoHealth Alliance's <a class="cite-link" href="https://drive.proton.me/urls/76RQCCFKM0#eXXjpWl26z1N" target="_blank" rel="noopener noreferrer">"Coalition of Support"</a>, the internal PR and lobbying network Daszak assembled from October 2021.</p>
+        <p class="authorship-table-note">Author lists per PubMed (DOIs: <a class="cite-link" href="https://doi.org/10.1038/s41591-020-0820-9" target="_blank" rel="noopener noreferrer">10.1038/s41591-020-0820-9</a>, <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">10.1016/j.cell.2021.08.017</a>, <a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">10.1126/science.abp8715</a>, <a class="cite-link" href="https://doi.org/10.1126/science.abp8337" target="_blank" rel="noopener noreferrer">10.1126/science.abp8337</a>). Remaining co-authors not otherwise named in this article: <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a> &mdash; Simon J. Anthony, Wendy S. Barclay, Maciej F. Boni, Peter C. Doherty, Jemma L. Geoghegan, Xiaowei Jiang, Julian L. Leibowitz, Stuart J. D. Neil, Tim Skern, Susan R. Weiss. <a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">Worobey et al.</a> &mdash; Joshua I. Levy, Lorena Malpica Serrano, Moritz U. G. Kraemer, Chris Newman, Philippe Lemey. <a class="cite-link" href="https://doi.org/10.1126/science.abp8337" target="_blank" rel="noopener noreferrer">Pekar et al.</a> &mdash; Andrew Magee, Edyth Parker, Niema Moshiri, Katherine Izhikevich, Jennifer L. Havens, Karthik Gangavarapu, Lorena Mariana Malpica Serrano, Nathaniel L. Matteson, Mark Zeller, Joshua I. Levy, Jade C. Wang, Scott Hughes, Jungmin Lee, Heedo Park, Man-Seong Park, Katherine Ching Zi Yan, Raymond Tzer Pin Lin, Mohd Noor Mat Isa, Yusuf Muhammad Noor, Tetyana I. Vasylyeva.</p>
+      </div>
+    </details>
+
+    <div class="chapter-text reveal">
+      <p>A broader network then sprang into action to vehemently enforce the natural-origin conclusion. Chief among them was Angela Rasmussen, a co-author of Worobey et al., but also the designated 'bull-dog' in EcoHealth Alliance's <a class="cite-link" href="https://www.researchgate.net/publication/395016679_Findings_from_EHA_documents_made_public_by_Congress_in_December_2024_-DRASTIC_Working_Notes_-_PREVIEW_LINKS_REMOVED" target="_blank" rel="noopener noreferrer">"Coalition of Support"</a> — the internal PR and lobbying network Daszak was assembling in 2021, initially around Peter Hotez, Gerald Keusch, and Rich Roberts, to counter what internal notes called "political interference" against EcoHealth.</p>
+      
+      <h3 class="context-section-title" style="margin-top:1.6rem">Silencing Sachs</h3>
+
+      <p>As one of many examples of the Coalition members at work, one may consider Keusch's email above from August 2022, precisely one week after the publication of the market papers in Science. In that email, Keusch explains that he was firmly rebutted by Lipkin when asking him how one could remove Jeffrey Sachs (Columbia University) from the leadership of the Lancet COVID-19 commission, and then went on wondering if he and his 'Coalition of Support' accomplices may still spin a story that Sachs was suffering from early dementia.</p>
+
+      <blockquote class="pull-quote pull-quote--sm reveal">
+        <p>&#8220;The secondary issue is Sachs&#8217; cognitive health, as he becomes ever more focused, concrete in his thinking, and unable to take in and evaluate new information. He is a broken record, for sure, very possibly because he is a record in the process of breaking.&#8221;</p>
+        <footer>&mdash; <cite>Gerald Keusch, internal email to Peter Daszak, Peter Hotez, Aleksei Chmura, and Jeff Sturchio, 3 August 2022</cite></footer>
+      </blockquote>
+
+      <p>For context, Sachs had recently (June 2021) asked Daszak to step down as chair of the origin task force under that commission (while remaining a member of the task force), for lack of transparency, while Keusch himself stepped up to be chair of the task force. Ironically, that email from Keusch - by then in his role as chair of the Lancet origins commission task force - perfectly justifies Sachs's decision to dissolve the full task force not long after, as being irredeemably compromised, if need ever was.</p>
+
+      <p>And thus it went on, with the 'Coalition of Support' diligently doing its work at key junctures. Angela Rasmussen played the role of the Coalition 'bull-dog'; as co-author on one of the papers she was on hand for <a class="cite-link" href="https://www.npr.org/sections/goatsandsoda/2023/02/28/1160162845/what-does-the-science-say-about-the-origin-of-the-sars-cov-2-pandemic" target="_blank" rel="noopener noreferrer">media quotes</a> and active as an influencer on Twitter. Peter Hotez, another 'influencer' who cultivates the image of a cultured honest scientist, was another Coalition asset and busy defending EcoHealth and the shallow zoonotic certitudes for years.</p>
+
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH8: The Infodemic Apparatus                             -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch8" data-chapter="8" aria-labelledby="ch8-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/event201_segment4_gao_haines.png')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <p class="chapter-hero-caption">Event 201 pandemic tabletop exercise, Segment 4 — George Fu Gao (Director-General, China CDC) and Avril Haines (former CIA Deputy Director, future DNI), New York, 18 October 2019</p>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 8</p>
+      <h2 class="chapter-hero-title" id="ch8-title">WHO as Censor: The Infodemic Apparatus</h2>
+      <p class="chapter-hero-date">February 2020 – May 2021</p>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <div class="chapter-text reveal">
+      <p>If Part 7 showed the scientific network defending its own verdict from within the literature, this chapter turns to the institutional and platform-level apparatus that defended the same verdict from outside it, not through peer review, but through platform policy negotiated directly between WHO leadership and Silicon Valley.</p>
+
+      <h3 class="context-section-title">The Menlo Park Deal: Building the Apparatus</h3>
+      <p>On 13 February 2020 — two days before Tedros denounced a supposed "infodemic" at the Munich Security Conference, and while the WHO was struggling to secure any access for its February 2020 mission in China — WHO's digital outreach team was already at <a class="cite-link" href="https://www.cnbc.com/2020/02/14/facebook-google-amazon-met-with-who-to-talk-coronavirus-misinformation.html" target="_blank" rel="noopener noreferrer">Facebook’s Menlo Park campus</a>, finalising content agreements with Amazon, Google, Twitter, YouTube, and ten other platforms.</p>
+
+      <p>The stated purpose was limiting harmful misinformation during a live public-health emergency — a defensible general policy that, applied here, conveniently suppressed a still-live scientific hypothesis rather than a settled falsehood. The result was to treat a live scientific hypothesis as settled misinformation: <a class="cite-link" href="https://about.fb.com/news/2020/03/combating-covid-19-misinformation/" target="_blank" rel="noopener noreferrer">Facebook removed posts discussing a likely laboratory origin throughout 2020 and into 2021</a>, and YouTube followed the same guidance.</p>  
+    <div class="doc-excerpt reveal">
+      <blockquote>“Following weekly calls between WHO and YouTube, the video platform has banned any COVID-19-related content that contradicts WHO advice; as pointed out by YouTube CEO Susan Wojcicki, anything against WHO recommendations is ‘a violation of our policy’. These policy updates led to the removal of more than half a million YouTube videos between February 2020 and January 2021. In order to potentiate the efforts of misinformation vigilance on YouTube and Facebook, these platforms have granted WHO access to a fast-track reporting system, which allows WHO staff to flag misinformation, leading to a quick removal of contents that break their policies.”</blockquote>
+      <cite><a class="cite-link" href="https://doi.org/10.1136/bmjgh-2022-009483" target="_blank" rel="noopener noreferrer">Germani, Pattison, Reinfelde &mdash; <em>BMJ Global Health</em> 2022;7:e009483</a></cite>
+    </div>
+
+      <p>To amplify the reach, WHO secured a <a class="cite-link" href="https://doi.org/10.1136/bmjgh-2022-009483" target="_blank" rel="noopener noreferrer">$250 million pro bono ad grant from Google</a> &mdash; negotiated directly by Tedros with Google CEO Sundar Pichai in March 2020, and roughly twice China’s total contribution to WHO that year. By July 2021 those targeted ad campaigns had driven 167 million visitors to the WHO website. Some of this was for good reasons, such as when people searched for absurd remedies, but it also included people who were merely looking for information about the lab-origin hypothesis.</p>
+    </div>
+
+    <div class="stat-callout reveal">
+      <p class="stat-figure">15 months</p>
+      <p class="stat-label">Duration of platform suppression of the lab-origin hypothesis</p>
+      <p class="stat-context">Feb 2020 to May 2021 — during which WHO-aligned platform policy actively suppressed a hypothesis treated as credible by the FBI and DoE (Department of Energy).</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <p>That fast and determined response was not improvised: the WHO&ndash;platform coordination that WHO communications official Andrew Pattison arranged in February 2020 on a visit to Silicon Valley had been rehearsed a bit earlier at <a class="cite-link" href="https://centerforhealthsecurity.org/our-work/tabletop-exercises/event-201-pandemic-tabletop-exercise" target="_blank" rel="noopener noreferrer">Event 201</a> &mdash; a pandemic tabletop exercise run in October 2019 by the Johns Hopkins Center for Health Security, the World Economic Forum, and the Bill &amp; Melinda Gates Foundation.</p>
+      <p>Event 201 was the culmination of a sequence of exercises that had progressively sharpened the pandemic communication strategy in coordination with the tech giants: <a class="cite-link" href="https://centerforhealthsecurity.org/our-work/tabletop-exercises/clade-x-tabletop-exercise" target="_blank" rel="noopener noreferrer">Clade X</a> (Johns Hopkins, May 2018) and <a class="cite-link" href="https://grokipedia.com/page/Crimson_Contagion" target="_blank" rel="noopener noreferrer">Crimson Contagion</a> (HHS, August 2019) had each identified an information-management gap without prescribing a mechanism to fill it, while Event 201 was the first one to play-act the solution: coordinated, real-time suppression through direct partnerships between media platforms, the WHO and affected governments.</p>
+    </div>
+
+    <div class="yt-wrap reveal">
+      <p class="yt-source">Johns Hopkins Center for Health Security &nbsp;&middot;&nbsp;
+         World Economic Forum &nbsp;&middot;&nbsp; Bill &amp; Melinda Gates Foundation</p>
+        <p>Event 201 was no arm&rsquo;s-length academic exercise: the Johns Hopkins Center for Health Security functions as one of the principal career bridges between the US biodefense establishment and global health governance, and the Center&rsquo;s own <strong>Emerging Leaders in Biosecurity Initiative (ELBI)</strong> fellowship formalises the pipeline.</p>
+
+        <p>Beth Cameron <a class="cite-link" href="https://globalbiodefense.com/2017/10/31/my-time-as-an-emerging-leader-in-biosecurity-initiative-fellow/" target="_blank" rel="noopener noreferrer">mentored ELBI&rsquo;s 2017 cohort</a>, the same year Adrienne Keen &mdash; then a State Department health advisor, concurrently consulting for the WHO &mdash; <a class="cite-link" href="https://centerforhealthsecurity.org/sites/default/files/2022-12/elbi-2017-yearbook.pdf" target="_blank" rel="noopener noreferrer">attended as a fellow</a>. Three years later Cameron was at the Biden NSC and Keen was directing the Global Health Security desk at the NIC (National Intelligence Council), coordinating the 2021 90-day origins review.</p>
+
+        <p>The exercise itself was co-hosted by the World Economic Forum and the Bill &amp; Melinda Gates Foundation &mdash; a vivid example of the Global Health Security / Biodefense arc running through Johns Hopkins, NTI, Wellcome Trust, WHO and Intelligence agencies.</p>
+
+        <div class="yt-facade"
+           data-yt-id="LBuP40H4Tko"
+           data-yt-start="78"
+           role="button" tabindex="0"
+           aria-label="Play: Event 201 Pandemic Exercise, Segment 4 — Communications Discussion, October 2019">
+        <img src="https://img.youtube.com/vi/LBuP40H4Tko/hqdefault.jpg"
+             alt="Event 201 Segment 4 — Communications Discussion thumbnail, Johns Hopkins Center for Health Security, October 2019"
+             loading="lazy">
+        <div class="yt-play-btn" aria-hidden="true"></div>
+        </div>
+          <p style="border-left:3px solid var(--red);padding-left:0.75rem;margin-top:0.9rem;
+                font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);line-height:1.5"> Source: <a href="https://www.youtube.com/watch?v=LBuP40H4Tko&amp;t=78s" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted)">JHCHS official YouTube channel</a> &nbsp;&middot;&nbsp; Johns Hopkins Center for Health Security, 18 October 2019 </p>
+    </div>
+      <div class="chapter-text" style="margin-top:1.4rem">
+        <p>The &ldquo;Communications Discussion&rdquo; was a key part of the October 2019 tabletop exercise (TTX): participants explicitly modelled coordinated social media account deletion as a standard pandemic misinformation-management response. Among the fifteen players was <strong><a class="cite-link" href="https://centerforhealthsecurity.org/event201/players/" target="_blank" rel="noopener noreferrer">Avril Haines</a></strong> &mdash; formerly CIA Deputy Director under Obama, and future Director of National Intelligence in charge of the origins &lsquo;investigation&rsquo; under President Biden.
+        </p>
+      </div>
+      <div class="script-compare reveal">
+        <div class="script-panel script-panel-top">
+          <p class="script-label">The October 2019 Script of Event 201 </p>
+          <blockquote class="script-quote">Penalties have been put in place for the spreading of harmful falsehoods, including arrests. Other countries have taken a more moderate approach and have focused on promoting fact-checking efforts and working with traditional media outlets, yet these approaches are limited in scope. Social media companies report they&rsquo;re doing all they can to limit the use of their platforms for nefarious or misleading purposes.<br>
+          <br>
+          source: Event 201, Segment 4, October 2019</blockquote>
+        </div>
+        <hr class="script-rule">
+        <div class="script-panel script-panel-bottom">
+          <p class="script-label">The 2020 Implementation</p>
+          <p class="script-impl">China arrests people for telling the truth. The Biodefense&ndash;NTI&ndash;Wellcome&ndash;WHO nexus demands and obtains from traditional and social media that they censor non-natural origin discussions.</p>
+        </div>
+      </div>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">A playbook that was 4 years in the making</h3>
+      <p>None of this began with COVID-19 &mdash; what changed between 2016 and 2020 was not the underlying sociological argument but its industrial scale: funded operations, platform cooperation, and rehearsed government-technology playbooks turned a nephew-of-Freud's theory of engineered consent into routine operating procedure. The most funded, coordinated digital rapid-response operation of the 2016 US campaign belonged to David Brock's <a class="cite-link" href="https://en.wikipedia.org/wiki/Correct_the_Record" target="_blank" rel="noopener noreferrer">Correct the Record</a>, whose $1 million "Barrier Breakers" unit worked Twitter, Facebook and Reddit on Clinton's behalf months before "fake news" and Russian interference became the dominant explanation for Hillary Clinton's defeat.</p>
+
+      <p>Obama <a class="cite-link" href="https://www.cnbc.com/2017/09/24/obama-personally-warned-mark-zuckerberg-about-fake-news-on-facebook.html" target="_blank" rel="noopener noreferrer">privately warned Zuckerberg</a> that November that Facebook had to do more. The same frame hardened into a running character claim: Clinton called Trump Putin's "puppet" from the debate stage in 2016 and was still running the line in February 2020, <a class="cite-link" href="https://thehill.com/homenews/news/484105-clinton-calls-trump-putins-puppet-amid-reports-that-russia-is-interfering-in/" target="_blank" rel="noopener noreferrer">tweeting that "Putin's Puppet is at it again... he knows he can't win without it"</a> as fresh Russia-interference reports surfaced ahead of that year's election.</p>
+      <p>By then Google and Facebook were already inside the exact platform-government coordination playbook that Event 201 had rehearsed as pandemic doctrine in October 2019 &#8212; the same two companies WHO would activate four months later, against a virus instead of an election.</p>
+      <p>Bernays' 1928 call, quoted in Part 7, for the "conscious and intelligent manipulation of the organized habits and opinions of the masses," has found many adherents since 1928, but seems to have moved from the shadows to become a mainstream and open political credo sometime in 2016.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- CH9: Conclusion                                          -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="ch9" data-chapter="9" aria-labelledby="ch9-title">
+
+  <div class="chapter-hero reveal"
+       style="--hero-img:url('../../shared/images/kowtow.png')">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <p class="chapter-hero-caption">The kowtow: conditional access for foreigners, inseparable from acknowledgment of sovereign hierarchy. In 2020, the mechanism was updated — no ritual prostration, but public encomiums, emasculated ToRs, and narrative concessions.</p>
+    <div class="chapter-hero-content">
+      <p class="chapter-num">Part 9</p>
+      <h2 class="chapter-hero-title" id="ch9-title">Conclusion</h2>
+    </div>
+  </div>
+
+  <div class="chapter-body-wrap">
+
+    <div class="chapter-text reveal">
+      <p>After an initial sucess, the attempt to project and protect a convenient narrative ended up damaging the institutions of the narrators, starting with the WHO itself. This was not preordained: 17 years before the COVID-19 pandemic, the WHO had shown <a class="cite-link" href="https://gillesdemaneuf.medium.com/the-good-the-bad-and-the-ugly-a-review-of-sars-lab-escapes-898d203d175d" target="_blank" rel="noopener noreferrer">real resolution</a>, but 2020 was not 2003, and key elements - many linked to the ascendency of China on the international scence, and it playing by its own rules - conspired to sap the WHO, so that its investigative resolution translated this time in a Potemkin-level effort to please in the face of an adverse reality.</p>
+
+      <p>China's acendency may seem surprinsignly effective given that it was a rather secondary contributor to the WHO budget - but it is perfectly representative of China's preference for well-applied leverage, preferably in unilateral settings, and the explotation of the Western own fracture points - which in deliquescent political (US) and economical (Europe) contexts were many. And so, in the end, even if China had a major lock on the WHO, it is largely Westermn actors, from Bernhard Schwartländer to Fauci, Farrar, Haines, Cameron, and a group of 'vocal scientists' relayed by obligent ideological media, who must colect the prize for one of the worst sceintific failures in human history.</p>
+
+    </div>
+
+    <div class="closing-statement reveal">
+      Six years on, the institutional loop the six dynamics describe has mostly closed rather than broken: Haines moved from overseeing the IC's own origins review to the presidency of Carnegie, the biodefense network that rehearsed suppression at Event 201 remains intact, and the WHO's independent-investigation capacity — demonstrated once, under Brundtland during SARS-1 in 2003, and not since — has still not been rebuilt.
+      <br><br>
+      What the material shows is not a single lapse but a standing arrangement: the same access bargain, the same conflicted networks, and the same suppression playbook remain in place, ready for whatever comes next.
+    </div>
+
+    <h3 class="dynamics-title-main reveal">
+      Six Interlocking Dynamics
+    </h3>
+
+    <div class="dynamics-grid" id="dynamics-grid">
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">1</div>
+        <h4 class="dynamic-title">Chinese Access Control</h4>
+        <p class="dynamic-desc">Beijing rationed even minimal access as a high-value concession, conditioning cooperation with the WHO on public deference, emasculated Terms of Reference, curated site visits, and narrative concessions.</p>
+      </div>
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">2</div>
+        <h4 class="dynamic-title">WHO Institutional Weakness</h4>
+        <p class="dynamic-desc">Procedural dependency on host-state consent, a culture of consensus over confrontation, and leadership that had internalised Beijing's preferences as its own, despite a <a class="cite-link" href="https://www.who.int/about/accountability/results/who-results-report-2020-mtr/budget-summary-details" target="_blank" rel="noopener noreferrer">Chinese contribution to the WHO budget</a> less than Saudi Arabia's in total dollar amount.</p>
+      </div>
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">3</div>
+        <h4 class="dynamic-title">Farrar's Narrative Lock-in</h4>
+        <p class="dynamic-desc">Pre-emptive publication of <a class="cite-link" href="https://gillesdemaneuf.medium.com/full-text-proximal-origin-a-tragicomedy-of-our-times-draft-p2-39b90684bf01" target="_blank" rel="noopener noreferrer"><em>Proximal Origin</em></a> and the <a class="cite-link" href="https://doi.org/10.1016/S0140-6736(20)30418-9" target="_blank" rel="noopener noreferrer"><em>Lancet</em> Letter</a> before any investigation had occurred — designed to signal to China that a WHO mission would be safe to host.</p>
+      </div>
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">4</div>
+        <h4 class="dynamic-title">The Global Health Security Network Posture</h4>
+        <p class="dynamic-desc">A pre-existing biosecurity architecture — Johns Hopkins Center for Health Security, NTI, Wellcome Trust, WEF — shared leadership with WHO advisory boards, Intelligence Community figures, and the Munich Security Conference circuit, and had rehearsed censorship and counter-narrative responses four months earlier at Event 201.</p>
+      </div>
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">5</div>
+        <h4 class="dynamic-title">Conflicted Scientific Networks</h4>
+        <p class="dynamic-desc">NIAID funding, EcoHealth Alliance grants, and gain-of-function research programmes tied key scientific actors to the natural-origin narrative and gave them institutional reasons to reinforce it.</p>
+      </div>
+      <div class="dynamic-card reveal">
+        <div class="dynamic-num">6</div>
+        <h4 class="dynamic-title">Self-Reinforcing Echo Chamber</h4>
+        <p class="dynamic-desc">When the outbreak hit, the network did not conduct a fresh inquiry: it executed the automatisms rehearsed at Event 201 — platform suppression, friendly press amplification, and a stream of low-quality publications that cited each other — raising the reputational cost of dissent while insulating the consensus from scrutiny.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-network" href="../../shared/network_graph.html"
+       target="_blank" rel="noopener noreferrer">
+      View the actor network graph &#8599;
+    </a>
+    <p class="footer-disclosures">
+      <strong>Author's disclosures.</strong> The author is a member of DRASTIC and of the Paris Group, which have both played key roles in unlocking the origins debate. He has no financial interest in any outcome and has never received remuneration for six years of investigative work. All research and publications are freely available. Source code and full Markdown at <a href="https://github.com/nemonominem/WHO_Compromission_Public" target="_blank" rel="noopener noreferrer"> github.com/nemonominem/WHO_Compromission_Public</a>.
+    </p>
+    <p class="footer-meta">DRASTIC &nbsp;&middot;&nbsp; OSINT Research Product &nbsp;&middot;&nbsp; July 2026</p>
+  </div>
+</footer>
+
+<!-- ── JavaScript ──────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Progress bar + active nav (rAF throttled) ── */
+  const progressEl  = document.getElementById('progress');
+  const navLinks    = document.querySelectorAll('.chapter-list a[data-ch]');
+  const chapters    = document.querySelectorAll('section[data-chapter]');
+  let rafPending    = false;
+
+  function updateProgress() {
+    const scrolled = window.scrollY;
+    const total    = document.documentElement.scrollHeight - window.innerHeight;
+    const pct      = total > 0 ? Math.min((scrolled / total) * 100, 100) : 0;
+    progressEl.style.width    = pct + '%';
+    progressEl.setAttribute('aria-valuenow', Math.round(pct));
+  }
+
+  function updateActiveChapter() {
+    let active = null;
+    chapters.forEach(function (ch) {
+      if (ch.getBoundingClientRect().top <= 80) active = ch.dataset.chapter;
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.dataset.ch === active);
+    });
+  }
+
+  window.addEventListener('scroll', function () {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function () {
+      updateProgress();
+      updateActiveChapter();
+      rafPending = false;
+    });
+  }, { passive: true });
+
+  /* ── Scroll cue fade ── */
+  const scrollCue = document.getElementById('scroll-cue');
+  let cueFaded = false;
+  window.addEventListener('scroll', function () {
+    if (!cueFaded && window.scrollY > 80) {
+      scrollCue.style.opacity = '0';
+      cueFaded = true;
+    }
+  }, { passive: true });
+
+  /* ── Mobile nav ── */
+  const toggle   = document.getElementById('nav-toggle');
+  const header   = document.getElementById('site-header');
+  const navList  = document.getElementById('chapter-list');
+
+  toggle.addEventListener('click', function () {
+    const open = header.classList.toggle('nav-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  navList.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (header.classList.contains('nav-open') &&
+        !header.contains(e.target)) {
+      header.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ── IntersectionObserver for animations ── */
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+
+      /* stagger timeline items in their parent */
+      if (el.classList.contains('timeline-block')) {
+        const items = el.querySelectorAll('.timeline-item');
+        items.forEach(function (item, i) {
+          setTimeout(function () {
+            item.classList.add('is-visible');
+          }, i * 130);
+        });
+        observer.unobserve(el);
+        return;
+      }
+
+      /* stagger dynamics grid cards */
+      if (el.id === 'dynamics-grid') {
+        const cards = el.querySelectorAll('.dynamic-card');
+        cards.forEach(function (card, i) {
+          setTimeout(function () {
+            card.classList.add('is-visible');
+          }, i * 100);
+        });
+        observer.unobserve(el);
+        return;
+      }
+
+      el.classList.add('is-visible');
+      observer.unobserve(el);
+    });
+  }, { threshold: [0.12, 0.28] });
+
+  /* observe all animated elements */
+  document.querySelectorAll(
+    '.reveal, .reveal-image, .pull-quote, .chapter-text, ' +
+    '.chapter-hero, .chapter-hero-text, .stat-callout, ' +
+    '.doc-excerpt, .closing-statement, .timeline-block, #dynamics-grid'
+  ).forEach(function (el) {
+    observer.observe(el);
+  });
+
+  /* ── Animated chat: ch3 email exchange ─────────────────── */
+  /* ── Animated chats (ch3/ch4) ── */
+  function initChatAnimation(chatId) {
+    var chatEl = document.getElementById(chatId);
+    if (!chatEl) return;
+
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function typeInto(bubbleEl, text, speed, done) {
+      bubbleEl.textContent = '';
+      if (prefersReduced) { bubbleEl.textContent = text; if (done) done(); return; }
+      var cursor = document.createElement('span');
+      cursor.className = 'chat-cursor';
+      bubbleEl.appendChild(cursor);
+      var i = 0;
+      function tick() {
+        if (i < text.length) {
+          bubbleEl.insertBefore(document.createTextNode(text[i]), cursor);
+          i++;
+          setTimeout(tick, speed);
+        } else {
+          cursor.remove();
+          if (done) done();
+        }
+      }
+      tick();
+    }
+
+    function runChat(msgs) {
+      if (!msgs.length) return;
+      var msg = msgs[0];
+      var rest = msgs.slice(1);
+      msg.classList.add('chat-visible');
+      var bubble = msg.querySelector('.chat-bubble');
+      var text = msg.getAttribute('data-text') || '';
+      setTimeout(function () {
+        typeInto(bubble, text, 18, function () {
+          setTimeout(function () { runChat(rest); }, 500);
+        });
+      }, 200);
+    }
+
+    var chatObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chatObs.unobserve(chatEl);
+        var msgs = Array.from(chatEl.querySelectorAll('.chat-msg'));
+        if (prefersReduced) {
+          msgs.forEach(function (m) {
+            m.classList.add('chat-visible');
+            var b = m.querySelector('.chat-bubble');
+            b.textContent = m.getAttribute('data-text') || '';
+          });
+        } else {
+          runChat(msgs);
+        }
+      });
+    }, { threshold: 0.2 });
+    chatObs.observe(chatEl);
+  }
+
+  initChatAnimation('ch3-chat');
+  initChatAnimation('ch4-chat');
+
+  /* ── YouTube facade (click-to-play) ── */
+  document.querySelectorAll('.yt-facade[data-yt-id]').forEach(function(facade) {
+    var activated = false;
+    var liveIframe = null;
+
+    function postCmd(cmd) {
+      if (liveIframe && liveIframe.contentWindow) {
+        liveIframe.contentWindow.postMessage(
+          JSON.stringify({event:'command', func:cmd, args:[]}), 'https://www.youtube.com');
+      }
+    }
+
+    function activate() {
+      if (activated) return;
+      activated = true;
+      var id    = facade.getAttribute('data-yt-id');
+      var start = facade.getAttribute('data-yt-start') || '0';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id +
+                   '?autoplay=1&rel=0&start=' + start + '&enablejsapi=1';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.setAttribute('allowfullscreen', '');
+      facade.innerHTML = '';
+      facade.appendChild(iframe);
+      facade.style.cursor = 'default';
+      liveIframe = iframe;
+
+      /* pause/resume when scrolled out/back in */
+      var playObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          postCmd(e.isIntersecting ? 'playVideo' : 'pauseVideo');
+        });
+      }, { threshold: 0.25 });
+      playObs.observe(facade);
+    }
+
+    facade.addEventListener('click', activate);
+    facade.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+    });
+  });
+
+  /* ── Closing statement flames ── */
+  (function() {
+    var closing = document.querySelector('.closing-statement');
+    if (!closing) return;
+    var row = document.createElement('div');
+    row.className = 'flame-row';
+    row.setAttribute('aria-hidden', 'true');
+    var tongues = [
+      { l:'1%',  h:'58px',  c1:'rgba(255,62,0,0.92)',  c2:'rgba(255,130,0,0.68)', delay:'0s',     dur:'1.35s' },
+      { l:'7%',  h:'76px',  c1:'rgba(255,42,0,0.88)',  c2:'rgba(255,108,0,0.6)',  delay:'0.28s',  dur:'1.62s' },
+      { l:'14%', h:'52px',  c1:'rgba(255,88,0,0.93)',  c2:'rgba(255,168,0,0.72)', delay:'0.44s',  dur:'1.18s' },
+      { l:'20%', h:'84px',  c1:'rgba(255,50,0,0.96)',  c2:'rgba(255,128,0,0.76)', delay:'0.09s',  dur:'1.52s' },
+      { l:'27%', h:'63px',  c1:'rgba(255,96,0,0.87)',  c2:'rgba(255,188,0,0.66)', delay:'0.61s',  dur:'1.28s' },
+      { l:'33%', h:'45px',  c1:'rgba(255,72,0,0.9)',   c2:'rgba(255,148,0,0.63)', delay:'0.17s',  dur:'1.45s' },
+      { l:'41%', h:'78px',  c1:'rgba(255,55,0,0.94)',  c2:'rgba(255,140,0,0.7)',  delay:'0.36s',  dur:'1.7s'  },
+      { l:'50%', h:'55px',  c1:'rgba(255,80,0,0.89)',  c2:'rgba(255,160,0,0.64)', delay:'0.52s',  dur:'1.22s' },
+      { l:'57%', h:'72px',  c1:'rgba(255,60,0,0.91)',  c2:'rgba(255,120,0,0.67)', delay:'0.07s',  dur:'1.48s' },
+      { l:'64%', h:'48px',  c1:'rgba(255,100,0,0.86)', c2:'rgba(255,192,0,0.62)', delay:'0.39s',  dur:'1.58s' },
+      { l:'71%', h:'81px',  c1:'rgba(255,48,0,0.93)',  c2:'rgba(255,122,0,0.73)', delay:'0.23s',  dur:'1.32s' },
+      { l:'78%', h:'59px',  c1:'rgba(255,75,0,0.88)',  c2:'rgba(255,155,0,0.65)', delay:'0.55s',  dur:'1.15s' },
+      { l:'85%', h:'68px',  c1:'rgba(255,58,0,0.92)',  c2:'rgba(255,136,0,0.7)',  delay:'0.14s',  dur:'1.65s' },
+      { l:'91%', h:'50px',  c1:'rgba(255,85,0,0.87)',  c2:'rgba(255,170,0,0.63)', delay:'0.43s',  dur:'1.4s'  },
+      { l:'97%', h:'74px',  c1:'rgba(255,45,0,0.9)',   c2:'rgba(255,115,0,0.68)', delay:'0.31s',  dur:'1.55s' },
+    ];
+    tongues.forEach(function(f) {
+      var t = document.createElement('div');
+      t.className = 'flame-tongue';
+      t.style.cssText = [
+        'left:' + f.l,
+        'height:' + f.h,
+        'width:' + (parseInt(f.h) * 0.65 + 'px'),
+        'background:radial-gradient(ellipse at 50% 100%,' + f.c1 + ' 0%,' + f.c2 + ' 45%,transparent 72%)',
+        'animation-delay:' + f.delay,
+        'animation-duration:' + f.dur,
+      ].join(';');
+      row.appendChild(t);
+    });
+    closing.appendChild(row);
+  }());
+
+})();
+</script>
+
+</body>
+</html>
