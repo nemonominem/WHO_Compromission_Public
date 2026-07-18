@@ -2527,7 +2527,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       el.classList.add('is-visible');
       observer.unobserve(el);
     });
-  }, { threshold: [0.12, 0.28] });
+  }, { threshold: 0 });
 
   /* observe all animated elements */
   document.querySelectorAll(
