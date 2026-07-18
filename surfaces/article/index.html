@@ -489,9 +489,39 @@ body {
   padding: 0.3rem 1.5rem 1.5rem;
   border-top: 1px solid var(--border);
 }
+.authorship-table-viewport {
+  position: relative;
+}
 .authorship-table-scroll {
   overflow-x: auto;
   margin-top: 1.1rem;
+}
+.authorship-table-fade {
+  position: absolute;
+  top: 1.1rem;
+  right: 0;
+  bottom: 0;
+  width: 32px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--bg-elevated));
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.authorship-table-fade.is-hidden { opacity: 0; }
+.authorship-table-swipe-hint {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.03em;
+  margin-top: 0.5rem;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.authorship-table-swipe-hint.is-hidden { opacity: 0; }
+@media (max-width: 640px) {
+  .authorship-table-swipe-hint { display: block; }
 }
 .authorship-table table {
   border-collapse: collapse;
@@ -2028,6 +2058,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
         <span class="at-title">Four Papers, One Network — Authorship Cross-Reference</span>
       </summary>
       <div class="authorship-table-body">
+        <div class="authorship-table-viewport">
         <div class="authorship-table-scroll">
           <table>
             <thead>
@@ -2168,6 +2199,9 @@ Some, perhaps more than a few, will not like it still since it allows that the n
             </tbody>
           </table>
         </div>
+        <div class="authorship-table-fade" aria-hidden="true"></div>
+        </div>
+        <p class="authorship-table-swipe-hint" aria-hidden="true">&#8596; Swipe to see more</p>
         <p class="authorship-table-legend">&#9679; credited co-author (<span style="color:var(--red-bright)">red</span> = lead/first or corresponding author) &nbsp;&middot;&nbsp; <em>italic</em> = shaped, commissioned, or consulted the work but not a credited co-author &nbsp;&middot;&nbsp; &ndash; = no connection to this paper &nbsp;&middot;&nbsp; (CS) = member of EcoHealth Alliance's <a class="cite-link" href="https://drive.proton.me/urls/76RQCCFKM0#eXXjpWl26z1N" target="_blank" rel="noopener noreferrer">"Coalition of Support"</a>, the internal PR and lobbying network Daszak assembled from October 2021.</p>
         <p class="authorship-table-note">Author lists per PubMed (DOIs: <a class="cite-link" href="https://doi.org/10.1038/s41591-020-0820-9" target="_blank" rel="noopener noreferrer">10.1038/s41591-020-0820-9</a>, <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">10.1016/j.cell.2021.08.017</a>, <a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">10.1126/science.abp8715</a>, <a class="cite-link" href="https://doi.org/10.1126/science.abp8337" target="_blank" rel="noopener noreferrer">10.1126/science.abp8337</a>). Remaining co-authors not otherwise named in this article: <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a> &mdash; Simon J. Anthony, Wendy S. Barclay, Maciej F. Boni, Peter C. Doherty, Jemma L. Geoghegan, Xiaowei Jiang, Julian L. Leibowitz, Stuart J. D. Neil, Tim Skern, Susan R. Weiss. <a class="cite-link" href="https://doi.org/10.1126/science.abp8715" target="_blank" rel="noopener noreferrer">Worobey et al.</a> &mdash; Joshua I. Levy, Lorena Malpica Serrano, Moritz U. G. Kraemer, Chris Newman, Philippe Lemey. <a class="cite-link" href="https://doi.org/10.1126/science.abp8337" target="_blank" rel="noopener noreferrer">Pekar et al.</a> &mdash; Andrew Magee, Edyth Parker, Niema Moshiri, Katherine Izhikevich, Jennifer L. Havens, Karthik Gangavarapu, Lorena Mariana Malpica Serrano, Nathaniel L. Matteson, Mark Zeller, Joshua I. Levy, Jade C. Wang, Scott Hughes, Jungmin Lee, Heedo Park, Man-Seong Park, Katherine Ching Zi Yan, Raymond Tzer Pin Lin, Mohd Noor Mat Isa, Yusuf Muhammad Noor, Tetyana I. Vasylyeva.</p>
       </div>
@@ -2609,6 +2643,23 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
     });
   });
+
+  /* ── Authorship table scroll hint ── */
+  (function() {
+    var scroller = document.querySelector('.authorship-table-scroll');
+    var fade = document.querySelector('.authorship-table-fade');
+    var hint = document.querySelector('.authorship-table-swipe-hint');
+    if (!scroller) return;
+    function update() {
+      var notScrollable = scroller.scrollWidth <= scroller.clientWidth + 1;
+      var atEnd = scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 2;
+      if (fade) fade.classList.toggle('is-hidden', notScrollable || atEnd);
+      if (hint) hint.classList.toggle('is-hidden', notScrollable || scroller.scrollLeft > 4);
+    }
+    scroller.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }());
 
   /* ── Closing statement flames ── */
   (function() {
