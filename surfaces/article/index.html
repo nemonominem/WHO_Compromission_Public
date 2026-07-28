@@ -812,7 +812,7 @@ body {
   position: relative;
 }
 .intel-frame::before {
-  content: 'DNI RELEASE';
+  content: var(--frame-label, 'DNI RELEASE');
   position: absolute;
   top: 0.4rem; left: 0.5rem;
   font-family: var(--font-mono);
@@ -821,6 +821,14 @@ body {
   color: #6496b4;
 }
 .intel-frame img { width: 100%; height: auto; display: block; margin-top: 1rem; }
+.intel-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin: 2rem 0;
+}
+@media (max-width: 700px) { .intel-pair { grid-template-columns: 1fr; } }
 
 /* ── Animated email chat window ──────────────────────────── */
 .chat-window {
@@ -1647,6 +1655,40 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       <p>In that capacity, Cameron helped steer Fauci into the origins process as an ostensibly independent scientific expert who just happened to be convinced by the Proximal Origin argument — the same Fauci who had co-convened the 1 February 2020 confidential call and co-drafted Proximal Origin within days of it. Fauci was thus able to use Haines’ and Cameron’s endorsements to push Proximal Origin — and its July 2021 successor, the Holmes-led <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a> — directly to the Intelligence Community, presenting it as the authoritative scientific consensus on origins. The timing itself is suspicious: the manuscript had been posted to Zenodo — a platform with no moderation delay, unlike bioRxiv's typical two-day screening — just one day before Fauci's email, a release cadence that reads less like routine posting than a deadline met to order.</p>
       
       <p>The irony compounds from there. Having helped shape Proximal Origin with Farrar in February 2020, then pushed it onto the Intelligence Community with Haines’ and Cameron’s help, Fauci would then be considered as an 'external' reviewer of the Biden 90-day intel assessment which he had helped shape, based on a paper (P.O.) which he had also quietly helped shape. One can't make that up.</p>
+
+      <p>The "Critical Review" author list is itself worth pausing on: alongside the usual Worobey, Andersen, Garry, Rambaut, and Holmes sit Jeremy Farrar and Angela Rasmussen — both discussed elsewhere in this report — plus Stuart Neil (King's College London), another frequent combatant in the Twitter origins debate. Absent is W. Ian Lipkin, the fifth <em>Proximal Origin</em> author and a longtime collaborator and co-author of Ralph Baric's, who — as shown above — never signed onto the "Critical Review," Worobey et al., or Pekar et al. These authors would have known perfectly well that their preprint was likely to be referenced in the Biden intelligence review — which goes some way to explaining the presence of names like Peter Doherty (a Nobel laureate immunologist with no prior involvement in the SARS-CoV-2 origins literature) and Jeremy Farrar, whose institutional weight added authority the paper's working scientists could not supply on their own.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <blockquote class="pull-quote pull-quote--sm reveal">
+        <p>&#8220;We contend that although the animal reservoir for SARS-CoV-2 has not been identified and the key species may not have been tested, in contrast to other scenarios there is substantial body of scientific evidence supporting a zoonotic origin. Although the possibility of a laboratory accident cannot be entirely dismissed, and may be near impossible to falsify, this conduit for emergence is highly unlikely relative to the numerous and repeated human-animal contacts that occur routinely in the wildlife trade. Failure to comprehensively investigate the zoonotic origin through collaborative and carefully coordinated studies would leave the world vulnerable to future pandemics arising from the same human activities that have repeatedly put us on a collision course with novel viruses.&#8221;</p>
+        <footer>&mdash; <cite>Holmes et al., "The Origins of SARS-CoV-2: A Critical Review," conclusion</cite></footer>
+      </blockquote>
+
+      <p>The paper's own conflict-of-interest disclosure is worth noting too: "A.R., A.L.R., M.F.B., S.A.G., and K.G.A. have received consulting fees and compensation for expert testimony on SARS-CoV-2 and the COVID-19 pandemic" — Andrew Rambaut, Angela L. Rasmussen, Maciej F. Boni, Stephen A. Goldstein, and Kristian G. Andersen. Given what this report documents elsewhere about Andersen's recruitment as a paid SME for the very IC review this paper was feeding, the most parsimonious reading is that at least some of that "expert testimony" compensation traces back to the same government channels the paper was being used to influence.</p>
+
+      <p>The choice of <em>Cell</em> is also not innocent. The P.O. authors already knew, from experience, that <em>Cell</em> would move fast. During the <em>Proximal Origin</em> publication scramble the year before — after Nature rejected the paper and recommended another Nature-family journal instead — Holmes told the group: "I'm pretty sure Cel would take it...they are desperate to get in on the act." Andersen made the same calculation as a fallback plan: "If it's a no, Science would likely be interested and Cell would take it for sure." And they would be able to go fast and get the paper published on <em>Cell</em>'s own website before the conclusion of the Biden 90-day review.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/holmes-slack-cell-desperate-to-get-in.png" loading="lazy"
+           alt="Eddie Holmes Slack message, 13:58: I'm pretty sure Cel would take it...they are desperate to get in on the act"
+           class="img-feature">
+      <p class="img-caption">Eddie Holmes, Slack, 13:58, during the <em>Proximal Origin</em> publication scramble.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/andersen-slack-cell-would-take-it.png" loading="lazy"
+           alt="Kristian Andersen Slack message, 18:10: If it's a no, Science would likely be interested and Cell would take it for sure"
+           class="img-feature">
+      <p class="img-caption">Kristian Andersen, Slack, 18:10, same discussion.</p>
+    </div>
+
+    <div class="reveal-image reveal">
+      <img src="../../shared/images/critical-review-zenodo-authorlist.png" loading="lazy"
+           alt="Zenodo author list for The Origins of SARS-CoV-2: A Critical Review, 7 July 2021: Holmes, Goldstein, Rasmussen, Robertson, Crits-Christoph, Wertheim, Anthony, Barclay, Boni, Doherty, Farrar, Geoghegan, Jiang, Leibowitz, Neil, Skern, Weiss, Worobey, Andersen, Garry, Rambaut"
+           class="img-feature">
+      <p class="img-caption">Zenodo author list, "The Origins of SARS-CoV-2: A Critical Review," 7 July 2021.</p>
     </div>
 
     <ol class="timeline-block" id="ch5-fauci-timeline" aria-label="Fauci's influence on the IC's 90-day COVID origins study, June to September 2021">
@@ -1660,15 +1702,37 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       <li class="timeline-item">
         <span class="timeline-date">7 Jul 2021</span>
         <div class="timeline-content">
-          <strong>The "Critical Review" (Holmes et al.) lands as preprint</strong>
-          <p>Holmes et al.'s "Critical Review" is posted to <a class="cite-link" href="https://doi.org/10.5281/zenodo.5075888" target="_blank" rel="noopener noreferrer">Zenodo</a>. A preprint server is the usual choice when speed matters, but bioRxiv, the standard venue, runs submissions through a moderation screen that typically takes about two days before public release; Zenodo, with no such screen, is what a deadline that has to be met exactly, not approximately, calls for. The same move recurs eight months later: an overlapping cast from this network (Worobey, Andersen, Holmes, Wertheim among them) posts the two 'market' papers to <a class="cite-link" href="https://doi.org/10.5281/zenodo.6299600" target="_blank" rel="noopener noreferrer">Zenodo on 26 February 2022</a>, one day after China CDC's George Gao releases his own more cautious Huanan-market analysis on <a class="cite-link" href="https://www.science.org/content/article/do-three-new-studies-add-proof-covid-19-s-origin-wuhan-animal-market" target="_blank" rel="noopener noreferrer">Research Square</a>, reaching different conclusions about the market's role — landing the day after Gao reads less like coincidence than a deliberate move to catch, and blunt, his limelight. Earlier that same day, before the paper went up, Rambaut told Holmes he was stripping the "corresponding authors" line from the byline "to avoid a perception that there are leaders and we just recruited everyone else" — collective authorship arranged as its own kind of authority, even as Fauci was about to sell that same paper upward as independent expert consensus.</p>
+          <strong>Fauci reads the classified assessment hours after the "Critical Review" lands as preprint</strong>
+          <p>At 16:16 UTC (12:16pm EDT) — after several rounds of NSC scheduling had settled on 4:00pm that same day — Holmes et al.'s "Critical Review" is posted to <a class="cite-link" href="https://doi.org/10.5281/zenodo.5075888" target="_blank" rel="noopener noreferrer">Zenodo</a>. Barely three hours later, Fauci makes his confirmed 4:00pm visit to EEOB Room 422, where Beth Cameron and Maher Bitar — the NSC's Special Assistant to the President for Intelligence — sit with him to read the classified read file. A preprint server is the usual choice when speed matters, but bioRxiv, the standard venue, runs submissions through a moderation screen that typically takes about two days before public release; Zenodo, with no such screen, is what a deadline that has to be met exactly, not approximately, calls for. The same move recurs eight months later: an overlapping cast from this network (Worobey, Andersen, Holmes, Wertheim among them) posts the two 'market' papers to <a class="cite-link" href="https://doi.org/10.5281/zenodo.6299600" target="_blank" rel="noopener noreferrer">Zenodo on 26 February 2022</a>, one day after China CDC's George Gao releases his own more cautious Huanan-market analysis on <a class="cite-link" href="https://www.science.org/content/article/do-three-new-studies-add-proof-covid-19-s-origin-wuhan-animal-market" target="_blank" rel="noopener noreferrer">Research Square</a>, reaching different conclusions about the market's role — landing the day after Gao reads less like coincidence than a deliberate move to catch, and blunt, his limelight. Earlier that same day, before the paper went up, Rambaut told Holmes he was stripping the "corresponding authors" line from the byline "to avoid a perception that there are leaders and we just recruited everyone else" — collective authorship arranged as its own kind of authority, even as Fauci was about to sell that same paper upward as independent expert consensus.</p>
         </div>
       </li>
       <li class="timeline-item">
         <span class="timeline-date">8 Jul 2021</span>
         <div class="timeline-content">
-          <strong>Fauci forwards the "Critical Review" to the NSC the next day</strong>
-          <p>Fauci forwards the "Critical Review" to Cameron, calling it the work of "a group of highly qualified virologists" that "summarizes what I said yesterday," and asks that it be routed to the NSC group, OSTP, and Jake Sullivan; Cameron replies that the NSC is "in awe" of him.</p>
+          <strong>Fauci forwards the "Critical Review" — with a Bitly link — to the NSC the next morning</strong>
+          <p>At 6:23am, Fauci emails Cameron a Bitly link to the same preprint he read hours after it went up — the shortened URL carried right in the subject line — calling it the work of "a group of highly qualified virologists" that "summarizes what I said yesterday," and asking that it be routed to the NSC group, OSTP, and Jake Sullivan; Cameron replies three hours later that the NSC is "in awe" of him. The classified briefing and the preprint are fused into a single talking point within eighteen hours of each other:</p>
+          <table style="width:100%;border-collapse:collapse;font-size:0.92rem;margin-top:0.75rem">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:left;padding:4px 8px;border-bottom:1px solid #ccc;white-space:nowrap">Time (EDT)</th>
+                <th scope="col" style="text-align:left;padding:4px 8px;border-bottom:1px solid #ccc">Event</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">9:08am, 7 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">Preprint PDF finalized &mdash; embedded file metadata records creation at 13:08 UTC, author Andrew Rambaut</td></tr>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">12:16pm, 7 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">Preprint posted live to Zenodo (16:16 UTC)</td></tr>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">3:09pm, 7 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">David Robertson, a "Critical Review" co-author, is first to tweet the paper publicly</td></tr>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">4:00pm, 7 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">Fauci reads the classified assessment with Cameron and Bitar, EEOB Room 422</td></tr>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">5:37pm, 7 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">Greg Folkers, Fauci's NIAID Chief of Staff, tweets the preprint via a Bitly link</td></tr>
+              <tr><td style="padding:4px 8px;border-bottom:1px solid #eee;white-space:nowrap">6:23am, 8 Jul</td><td style="padding:4px 8px;border-bottom:1px solid #eee">Fauci emails Cameron the same Bitly link to the preprint</td></tr>
+              <tr><td style="padding:4px 8px;white-space:nowrap">18 Aug 2021</td><td style="padding:4px 8px"><em>Cell</em> publishes the paper online &mdash; still inside the Biden administration's 90-day review window (26 May&ndash;24 Aug 2021)</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.95rem;font-style:italic;color:var(--text-secondary,#aaa);margin-top:0.75rem">Robertson's tweet, three hours after the Zenodo posting, is unremarkable on its own &mdash; a co-author promoting his own paper. Folkers's, coming from outside the author list entirely, is the one worth pausing on: it lands 5 hours and 21 minutes after the preprint went up on Zenodo &mdash; Fauci's own chief of staff was already broadcasting the link publicly, roughly ninety minutes after Fauci's own NSC briefing with Cameron and Bitar wrapped, nearly thirteen hours before Fauci "privately" forwarded the identical link to Cameron the next morning as though he alone had flagged it. Folkers surfaces elsewhere in the same congressional record for a parallel tactic: the Select Subcommittee's <a class="cite-link" href="https://oversight.house.gov/wp-content/uploads/2024/12/12.04.2024-SSCP-FINAL-REPORT.pdf" target="_blank" rel="noopener noreferrer">December 2024 final report</a> found he had deliberately misspelled keywords in his own emails &mdash; "Ec~Health," "g#in-function research," "anders$n" &mdash; specifically to defeat FOIA keyword searches, the same evasion pattern separately documented for Morens's shift to personal Gmail.</p>
+          <img src="../../shared/images/folkers-tweet-critical-review-2021-07-08.png" loading="lazy"
+               alt="Greg Folkers (@greg_folkers), Fauci's NIAID Chief of Staff, tweets the Zenodo/Bitly link to The Origins of SARS-CoV-2: A Critical Review, timestamped 9:37 AM, Jul 8, 2021 in NZ time — 5:37pm EDT, 7 July 2021"
+               style="width:100%;max-width:420px;height:auto;display:block;margin-top:0.75rem;border-radius:8px">
+          <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">Greg Folkers (@greg_folkers), Fauci's NIAID Chief of Staff, tweets the same Bitly link, 9:37am NZT (5:37pm EDT), 7 July 2021.</p>
         </div>
       </li>
       <li class="timeline-item">
@@ -1708,13 +1772,46 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       </li>
     </ol>
 
-    <div class="intel-frame reveal">
-      <img src="../../shared/images/fauci_reviewer_montage.png" loading="lazy"
-           alt="Two declassified ODNI documents, released by DNI Tulsi Gabbard: an email naming Edward Holmes, Kristian Andersen, and Andrew Rambaut as the 'Critical Review' authors Fauci highlighted as important, and the internal reviewer-shortlist discussion where Fauci's own name 'came up probably the most' despite being flagged as 'a potential customer' with a conflict of interest"
-           style="width:100%;height:auto;display:block;margin-top:1rem">
-      <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">
-        Declassified ODNI documents released by DNI Tulsi Gabbard, 18 June 2026 &#8212; the "Critical Review" author list (12 July 2021) and the reviewer-shortlist discussion naming Fauci (19&ndash;20 July 2021).
-      </p>
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">Folkers: Fauci's Man Inside the Coalition</h3>
+
+      <p>Fauci's own office was wired directly into the Daszak/Morens network. David Morens named Chief of Staff Greg Folkers, in a <a class="cite-link" href="https://files.usrtk.org/4-USRTK-Prod-22-12.22.25doj-nih.pdf" target="_blank" rel="noopener noreferrer">September 2021 email</a> to Gerald Keusch, as one of only "two key people who decide what Tony sees" — having already described him, that April, as one of the few people "in whom Tony confides when the subject is difficult or personal."</p>
+
+      <p>See, for instance — among many such exchanges — a July 2022 thread about Angela Rasmussen's PBS Newshour appearance, where Folkers is cc'd alongside Daszak, Rich Roberts, Peter Hotez, and Jeffrey Sturchio (EcoHealth Alliance's consultant for NIH/NIAID communications). In all these communications, Folkers repetitively uses bit.ly links to circulate papers or articles. One typical example is: on 2 March 2023 he sent Morens a bit.ly link to Philipp Markolin's "Denounce, deny, deceive: The manipulation playbook of anti-science actors," which Morens forwarded that same evening to the same circle (see images below).</p>
+
+      <p>Keusch is another key character in these Coalition conversations around Folkers: we already saw him in the Sachs-targeting campaign, with its lament over Lipkin's "crap epidemiology" verdict on the Science market paper. Rich Roberts, meanwhile, is a reliable PR man for Daszak, ready to lend his Nobel Prize connections in support: in May 2020 he organized a letter signed by 77 Nobel laureates protesting NIH's termination of EcoHealth Alliance's grant.</p>
+    </div>
+
+    <div class="intel-pair">
+      <div class="reveal-image reveal">
+        <img src="../../shared/images/folkers-rasmussen-pbs-newshour-2022-07-27.png" loading="lazy"
+             alt="Gerald Keusch to David Morens, cc Peter Daszak, Rich Roberts, Peter Hotez, Aleksei Chmura, Greg Folkers, and Jeffery Taubenberger, 27 July 2022: she cleaned up her act and was just as compelling, but not such a hoot as she is in tweets"
+             class="img-feature">
+        <p class="img-caption">Gerald Keusch to David Morens, cc Daszak, Roberts, Hotez, Chmura, Folkers, and Taubenberger, 27 July 2022. Source: <a class="cite-link" href="https://files.usrtk.org/NIH-19-1.22.26-production-Morens.pdf" target="_blank" rel="noopener noreferrer">NIH-19-1.22.26-production-Morens.pdf</a>.</p>
+      </div>
+      <div class="reveal-image reveal">
+        <img src="../../shared/images/folkers-denounce-deny-deceive-full-thread-2023-03-02.png" loading="lazy"
+             alt="David Morens forwards Greg Folkers's Denounce, deny, deceive: The manipulation playbook of anti-science actors (bit.ly/3mj0Rjk) to Gerald Keusch, Peter Daszak, Rich Roberts, Peter Hotez, Jeff Sturchio, and Aleksei Chmura, 2 March 2023"
+             class="img-feature">
+        <p class="img-caption">Folkers originates, Morens relays to the full Coalition circle — Keusch, Daszak, Roberts, Hotez, Sturchio, and Chmura — 2 March 2023. Source: <a class="cite-link" href="https://files.usrtk.org/NIH-19-1.22.26-production-Morens.pdf" target="_blank" rel="noopener noreferrer">NIH-19-1.22.26-production-Morens.pdf</a>.</p>
+      </div>
+    </div>
+
+    <div class="intel-pair">
+      <div class="intel-frame reveal" style="--frame-label:'SENATE RELEASE'">
+        <img src="../../shared/images/fauci-cameron-critical-review-email-2021-07-08.png" loading="lazy"
+             alt="Fauci to Cameron, 8 July 2021, 6:23am: the Critical Review preprint is from a group of highly qualified virologists, please show it to your team, it summarizes what I said yesterday. Cameron's reply: I will share it with the NSC group, my bio team, colleagues in OSTP, and also with Jake.">
+        <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">
+          Fauci to Cameron, 8 July 2021, 6:23am, and Cameron's reply, 9:33am. Source: <a class="cite-link" href="https://www.paul.senate.gov/wp-content/uploads/2026/07/Fauci-Intel-Release-2026.06.11.pdf" target="_blank" rel="noopener noreferrer"><em>Fauci-Intel-Release-2026.06.11</em></a>, p. 67, released by Sen. Rand Paul, Senate Homeland Security &amp; Governmental Affairs Committee.
+        </p>
+      </div>
+      <div class="intel-frame reveal">
+        <img src="../../shared/images/fauci_reviewer_montage.png" loading="lazy"
+             alt="Two declassified ODNI documents, released by DNI Tulsi Gabbard: an email naming Edward Holmes, Kristian Andersen, and Andrew Rambaut as the 'Critical Review' authors Fauci highlighted as important, and the internal reviewer-shortlist discussion where Fauci's own name 'came up probably the most' despite being flagged as 'a potential customer' with a conflict of interest">
+        <p class="img-caption" style="padding:0.4rem 0.25rem 0.5rem">
+          Declassified ODNI documents released by DNI Tulsi Gabbard, 18 June 2026 &#8212; the "Critical Review" author list (12 July 2021) and the reviewer-shortlist discussion naming Fauci (19&ndash;20 July 2021).
+        </p>
+      </div>
     </div>
 
   </div>
