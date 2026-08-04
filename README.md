@@ -28,6 +28,10 @@ Data source: `shared/network_data.json`
 
 Annotated reconstruction of Michael Worobey's 27 October 2022 response to ProPublica and Vanity Fair, tracking how the market-papers' central claims have fared since — corrections, retracted probability estimates, and disputed rebuttals. Self-contained HTML.
 
+### 4. Lipkin as CIA Relay — [surfaces/article/intel_game.html](https://nemonominem.github.io/WHO_Compromission_Public/surfaces/article/intel_game.html)
+
+Supplementary analysis of how W. Ian Lipkin was inserted into the Proximal Origin process, and what that insertion meant for what came after. Self-contained HTML.
+
 ---
 
 ## About
