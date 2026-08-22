@@ -562,6 +562,7 @@ body {
 .authorship-table .at-yes { color: var(--text-primary); font-size: 1rem; }
 .authorship-table .at-lead { color: var(--red-bright); font-weight: 700; }
 .authorship-table .at-lead::after { content: ' (lead)'; font-size: 0.62rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em; color: var(--red-bright); }
+.authorship-table .at-central { color: var(--red-bright); font-weight: 700; }
 .authorship-table .at-shaped { color: var(--text-muted); font-size: 0.72rem; font-style: italic; line-height: 1.4; }
 .authorship-table .at-quote { color: #E8B84B; font-weight: 700; font-style: normal; }
 .authorship-table .at-no { color: var(--text-muted); opacity: 0.35; }
@@ -569,6 +570,15 @@ body {
 .authorship-table tr.at-lipkin-row td { background: #1E1040; }
 .authorship-table tr.at-shaper-row td { background: #2A151B; }
 .at-relay-tag { display: inline-block; font-size: 0.62rem; font-family: var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: #9B8FD4; border: 1px solid #4A3A8A; padding: 1px 5px; margin-left: 7px; vertical-align: middle; font-weight: 600; }
+.comparison-table table { table-layout: fixed; min-width: 760px; }
+.comparison-table td:first-child, .comparison-table th:first-child { white-space: normal; }
+.comparison-table td, .comparison-table th { vertical-align: top; }
+.authorship-table.comparison-table td, .authorship-table.comparison-table th { text-align: left; }
+.authorship-table.comparison-table td, .authorship-table.comparison-table th { border-left: 1px solid var(--border); }
+.authorship-table.comparison-table td:first-child, .authorship-table.comparison-table th:first-child { border-left: none; }
+.comparison-table thead tr { background: rgba(192,57,43,0.12); }
+.comparison-table .at-shaped { color: var(--text-primary); font-style: normal; font-size: inherit; }
+.comparison-table tr.at-total td:first-child { color: var(--text-primary); font-style: normal; font-family: var(--font-serif); font-size: 0.92rem; }
 .authorship-table-legend {
   font-family: var(--font-sans);
   font-size: 0.74rem;
@@ -1186,7 +1196,7 @@ footer {
     <h1 class="hero-title">Fate or<br>Failure?</h1>
     <p class="hero-subtitle">China, the WHO, and the Politics of Origins</p>
     <p class="hero-byline">Infographic synthesis of DRASTIC OSINT research report <em>Fate or Failure</em> &nbsp;&middot;&nbsp; Gilles Demaneuf &nbsp;&middot;&nbsp; July 2026</p>
-    <div class="hero-abstract">US and UK intelligence flagged a laboratory origin as a live hypothesis by the end of January 2020, based on consultations with key scientists. What then followed was deliberate narrative containment, with the WHO enrolled to play the key role. <strong>This is the story of why that happened and of how it was done.</strong></div>
+    <div class="hero-abstract">US and UK intelligence flagged a laboratory origin as a live hypothesis by the end of January 2020, based on consultations with key scientists — and within weeks, a narrative-containment operation took hold, with the WHO enrolled to play the key role. <strong>Why that happened, and how it was engineered, is what this article reconstructs.</strong></div>
 
   </div>
   <div class="scroll-cue" id="scroll-cue" aria-hidden="true">
@@ -1227,7 +1237,7 @@ footer {
     <div class="chapter-text reveal">
       <p>In the last days of December 2019, a cluster of unusual pneumonia cases in Wuhan set off a chain of events that would eventually kill millions and reshape geopolitics for a generation. By late January 2020, <a class="cite-link" href="https://gillesdemaneuf.medium.com/the-odnis-b-group-meeting-ralph-baric-s-january-2020-briefing-and-its-relevance-to-covid-19-93c7cc007d63" target="_blank" rel="noopener noreferrer">US and UK intelligence had flagged concerns about a possible laboratory origin for the Wuhan outbreak</a>. The World Health Organization — the one international body with the mandate and in principle the standing to lead a genuine investigation into how the pandemic began — never did so.</p>
 
-      <p>That failure did not happen by accident &mdash; faced with the early intelligence alarm and China's determined strategy of access denial, an explicit choice was made: prioritize cooperation with Beijing over any confrontation on origins. It was a choice of convenience with consequences that outlasted the pandemic itself — an origins question left spinning in a charged geo-political landscape, and a UN health agency which has lost all credibility in its ability to conduct investigations of possibly non-natural outbreaks.</p>
+      <p>Faced with the early intelligence alarm and China's determined strategy of access denial, WHO leadership chose cooperation with Beijing over any confrontation on origins — a convenient decision whose consequences outlasted the pandemic itself, leaving the origins question spinning in a charged geo-political landscape and stripping a UN health agency of any credibility to investigate a possibly non-natural outbreak.</p>
 
       <p>Six interlocking dynamics — Chinese access control, WHO institutional weakness, Farrar's narrative lock-in, the Global Health Security network posture, conflicted scientific networks, and a self-reinforcing echo chamber — operated in parallel to prevent any true investigation of the origin question, even before any WHO investigation team had landed in China. None of them required a central conspirator; each simply needed to point in the same direction. This article traces how they did.</p>
     </div>
@@ -1605,7 +1615,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
     </div>
 
     <div class="chapter-text reveal">
-      <p><em>Proximal Origin</em> did not end its useful life as a single <em>Nature Medicine</em> paper in March 2020. The following year, the usual network of Biodefense & Global Health Initiatives actors pictured above — foremost Avril Haines and Beth Cameron — recycled it by using their positions inside the Biden administration to help Anthony Fauci present the paper to the Intelligence Community as settled scientific consensus. Understanding how that network operates, and its revolving doors, is essential to understanding what happened next.</p>
+      <p><em>Proximal Origin</em>'s useful life extended well past its March 2020 debut as a single <em>Nature Medicine</em> paper: the following year, the usual network of Biodefense & Global Health Initiatives actors pictured above — foremost Avril Haines and Beth Cameron — recycled it, using their positions inside the Biden administration to help Anthony Fauci present the paper to the Intelligence Community as settled scientific consensus. Understanding how that network operates, and its revolving doors, is essential to understanding what happened next.</p>
 
 
       <h3 class="context-section-title" style="margin-top:1.6rem">NTI: The Institutional Backbone</h3>
@@ -1613,6 +1623,22 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       <p>The 2018 photo above shows Nunn (left) with Jeremy Farrar, Director of the Wellcome Trust, acting as the relay between intelligence networks, Track II organisations such as the NTI, and international health institutions. That 2018 press release was co-authored by Beth Cameron, then NTI's Vice President for Global Biological Policy. Cameron would go on to serve as NSC (National Security Council) Senior Director for Global Health Security under Biden, personally shaping the White House's engagement with the 90-day intelligence review that DNI (Director of National Intelligence) Avril Haines oversaw. Post pandemic, in October 2024, <a class="cite-link" href="https://www.nti.org/news/announcing-new-task-force-on-nuclear-proliferation-and-u-s-national-security/" target="_blank" rel="noopener noreferrer">the NTI and the Carnegie Endowment for International Peace formalised their partnership through a joint Task Force</a>. In June 2026, Haines — who as DNI had presided over the IC origins review — was <a class="cite-link" href="https://carnegieendowment.org/posts/2026/06/avril-haines-named-next-carnegie-endowment-president" target="_blank" rel="noopener noreferrer">named Carnegie's eleventh president</a>, taking office September 2026.</p>
       
       <p>What these quick mentions clearly demonstrate is that the same small cast that had previously created and rehearsed scenarios on non-natural pandemics, with particular concerns about biological research in China, worked hard to ignore any potential non-natural origin of SARS-CoV-2. They also show that these actors have happily kept rotating between government, foundations and think-tanks, as if nothing ever happened — a pattern that allows for continued pressure, whoever the president is and whoever controls the House.</p>
+
+      <h3 class="context-section-title" style="margin-top:1.6rem">NTI and the Track II Competition</h3>
+      <p>The Committee on International Security and Arms Control (CISAC), a standing committee of the National Academy of Sciences, was formed in 1980 to keep a scientist-to-scientist channel open with the Soviet Academy of Sciences on nuclear weapons — later extended to China and India. The Nuclear Threat Initiative (NTI), co-founded by Senator Sam Nunn, grew out of the 1991 Nunn–Lugar Cooperative Threat Reduction programme that dismantled the Soviet Union's nuclear arsenal, and, as the collapse exposed, a biological weapons programme (Biopreparat) far larger than anyone had assessed.</p>
+
+      <p>Both organisations pivoted into biology for the same structural reason. Nuclear arms control has a physical anchor: enrichment plants, weapons tests, and missile silos leave signatures a treaty inspector or a satellite can verify. Biology has no equivalent — a legitimate vaccine laboratory and a clandestine weapons programme run the same equipment and train the same technicians. Dual-use research of concern (DURC) makes that overlap structural, not incidental; it is the model on which EcoHealth Alliance's gain-of-function collaboration with the WIV was built. As synthetic biology accelerated after 2010, the only game left in town was to build a living sensor web — the human equivalent of the satellites that detect a radioactive plume or the seismic networks that catch an underground test. CISAC, NTI, and Johns Hopkins were the key instruments of that murky cooperation-cum-intelligence play, and informal, scientist-to-scientist Track II relationships became close to the only mechanism left for reading intent inside a foreign biological research programme.</p>
+
+      <p>CISAC ran its own operation through some of the very names at the centre of the COVID origins controversy: Ralph Baric, David Franz — also, as this report documents elsewhere, an EcoHealth Alliance adviser — and EcoHealth Alliance itself, meeting Chinese counterparts in Wuhan (2017), Galveston (2018), and Harbin (2019). NTI operated on a different scale entirely: a large, well-funded staff and a public profile that dwarfed CISAC's, not a function of any one board seat — Farrar's own NTI board membership, documented elsewhere in this report, was one node in a much bigger operation. The Johns Hopkins Center for Health Security ran its own parallel channel into China, built around Tianjin University's Center for Biosafety Research and Strategy: Gronvall attended the June 2018 Tianjin workshop, moderated Tianjin's presentation at the December 2018 Global Forum on Scientific Advances, and co-organised the July 2019 Washington dialogue on synthetic-biology biosecurity. A very representative example of this Track II concerted effort is Gronvall's own convergence with Franz: co-authors, and fellow members of the 2019 Defense Threat Reduction Advisory Committee task force that recommended more Track II diplomacy over stronger biosafety oversight.</p>
+
+      <p>An <a class="cite-link" href="https://drive.usercontent.google.com/download?id=1OCQ1dQ7ALrdIiVpqhm0iAR86giwxJ2eg&export=download&authuser=0" target="_blank" rel="noopener noreferrer">internal CISAC conference call and draft SWOT analysis from August 2019</a> has Franz complaining that "there's a lot more competition than when we started this a few years ago," naming the Johns Hopkins Center for Health Security (Tom Inglesby's group) and NTI directly. Open Philanthropy, the funder now bankrolling both rivals, had given Hopkins $16 million over three years and NTI $12 million, while CISAC's own contact at the foundation had already left to join NTI. The SWOT analysis lists it as a formal institutional threat: "Competition in this space from others, i.e. JHU center, NTI."</p>
+
+      <p>Losing the funding race left CISAC with one asset its rivals could not easily match: access to the country's most capable virologists, in a field where China's own high-containment labs wanted exactly that kind of collaborator. Jim Le Duc put the strategy in plain terms on the same call: "We've been successful because we've augmented dialogues with cutting-edge science. No one else has this to offer." Ralph Baric — the world's foremost builder of chimeric coronaviruses, already collaborating with Shi Zhengli — appears in <a class="cite-link" href="https://drive.usercontent.google.com/download?id=1OCQ1dQ7ALrdIiVpqhm0iAR86giwxJ2eg&export=download&authuser=0" target="_blank" rel="noopener noreferrer">CISAC's own August 2019 list</a> of names "suggested for CISAC activities." CISAC's competitive strategy amounted to offering elite American DURC expertise — Baric foremost among it — as the price of admission to keep Chinese high-containment labs engaged: trading exactly the technology base whose export this report treats elsewhere as a central policy failure, to stay relevant as NTI and Hopkins had much better funding and deeper benches.</p>
+    </div>
+
+    <div class="chapter-text reveal">
+      <h3 class="context-section-title" style="margin-top:1.6rem">Track II Actors, Tabletop Exercises (TTX) and the Munich Security Conference</h3>
+      <p>Boards and advisory panels were only the visible layer of NTI's and Johns Hopkins's Track II reach, which extended into conferences and a running series of tabletop exercises (TTX) built to rehearse exactly the kind of event COVID-19 turned out to be — of which the Munich Security Conference became the most visible annual stage.</p>
     </div>
 
     <div class="yt-wrap reveal">
@@ -1626,8 +1652,29 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       <p style="border-left:3px solid var(--red);padding-left:0.75rem;margin-top:0.9rem;
                 font-family:var(--font-sans);font-size:0.78rem;color:var(--text-muted);line-height:1.5"> Source: <a href="https://www.nti.org/news/nti-bio-munich-security-conference-convene-global-leaders-annual-tabletop-exercise-reducing-high-consequence-biological-threats/" target="_blank" rel="noopener noreferrer" style="color:var(--text-muted)">NTI | bio official YouTube channel</a> &nbsp;&middot;&nbsp; NTI–Munich Security Conference Tabletop Exercise, 14–16 February 2020</p>
       <div class="chapter-text" style="margin-top:1.2rem">
-        <p>The collision between what the Biodefense & Global Health Initiatives actors had been working on, and their actual track-record during COVID, cannot be better exemplified than by the late 2019 internal tabletop exercise (TTX) that was played publicly during the Munich Security Conference of February 2020. That exercise explicitly modelled international institutions confronting an accidental engineered-pathogen release from a state denying responsibility — the precise scenario that would edge toward reality within weeks. Farrar, who attended the Munich Security Conference, spent the same week locking in the opposite response: a natural-origin narrative designed to clear the path for WHO access to China.</p>
+        <p>The collision between what the Biodefense & Global Health Initiatives actors had been working on, and their actual track-record during COVID, cannot be better exemplified than by the late 2019 internal tabletop exercise (TTX) that was played publicly during the Munich Security Conference of February 2020. That exercise explicitly modelled international institutions confronting an accidental engineered-pathogen release from a state denying responsibility — the precise scenario that would edge toward reality within weeks. Before its Munich debut, the scenario was rehearsed behind closed doors: NTI ran a full-day version of the same exercise in Washington, DC in December 2019, under Chatham House Rule, with Avril Haines among the participants.</p>
+        <p><strong>Farrar, who attended the Munich Security Conference, spent that same week locking in the opposite response: a natural-origin narrative designed to clear the path for WHO access to China. The irony is not incidental. The man shaping the public case against a laboratory origin was standing, that week, in the same rooms as the exercise built to rehearse how the world should respond if one occurred.</strong></p>
       </div>
+    </div>
+
+    <div class="img-pair reveal" style="grid-template-columns:2fr 1fr">
+      <div class="reveal-image">
+        <img src="../../shared/images/BethCameron_NTI_2019-20.PNG" loading="lazy"
+             alt="Cover of NTI report 'Preventing Global Catastrophic Biological Risks: Lessons and Recommendations from a Tabletop Exercise Held at the 2020 Munich Security Conference', authored by Beth Cameron, Jaime Yassif, Jacob Jordan, and Jacob Eckles"
+             class="img-feature">
+        <p class="img-caption">NTI's own scenario page: Aplea's profile — state biotech investment, a "hybrid regime," a "powerful national leader" — reads as a template for the exact anxieties driving US concern about Chinese high-containment labs. Source: NTI, <em>Preventing Global Catastrophic Biological Risks</em> (2020), p. 10.</p>
+      </div>
+      <div class="reveal-image">
+        <img src="../../shared/images/nti_ttx_scenario_aplea.png" loading="lazy"
+             alt="NTI report map and scenario text for the fictional country of Aplea — 'population 40 million,' 'middle-income country with national investment in growing biotechnology sector,' 'hybrid regime with powerful national leader' — the state whose lab is ultimately exposed as a covert bioweapons facility"
+             class="img-feature">
+      </div>
+    </div>
+
+    <div class="chapter-text reveal">
+        <p>Laid out in granular detail in NTI's own after-action report, the scenario opens with deadly, unexplained influenza deaths among travelers from a fictional country the report calls "Aplea" — population 40 million, a "hybrid regime" under "a powerful national leader," with heavy state investment in "a growing biotechnology sector" — traced by WHO-collaborating laboratories in London and Beijing to an engineered version of H2N2 influenza, a strain related to the one that caused the 1957 pandemic. The genetic signature is damning by design: mutations that blunt antiviral drugs, plus a cluster of changes previously linked to fatal immune overreaction. Aplea denies any wrongdoing, insisting the suspect facility is a defensive biopreparedness programme — until intelligence sources, "including former laboratory workers," confirm it as a covert bioweapons facility and the outbreak as an accidental release. By the exercise's end the global case count exceeds two billion and more than fifty million people are dead, a toll NTI's own epidemiological appendix modelled directly on 1957 H2N2 transmission data.</p>
+
+        <p>NTI's published recommendation was a "Joint Assessment Mechanism" able to determine, within 48 hours, whether a biological event "emerged naturally or was deliberately or accidentally released from an academic, commercial, or government laboratory" — in substance a design specification for the very body that was never built for COVID-19. The scenario's own authorship makes the real-world referent harder to wave away: <a class="cite-link" href="https://media.nti.org/documents/NTI_BIO_TTX_RPT_FINAL.pdf" target="_blank" rel="noopener noreferrer">Appendix A of the report</a> credits Dr. Renee Wegrzyn of DARPA among the outside experts who helped design it. Wegrzyn was, at the same time, the DARPA program officer who had reviewed and rejected EcoHealth Alliance's 2018 DEFUSE proposal — the grant application seeking funding for gain-of-function work conducted with the Wuhan Institute of Virology. The official who had just read the paperwork on a real gain-of-function collaboration with a Chinese high-containment laboratory helped script a rehearsal in which a state with "biotech development ambitions" conceals exactly that kind of programme, until an accidental release forces the truth out.</p>
     </div>
 
     <div class="script-compare reveal">
@@ -1642,11 +1689,118 @@ Some, perhaps more than a few, will not like it still since it allows that the n
       </div>
     </div>
 
-    <div class="reveal-image reveal" style="margin:2rem 0">
-      <img src="../../shared/images/BethCameron_NTI_2019-20.PNG" loading="lazy"
-           alt="Cover of NTI report 'Preventing Global Catastrophic Biological Risks: Lessons and Recommendations from a Tabletop Exercise Held at the 2020 Munich Security Conference', authored by Beth Cameron, Jaime Yassif, Jacob Jordan, and Jacob Eckles"
-           class="img-feature">
+    <div class="chapter-text">
+      <p>Cross-referenced against NTI's own published roster, Haines turns out to have been listed as a participant not just at the December 2019 Washington rehearsal but at the Munich session itself — alongside keynote speaker Gro Harlem Brundtland, Sam Nunn, Ernest Moniz, and a roster of Track II, humanitarian, and public-health figures (below). Beth Cameron does not appear on either delegate list: her role was institutional rather than a seat at the table — she ran NTI's Global Biological Policy programme and is lead author of the report the exercise produced. Farrar, too, is absent from the roster; his documented connection is that he was in Munich that same week, at the same conference, doing the opposite work — not that he sat through the exercise itself. George Fu Gao and Adrienne Keen were not part of the NTI exercise at all: both belong to the parallel Event 201 network, a distinct tabletop with a distinct sponsor set, addressed in <a class="cite-link" href="#ch8">Part 8</a>. The distinctions matter because they are precise, not because they are exculpatory — Haines sat through a scripted rehearsal of exactly the investigation the world would need within weeks, then went on to preside over the version of that investigation that was never run.</p>
     </div>
+
+    <details class="authorship-table comparison-table reveal" open>
+      <summary>
+        <span class="at-title">Event 201, the NTI H2N2 Exercises, and COVID-19 &mdash; A Comparison</span>
+      </summary>
+      <div class="authorship-table-body">
+        <div class="authorship-table-viewport">
+        <div class="authorship-table-scroll">
+          <table>
+            <colgroup>
+              <col style="width:13%">
+              <col style="width:21%">
+              <col style="width:12%">
+              <col style="width:12%">
+              <col style="width:42%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Event 201<br><span style="font-weight:400;font-size:0.75em">18 Oct 2019, New York</span></th>
+                <th scope="col">NTI TTX &mdash; DC<br><span style="font-weight:400;font-size:0.75em">Dec 2019, Washington</span></th>
+                <th scope="col">NTI TTX &mdash; Munich<br><span style="font-weight:400;font-size:0.75em">13 Feb 2020</span></th>
+                <th scope="col">COVID-19<br><span style="font-weight:400;font-size:0.75em">the actual pandemic</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="at-total">
+                <td>Sponsor / host</td>
+                <td><span class="at-shaped">Johns Hopkins Center for Health Security, World Economic Forum, Bill &amp; Melinda Gates Foundation</span></td>
+                <td colspan="2"><span class="at-shaped">Nuclear Threat Initiative, with the Munich Security Conference as venue for the second run</span></td>
+                <td><span class="at-shaped">&mdash;</span></td>
+              </tr>
+              <tr>
+                <td>Scenario pathogen</td>
+                <td><span class="at-shaped">Fictional novel coronavirus ("CAPS"), pig-to-human spillover</span></td>
+                <td colspan="2"><span class="at-shaped">Engineered H2N2 influenza, related to the 1957 pandemic strain</span></td>
+                <td><span class="at-shaped">SARS-CoV-2</span></td>
+              </tr>
+              <tr>
+                <td>Engineered / modified virus modelled?</td>
+                <td><span class="at-no">No</span> &mdash; explicitly natural zoonosis</td>
+                <td colspan="2"><span class="at-yes">Yes</span></td>
+                <td><span class="at-shaped">Plausible to any unbiased observer from January 2020 onward &mdash; the lab hypothesis was suppressed: first to try to secure WHO access to China under Tedros, then for political reasons under Biden</span></td>
+              </tr>
+              <tr>
+                <td>Country named in scenario?</td>
+                <td><span class="at-no">No</span> &mdash; fictional, Brazil-linked spillover</td>
+                <td colspan="2"><span class="at-no">No</span> &mdash; fictional country "Aplea"</td>
+                <td><span class="at-yes">Yes</span> &mdash; China (Wuhan)</td>
+              </tr>
+              <tr>
+                <td>Responsible lab/state modelled as denying it?</td>
+                <td><span class="at-no">No</span> &mdash; no state actor accused</td>
+                <td colspan="2"><span class="at-yes">Yes</span> &mdash; Aplea denies, then is exposed</td>
+                <td><span class="at-yes">Yes</span> &mdash; China denied a lab origin, restricted access</td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Jeremy Farrar</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td><span class="at-shaped">At the MSC that week, not a listed exercise participant</span></td>
+                <td><span class="at-central">Central</span> &mdash; MI5's side-check, Tedros's proposal, then narrative control via the <em>Lancet</em> statement and <em>Proximal Origin</em>, all to secure WHO access to China as a key Global Health Initiative player</td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Beth Cameron</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td colspan="2"><span class="at-shaped">NTI VP, Global Biological Policy &mdash; helped design the scenario, ran the programme, and authored the report</span></td>
+                <td><span class="at-central">Central</span> &mdash; Special Assistant to the President &amp; Senior Director for Global Health Security and Biodefense, NSC; managed Fauci's access to the IC review, pushed him as a prime SME, and beat back internal objections to his inclusion</td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Avril Haines</td>
+                <td><span class="at-yes">Player</span></td>
+                <td colspan="2"><span class="at-yes">Player</span> (both runs)</td>
+                <td><span class="at-central">Central</span> &mdash; Director of National Intelligence (DNI); oversaw the IC origins assessment</td>
+              </tr>
+              <tr class="at-po-row">
+                <td>Adrienne Keen</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td colspan="2"><span class="at-no">&ndash;</span></td>
+                <td><span class="at-central">Central</span> &mdash; Director for Global Health Security, National Intelligence Council (NIC/ODNI); led the first National Intelligence Estimate on COVID-19</td>
+              </tr>
+              <tr>
+                <td>George Fu Gao</td>
+                <td><span class="at-yes">Player</span></td>
+                <td colspan="2"><span class="at-no">&ndash;</span></td>
+                <td><span class="at-yes">Present</span> &mdash; China CDC Director-General</td>
+              </tr>
+              <tr>
+                <td>Renee Wegrzyn (DARPA)</td>
+                <td><span class="at-no">&ndash;</span></td>
+                <td colspan="2"><span class="at-shaped">Scenario co-developer, Appendix A (both runs)</span></td>
+                <td><span class="at-shaped">Same year: DARPA reviewer who rejected EcoHealth's WIV-linked DEFUSE proposal (2018)</span></td>
+              </tr>
+              <tr class="at-total">
+                <td>Information management</td>
+                <td><span class="at-shaped">Central to the exercise: Recommendation 7 called for platform&ndash;government partnerships to "flood media with fast, accurate, and consistent information" and ensure "false messages are suppressed including through the use of technology"</span></td>
+                <td colspan="2"><span class="at-no">Not addressed</span> <span class="at-shaped">&mdash; the report is silent on communications strategy; its focus was investigation and attribution (the Joint Assessment Mechanism), not narrative management</span></td>
+                <td><span class="at-shaped">Tedros framed the lab hypothesis as part of an "infodemic" at the same Munich Security Conference (13 Feb 2020); WHO's own information-management team, run by Andrew Pattison, coordinated directly with platforms that same week to censor undesirable discussions, including on origins</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="authorship-table-fade" aria-hidden="true"></div>
+        </div>
+        <p class="authorship-table-swipe-hint" aria-hidden="true">&#8596; Swipe to see more</p>
+        <p class="authorship-table-legend">&#9679; / <strong>Player</strong> = documented participant in that exercise &nbsp;&middot;&nbsp; <em>italic</em> = institutional, scenario-design, or contextual link short of exercise participation &nbsp;&middot;&nbsp; &ndash; = no documented connection to that exercise.</p>
+        <p class="authorship-table-note">Event 201 sources: Johns Hopkins Center for Health Security, <a class="cite-link" href="https://centerforhealthsecurity.org/our-work/tabletop-exercises/event-201-pandemic-tabletop-exercise" target="_blank" rel="noopener noreferrer">Event 201 Pandemic Tabletop Exercise</a>, October 2019. NTI TTX sources: NTI, <a class="cite-link" href="https://media.nti.org/documents/NTI_BIO_TTX_RPT_FINAL.pdf" target="_blank" rel="noopener noreferrer"><em>Preventing Global Catastrophic Biological Risks</em></a> (2020), Executive Summary, About the Exercise, Appendices A&ndash;C.</p>
+      </div>
+    </details>
 
     <div class="chapter-text reveal">
       <h3 class="context-section-title" style="margin-top:1.6rem">From Tabletop Exercises to Bending the Biden 90-day Intel Report</h3>
@@ -1656,7 +1810,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
 
       <p>In that capacity, Cameron helped steer Fauci into the origins process as an ostensibly independent scientific expert who just happened to be convinced by the Proximal Origin argument — the same Fauci who had co-convened the 1 February 2020 confidential call and co-drafted Proximal Origin within days of it. Fauci was thus able to use Haines’ and Cameron’s endorsements to push Proximal Origin — and its July 2021 successor, the Holmes-led <a class="cite-link" href="https://doi.org/10.1016/j.cell.2021.08.017" target="_blank" rel="noopener noreferrer">"Critical Review"</a> — directly to the Intelligence Community, presenting it as the authoritative scientific consensus on origins. The timing itself is suspicious: the manuscript had been posted to Zenodo — a platform with no moderation delay, unlike bioRxiv's typical two-day screening — just one day before Fauci's email, a release cadence that reads less like routine posting than a deadline met to order.</p>
       
-      <p>The irony compounds from there. Having helped shape Proximal Origin with Farrar in February 2020, then pushed it onto the Intelligence Community with Haines’ and Cameron’s help, Fauci would then be considered as an 'external' reviewer of the Biden 90-day intel assessment which he had helped shape, based on a paper (P.O.) which he had also quietly helped shape. One can't make that up.</p>
+      <p>Having helped shape Proximal Origin with Farrar in February 2020, then pushed it onto the Intelligence Community with Haines’ and Cameron’s help, Fauci compounds the irony by then being considered as an 'external' reviewer of the Biden 90-day intel assessment which he had helped shape, based on a paper (P.O.) which he had also quietly helped shape. One can't make that up.</p>
 
       <p>The "Critical Review" author list is itself worth pausing on: alongside the usual Worobey, Andersen, Garry, Rambaut, and Holmes sit Jeremy Farrar and Angela Rasmussen — both discussed elsewhere in this report — plus Stuart Neil (King's College London), another frequent combatant in the Twitter origins debate. Absent is W. Ian Lipkin, the fifth <em>Proximal Origin</em> author and a longtime collaborator and co-author of Ralph Baric's, who — as shown above — never signed onto the "Critical Review," Worobey et al., or Pekar et al. These authors would have known perfectly well that their preprint was likely to be referenced in the Biden intelligence review — which goes some way to explaining the presence of names like Peter Doherty (a Nobel laureate immunologist with no prior involvement in the SARS-CoV-2 origins literature) and Jeremy Farrar, whose institutional weight added authority the paper's working scientists could not supply on their own.</p>
     </div>
@@ -1669,7 +1823,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
 
       <p>The paper's own conflict-of-interest disclosure is worth noting too: "A.R., A.L.R., M.F.B., S.A.G., and K.G.A. have received consulting fees and compensation for expert testimony on SARS-CoV-2 and the COVID-19 pandemic" — Andrew Rambaut, Angela L. Rasmussen, Maciej F. Boni, Stephen A. Goldstein, and Kristian G. Andersen. Given what this report documents elsewhere about Andersen's recruitment as a paid SME for the very IC review this paper was feeding, the most parsimonious reading is that at least some of that "expert testimony" compensation traces back to the same government channels the paper was being used to influence.</p>
 
-      <p>The choice of <em>Cell</em> is also not innocent. The P.O. authors already knew, from experience, that <em>Cell</em> would move fast. During the <em>Proximal Origin</em> publication scramble the year before — after Nature rejected the paper and recommended another Nature-family journal instead — Holmes told the group: "I'm pretty sure Cel would take it...they are desperate to get in on the act." Andersen made the same calculation as a fallback plan: "If it's a no, Science would likely be interested and Cell would take it for sure." And they would be able to go fast and get the paper published on <em>Cell</em>'s own website before the conclusion of the Biden 90-day review.</p>
+      <p>Having already learned, during the <em>Proximal Origin</em> publication scramble the year before, exactly how fast <em>Cell</em> could move when the moment called for it, the P.O. authors' choice of that same journal this time was no accident: after Nature rejected the paper and recommended another Nature-family journal instead, Holmes told the group: "I'm pretty sure Cel would take it...they are desperate to get in on the act." Andersen made the same calculation as a fallback plan: "If it's a no, Science would likely be interested and Cell would take it for sure." And they would be able to go fast and get the paper published on <em>Cell</em>'s own website before the conclusion of the Biden 90-day review.</p>
     </div>
 
     <div class="reveal-image reveal">
@@ -2758,11 +2912,11 @@ Some, perhaps more than a few, will not like it still since it allows that the n
     });
   });
 
-  /* ── Authorship table scroll hint ── */
-  (function() {
-    var scroller = document.querySelector('.authorship-table-scroll');
-    var fade = document.querySelector('.authorship-table-fade');
-    var hint = document.querySelector('.authorship-table-swipe-hint');
+  /* ── Authorship table scroll hint (handles every .authorship-table instance) ── */
+  document.querySelectorAll('.authorship-table').forEach(function(root) {
+    var scroller = root.querySelector('.authorship-table-scroll');
+    var fade = root.querySelector('.authorship-table-fade');
+    var hint = root.querySelector('.authorship-table-swipe-hint');
     if (!scroller) return;
     function update() {
       var notScrollable = scroller.scrollWidth <= scroller.clientWidth + 1;
@@ -2773,7 +2927,7 @@ Some, perhaps more than a few, will not like it still since it allows that the n
     scroller.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
-  }());
+  });
 
   /* ── Closing statement flames ── */
   (function() {
