@@ -476,6 +476,31 @@
       "type": "person",
       "full": "Kathryn Brinsfield; Senior Advisor, National Counterproliferation Centre, Office of the Director of National Intelligence (ODNI); attended 3 February 2020 NASEM call on COVID-19 origins — placing ODNI's counterproliferation apparatus in the room at the origins debate's first significant scientific convocation",
       "narrative": "neutral"
+    },
+    "BA": {
+      "label": "Bruce Aylward",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "SB": {
+      "label": "Sylvie Briand",
+      "type": "person",
+      "narrative": "aligned"
+    },
+    "GFG": {
+      "label": "George Fu Gao",
+      "type": "person",
+      "narrative": "neutral"
+    },
+    "RW": {
+      "label": "Renee Wegrzyn",
+      "type": "person",
+      "narrative": "neutral"
+    },
+    "PATT": {
+      "label": "Andrew Pattison",
+      "type": "person",
+      "narrative": "enforcer"
     }
   },
   "edges": [
@@ -1458,6 +1483,90 @@
       "co-attended",
       "3 February 2020 NASEM call on COVID-19 origins — the first significant scientific convocation on origins, attended alongside Fauci, Daszak, Baric, Inglesby, Kadlec, and Gronvall. Bull represented FBI Quantico; Brinsfield represented ODNI/NCPC.",
       "3 Feb 2020"
+    ],
+    [
+      "BA",
+      "WHO",
+      "led mission for",
+      "Headed the three-person WHO advance team (with Van Kerkhove and Jun Xing) that negotiated the February 2020 mission's terms of reference, then presented the mission's own findings to China's Health Minister Ma Xiaowei before the team had independently written its conclusions.",
+      "Feb 2020"
+    ],
+    [
+      "BA",
+      "CHN",
+      "negotiated access with",
+      "Presented WHO mission findings to Chinese Health Minister Ma Xiaowei on 23 February 2020, during the Wuhan visit itself and before the team's own independent write-up — conclusions pre-configured around China's access terms.",
+      "Feb 2020"
+    ],
+    [
+      "BA",
+      "WHO",
+      "dropped then reinstated by",
+      "Dropped from WHO's Senior Leadership Team in Tedros's May 2025 reorganisation as ADG for Universal Health Coverage, amid press criticism for being 'too deferential to China' during COVID; appointed director of the WHO-World Bank Global Preparedness Monitoring Board in August 2025; returned to WHO's senior leadership in August 2026 as successor to Jeremy Farrar.",
+      "2025-2026"
+    ],
+    [
+      "SB",
+      "CHN",
+      "negotiated with",
+      "Accompanied Tedros to Beijing on 28 January 2020 and managed the follow-up diplomatic channel with Chinese officials, remaining in Beijing for several days after Tedros and Ryan returned to Geneva.",
+      "Jan-Feb 2020"
+    ],
+    [
+      "SB",
+      "WHO",
+      "promoted within",
+      "Directed the WHO-World Bank Global Preparedness Monitoring Board before becoming WHO Chief Scientist in Tedros's May 2025 reorganisation (succeeding Farrar in that post), then acting ADG for Health Systems in August 2026 (replacing Yukiko Nakatani).",
+      "2025-2026"
+    ],
+    [
+      "GFG",
+      "CHN",
+      "led",
+      "Director-General of China's Center for Disease Control and Prevention; China's top public health official during the outbreak's emergence.",
+      "2020"
+    ],
+    [
+      "GFG",
+      "JHU",
+      "participated in",
+      "Player in the Johns Hopkins/WEF/Gates Event 201 pandemic tabletop exercise, 18 October 2019, alongside Avril Haines — three months before the first Wuhan notifications reached WHO.",
+      "Oct 2019"
+    ],
+    [
+      "RW",
+      "DEFUSE",
+      "reviewed",
+      "One of DARPA's reviewers of the DEFUSE proposal (EcoHealth Alliance's plan for chimeric-coronavirus gain-of-function work at the WIV), which DARPA rejected in 2018; program management sat with Jim Gimlett.",
+      "2018"
+    ],
+    [
+      "RW",
+      "NTI",
+      "co-developed scenario for",
+      "Listed in Appendix A of NTI's 2020 tabletop-exercise report as a scenario-development contributor — for an exercise modelling exactly the kind of state-run lab cover-up her own agency had just reviewed a real proposal for.",
+      "2019-2020"
+    ],
+    [
+      "PATT",
+      "WHO",
+      "worked at",
+      "WHO Team Lead for Digital Channels/EPI-WIN; approached Tedros in early 2018 to propose a systematic WHO effort to partner with social media companies on health misinformation; built the platform-partnership machinery activated as the 'infodemic' response in February 2020.",
+      "2018-2021"
+    ],
+    [
+      "PATT",
+      "TA",
+      "operationalised for",
+      "Operationalised Tedros's 'infodemic' framing (announced at the Munich Security Conference, 15 Feb 2020) through platform-government partnerships negotiated the week before at Menlo Park with Facebook, Amazon, Google and others.",
+      "Feb 2020"
+    ],
+    [
+      "BC",
+      "SN",
+      "professional lineage with",
+      "Cameron ran the Pentagon's Cooperative Threat Reduction (CTR) office (2010-2013), overseeing the geographic expansion of the same Nunn-Lugar CTR programme that NTI co-founder Sam Nunn had authored, before joining NTI in 2017.",
+      "2010-2013"
     ]
   ]
 }
