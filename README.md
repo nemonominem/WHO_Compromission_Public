@@ -16,19 +16,21 @@ by [Gilles Demaneuf](mailto:gilles.demaneuf@gmail.com) &nbsp;·&nbsp; [drasticre
 
 Immersive web article taking readers through the nine main sections of the investigation. Self-contained — no build step, no CDN, no server required for local viewing.
 
-> **Note:** This is a summary of a 100-page report that will soon be released here too.
+### 2. Full Report (PDF) — [typst/WHO_Compromission.pdf](https://nemonominem.github.io/WHO_Compromission_Public/typst/WHO_Compromission.pdf)
 
-### 2. Actor Network Graph — [shared/network_graph.html](https://nemonominem.github.io/WHO_Compromission_Public/shared/network_graph.html)
+The complete 125-page investigation, typeset and fully sourced — the primary document behind the scrollystory above.
+
+### 3. Actor Network Graph — [shared/network_graph.html](https://nemonominem.github.io/WHO_Compromission_Public/shared/network_graph.html)
 
 Interactive force-directed graph of the principal actors, institutions, and funding relationships documented in the investigation. Self-contained HTML — open directly in any browser.
 
 Data source: `shared/network_data.json`
 
-### 3. From Dispositive to Disposable — [surfaces/article/Worobey_to_Eban.html](https://nemonominem.github.io/WHO_Compromission_Public/surfaces/article/Worobey_to_Eban.html)
+### 4. From Dispositive to Disposable — [surfaces/article/Worobey_to_Eban.html](https://nemonominem.github.io/WHO_Compromission_Public/surfaces/article/Worobey_to_Eban.html)
 
 Annotated reconstruction of Michael Worobey's 27 October 2022 response to ProPublica and Vanity Fair, tracking how the market-papers' central claims have fared since — corrections, retracted probability estimates, and disputed rebuttals. Self-contained HTML.
 
-### 4. Lipkin as CIA Relay — [surfaces/article/intel_game.html](https://nemonominem.github.io/WHO_Compromission_Public/surfaces/article/intel_game.html)
+### 5. Lipkin as CIA Relay — [surfaces/article/intel_game.html](https://nemonominem.github.io/WHO_Compromission_Public/surfaces/article/intel_game.html)
 
 Supplementary analysis of how W. Ian Lipkin was inserted into the Proximal Origin process, and what that insertion meant for what came after. Self-contained HTML.
 
