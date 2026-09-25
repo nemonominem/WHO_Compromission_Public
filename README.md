@@ -18,7 +18,7 @@ Immersive web article taking readers through the nine main sections of the inves
 
 ### 2. Full Report (PDF) — [typst/WHO_Compromission.pdf](https://nemonominem.github.io/WHO_Compromission_Public/typst/WHO_Compromission.pdf)
 
-The complete 125-page investigation, typeset and fully sourced — the primary document behind the scrollystory above.
+The complete investigation, typeset and fully sourced — the primary document behind the scrollystory above.
 
 ### 3. Actor Network Graph — [shared/network_graph.html](https://nemonominem.github.io/WHO_Compromission_Public/shared/network_graph.html)
 
