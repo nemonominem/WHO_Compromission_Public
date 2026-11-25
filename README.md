@@ -16,7 +16,7 @@ by [Gilles Demaneuf](mailto:gilles.demaneuf@gmail.com) &nbsp;·&nbsp; [drasticre
 
 Immersive web article taking readers through the nine main sections of the investigation. Self-contained — no build step, no CDN, no server required for local viewing.
 
-### 2. Full Report (PDF) — [typst/WHO_Compromission.pdf](https://nemonominem.github.io/WHO_Compromission_Public/typst/WHO_Compromission.pdf)
+### 2. Full Report (PDF) — [typst/WHO_Compromission.pdf](https://raw.githubusercontent.com/nemonominem/WHO_Compromission_Public/main/typst/WHO_Compromission.pdf)
 
 The complete investigation, typeset and fully sourced — the primary document behind the scrollystory above.
 
